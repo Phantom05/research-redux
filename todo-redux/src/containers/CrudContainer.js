@@ -18,30 +18,51 @@ class CrudContainer extends Component {
     const {CrudActions} = this.props;
     CrudActions.changeInput(e.target.value);
   }
-  handleWrite =(value)=>{
+  handleChangeTextArea =(e) =>{
     const {CrudActions} = this.props;
-    CrudActions.write(value);
+    CrudActions.changeTextarea(e.target.value);
+  }
+  handleWrite =(inputValue,textareaValue)=>{
+    const {CrudActions} = this.props;
+    CrudActions.write({input:inputValue,textarea:textareaValue});
     CrudActions.changeInput('');
+    CrudActions.changeTextarea('');
   }
   handleKeyUp = (e)=>{
     if(e.keyCode !== 13) return;
     this.handleWrite(e.target.value)
-
+  }
+  handleDetail=(id)=>{
+    console.log(id);
+    const {CrudActions} = this.props;
+    CrudActions.detail(id)
+    CrudActions.page('detail');
   }
   render() {
-    const {handlePage,handleDeleteItem,handleChange,handleWrite,handleKeyUp} = this;
-    const {page,input,list} = this.props;
+    const {
+      handlePage,
+      handleDeleteItem,
+      handleChange,
+      handleWrite,
+      handleKeyUp,
+      handleChangeTextArea,
+      handleDetail} = this;
+    const {page,input,list,textarea,detail} = this.props;
     return (
       <div>
         <Crud 
           page={page} 
           input={input}
+          textarea={textarea}
           list={list}
           handleMenu={handlePage}
           handleDeleteItem={handleDeleteItem}
           handleChange={handleChange}
           handleWrite={handleWrite}
           handleKeyUp={handleKeyUp}
+          handleChangeTextArea={handleChangeTextArea}
+          handleDetail ={handleDetail}
+          detail={detail}
         />
       </div>
     );
@@ -52,9 +73,11 @@ class CrudContainer extends Component {
 // 그래서 거기서 export 된것중에 crud 를 가져와야함.
 export default connect(
   ({crud})=>({
-    page:crud.get('page'),
-    list:crud.get('list'),
-    input:crud.get('input')
+    page     : crud.get('page'),
+    list     : crud.get('list'),
+    input    : crud.get('input'),
+    textarea : crud.get('textarea'),
+    detail   : crud.get('detail'),
   })
   ,(dispatch)=> ({
     CrudActions:bindActionCreators(crudActions,dispatch)

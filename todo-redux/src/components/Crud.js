@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import {Map,List} from 'immutable';
-import { Button, Menu, Dropdown, Icon, Input, Empty  } from 'antd';
+import './Crud.css';
+import { Button, Menu, Dropdown, Icon, Input, Empty   } from 'antd';
+const {TextArea} = Input;
 
 
-
-const CrudItem = ({title,onClick}) =>(
-  <div style={{borderBottom:'1px solid #ececec'}}>
-    <Button onClick={onClick}>Delete</Button> 
+const CrudItem = ({title,onClick,viewDetail}) =>(
+  <div className="itemRow">
+  <Button className="deleteBtn" onClick={onClick}>Delete</Button> 
+  <div className="CrudItem" onClick={viewDetail}>
+    
     {title} 
+  </div>
   </div>
 );
 const menu = (
@@ -17,7 +21,7 @@ const menu = (
     <Menu.Item key="3">3rd item</Menu.Item>
   </Menu>
 );
-const ListPage = ({handleDeleteItem,list}) => {
+const ListPage = ({handleDeleteItem,list,handleDetail}) => {
   let itemList = list.toJS();
   return (
     <div>
@@ -28,7 +32,7 @@ const ListPage = ({handleDeleteItem,list}) => {
           itemList.length === 0 
           ?<Empty /> 
           : list.toJS().map(info=>(
-          <CrudItem onClick={() => handleDeleteItem(info.id)} key={info.id} title={info.title}/>
+          <CrudItem viewDetail={() => handleDetail(info.id)} onClick={() => handleDeleteItem(info.id)} key={info.id} title={info.title}/>
         ))
         }
       </div>
@@ -36,28 +40,50 @@ const ListPage = ({handleDeleteItem,list}) => {
   </div>
   )
 }
-const WritePage = ({onChange,input,onClick, onKeyUp}) => (
+const WritePage = ({onChange,input,onClick, onKeyUp,textarea,onChangeTextArea}) => (
   <div>
     <h2>Write</h2>
     <Input onKeyUp={onKeyUp} onChange={onChange} placeholder="Title" style={{ width: '50%' }} value={input} />
-    <Button onClick={()=>onClick(input)}>Write</Button>
+    <TextArea  onChange={onChangeTextArea} value={textarea} rows={4} placeholder="Content"/>
+    <Button onClick={()=>onClick(input,textarea)}>Write</Button>
   </div>
 );
-const DetailPage = () =>(
+const DetailPage = ({title,content}) =>(
   <div>
-    Detail
+    <h3>Title : {title}</h3>
+    <h5>content</h5>
+    <div>{content}</div>
   </div>
 )
 
 class Crud extends Component {
   render() {
-    const { page, handleMenu,disable,handleDeleteItem,handleChange,handleWrite,handleKeyUp ,list,input} = this.props;
+    const { 
+      page, 
+      handleMenu,
+      disable,
+      handleDeleteItem,
+      handleChange,
+      handleWrite,
+      handleKeyUp,
+      handleDetail ,
+      handleChangeTextArea,
+      list,
+      input,
+      textarea,
+      detail} = this.props;
     // console.log(list);
 
     let pageObj = {
-      'write': <WritePage onKeyUp={handleKeyUp} input={input} onChange={handleChange} onClick={handleWrite}/>,
-      'list': <ListPage handleDeleteItem={handleDeleteItem} list={list}/>,
-      'detail':<DetailPage />
+      'write': <WritePage 
+        textarea={textarea} 
+        onChangeTextArea={handleChangeTextArea} 
+        onKeyUp={handleKeyUp} 
+        input={input} 
+        onChange={handleChange} 
+        onClick={handleWrite}/>,
+      'list': <ListPage handleDetail={handleDetail} handleDeleteItem={handleDeleteItem} list={list}/>,
+      'detail':<DetailPage title={detail.title} content={detail.content} />
     }
     let PageRender = pageObj[page];
     return (
@@ -88,27 +114,9 @@ export default Crud;
 Crud.defaultProps = {
   disable:'false',
   list:List(),
+  detail:{
+    title:'',
+    content:''
+  }
 }
 
-
-
-// [
-//   Map({
-//     key: '1',
-//     name: 'John Brown',
-//     title: 'New York No. 1 Lake Park',
-//     date: '2019-10-12',
-//   }),
-//   Map({
-//     key: '2',
-//     name: 'Jim Green',
-//     title: 'London No. 1 Lake Park',
-//     date: '2019-10-12',
-//   }),
-//   Map({
-//     key: '3',
-//     name: 'Joe Black',
-//     title: 'Sidney No. 1 Lake Park',
-//     date: '2019-10-12',
-//   })
-// ]
