@@ -1,32 +1,34 @@
 import React, { Component } from 'react';
 import Crud from 'components/Crud';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as crudActions from 'store/modules/crud';
+// import {bindActionCreators} from 'redux';
+// import * as crudActions from 'store/modules/crud';
+import { CrudActions} from 'store/actionCreators';
 
 class CrudContainer extends Component {
   handlePage =(pageName) => ()=>{
-    const {CrudActions} = this.props;
+    // const {CrudActions} = this.props;
     CrudActions.page(pageName)
   }
   handleDeleteItem =(id) =>{
     console.log(id);
-    const {CrudActions} = this.props;
+    // const {CrudActions} = this.props;
     CrudActions.deleteItem(id);
   }
   handleChange =(e) =>{
-    const {CrudActions} = this.props;
+    // const {CrudActions} = this.props;
     CrudActions.changeInput(e.target.value);
   }
   handleChangeTextArea =(e) =>{
     const {CrudActions} = this.props;
-    CrudActions.changeTextarea(e.target.value);
+    // CrudActions.changeTextarea(e.target.value);
   }
   handleWrite =(inputValue,textareaValue)=>{
-    const {CrudActions} = this.props;
+    // const {CrudActions} = this.props;
     CrudActions.write({input:inputValue,textarea:textareaValue});
     CrudActions.changeInput('');
     CrudActions.changeTextarea('');
+    alert('Success Writed')
   }
   handleKeyUp = (e)=>{
     if(e.keyCode !== 13) return;
@@ -34,7 +36,7 @@ class CrudContainer extends Component {
   }
   handleDetail=(id)=>{
     console.log(id);
-    const {CrudActions} = this.props;
+    // const {CrudActions} = this.props;
     CrudActions.detail(id)
     CrudActions.page('detail');
   }
@@ -79,7 +81,7 @@ export default connect(
     textarea : crud.get('textarea'),
     detail   : crud.get('detail'),
   })
-  ,(dispatch)=> ({
-    CrudActions:bindActionCreators(crudActions,dispatch)
-  })
+  // ,(dispatch)=> ({
+  //   CrudActions:bindActionCreators(crudActions,dispatch)
+  // })
 )(CrudContainer) ;

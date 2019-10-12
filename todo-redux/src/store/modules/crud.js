@@ -10,6 +10,7 @@ const LIST            = 'crud/LIST';
 const PAGE            = 'crud/PAGE';
 const DELETEITEM      = 'crud/DELETE'
 const DETAIL          = 'crud/DETAIL';
+const UPLOAD_FRAG      = 'crdu/UPLOAD_FRAG';
 
 
 export const write = createAction(WRITE,value=>value)
@@ -19,7 +20,7 @@ export const list = createAction(LIST);
 export const page = createAction(PAGE, page =>page);
 export const deleteItem = createAction(DELETEITEM,id=>id);
 export const detail = createAction(DETAIL,id => id);
-
+export const upload_flag = createAction(UPLOAD_FRAG,status => status);
 
 let id = 0;
 let initialState= Map({
@@ -30,7 +31,7 @@ let initialState= Map({
   detail:{
     title:'',
     content:''
-  }
+  },
 });
 
 export default handleActions({
@@ -49,5 +50,6 @@ export default handleActions({
     console.log(id,'ididid');
     const info = state.get('list').find(item => item.get('id') === id).toJS();
     return state.setIn(['detail','title'],info.title).setIn(['detail','content'],info.content);
-  }
+  },
+
 },initialState);
