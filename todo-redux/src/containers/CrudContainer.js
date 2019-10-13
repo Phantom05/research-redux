@@ -3,7 +3,7 @@ import Crud from 'components/Crud';
 import {connect} from 'react-redux';
 // import {bindActionCreators} from 'redux';
 // import * as crudActions from 'store/modules/crud';
-import { CrudActions} from 'store/actionCreators';
+import { CrudActions } from 'store/actionCreators';
 
 class CrudContainer extends Component {
   handlePage =(pageName) => ()=>{
@@ -20,8 +20,8 @@ class CrudContainer extends Component {
     CrudActions.changeInput(e.target.value);
   }
   handleChangeTextArea =(e) =>{
-    const {CrudActions} = this.props;
-    // CrudActions.changeTextarea(e.target.value);
+    // const {CrudActions} = this.props;
+    CrudActions.changeTextarea(e.target.value);
   }
   handleWrite =(inputValue,textareaValue)=>{
     // const {CrudActions} = this.props;

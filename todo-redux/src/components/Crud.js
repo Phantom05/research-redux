@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, memo } from 'react';
 import {Map,List} from 'immutable';
 import './Crud.css';
 import { Button, Menu, Dropdown, Icon, Input, Empty   } from 'antd';
@@ -9,7 +9,6 @@ const CrudItem = ({title,onClick,viewDetail}) =>(
   <div className="itemRow">
   <Button className="deleteBtn" onClick={onClick}>Delete</Button> 
   <div className="CrudItem" onClick={viewDetail}>
-    
     {title} 
   </div>
   </div>
@@ -40,12 +39,26 @@ const ListPage = ({handleDeleteItem,list,handleDetail}) => {
   </div>
   )
 }
+
+
+
+const WriteTitle = memo(({onChange,onKeyUp, input})=>(
+  <Input onKeyUp={onKeyUp} onChange={onChange} placeholder="Title" style={{ width: '50%' }} value={input} />
+));
+const WriteContent = memo(({onChangeTextArea,textarea})=>(
+  <TextArea  onChange={onChangeTextArea} value={textarea} rows={4} placeholder="Content"/>
+));
+const WriteButton = memo(({input,textarea,onClick})=>(
+  <Button onClick={()=>onClick(input,textarea)}>Write</Button>
+))
+
+
 const WritePage = ({onChange,input,onClick, onKeyUp,textarea,onChangeTextArea}) => (
   <div>
     <h2>Write</h2>
-    <Input onKeyUp={onKeyUp} onChange={onChange} placeholder="Title" style={{ width: '50%' }} value={input} />
-    <TextArea  onChange={onChangeTextArea} value={textarea} rows={4} placeholder="Content"/>
-    <Button onClick={()=>onClick(input,textarea)}>Write</Button>
+    <WriteTitle onChange={onChange} input={input} onKeyUp={onKeyUp}/>
+    <WriteContent onChangeTextArea={onChangeTextArea} textarea={textarea} />
+    <WriteButton onClick={onClick} textarea={textarea} input={input} />
   </div>
 );
 const DetailPage = ({title,content}) =>(
@@ -54,7 +67,22 @@ const DetailPage = ({title,content}) =>(
     <h5>content</h5>
     <div>{content}</div>
   </div>
-)
+);
+
+const CrudMemu = memo(({disable,handleMenu,page})=>(
+  <div>
+        <Button 
+          type={page === 'list' ? 'primary':disable} 
+          onClick={handleMenu('list')}>
+            List
+        </Button>
+        <Button 
+          type={page === 'write' ? 'primary':disable} 
+          onClick={handleMenu('write')}>
+            Write
+        </Button>
+  </div>
+));
 
 class Crud extends Component {
   render() {
@@ -89,16 +117,7 @@ class Crud extends Component {
     return (
       <div>
         <h1>Crud</h1>
-        <Button 
-          type={page === 'list' ? 'primary':disable} 
-          onClick={handleMenu('list')}>
-            List
-        </Button>
-        <Button 
-          type={page === 'write' ? 'primary':disable} 
-          onClick={handleMenu('write')}>
-            Write
-        </Button>
+        <CrudMemu page={page} disable={disable} handleMenu={handleMenu}/>
         {/* <Dropdown overlay={menu}>
           <Button>
             Actions <Icon type="down" />
