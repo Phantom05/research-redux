@@ -15,4 +15,8 @@ class Post extends Component {
   }
 }
 
-export default withRequest('https://jsonplaceholder.typicode.com/posts/1')(Post);
+
+export default withRequest({
+  url:"https://jsonplaceholder.typicode.com/posts/1",
+  method:"get"
+})(Post);

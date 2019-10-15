@@ -14,5 +14,8 @@ class Comments extends Component {
   }
 }
 
-export default withRequest(`https://jsonplaceholder.typicode.com/comments?postId=1`)(Comments);
+export default withRequest({
+  url:`https://jsonplaceholder.typicode.com/comments?postId=1`,
+  method:"get"
+})(Comments);
 

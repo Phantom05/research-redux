@@ -13,7 +13,9 @@
     "react-redux": "^7.1.1",
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
-    "redux-actions": "^2.6.5"
+    "redux-actions": "^2.6.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "cross-env NODE_PATH=src react-scripts start",

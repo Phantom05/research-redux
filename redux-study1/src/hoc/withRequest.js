@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const withRequest = (url) =>(WrappedComponent) =>{
+const withRequest = (config) =>(WrappedComponent) =>{
   return class extends Component{
-
     state={
       data:null
     }
     async initialize(){
       try{
-        const {data} = await axios.get(url);
+        const {data} = await axios(config);
         this.setState({
           data:data
         })
