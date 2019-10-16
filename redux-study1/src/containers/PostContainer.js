@@ -41,11 +41,11 @@ class PostContainer extends Component {
 }
 
 export default connect(
-  ({post})=>({
+  ({post,pender})=>({
     number:post.number,
     data:post.data,
-    pending:post.pending,
-    error:post.error,
+    pending:pender.pending['GET_POST'],
+    error:pender.error['GET_POST'],
   })
 )(PostContainer);
 
