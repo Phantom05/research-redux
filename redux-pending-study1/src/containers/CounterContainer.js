@@ -10,6 +10,16 @@ class CounterContainer extends Component {
   handleDecrement = () =>{
     CounterActions.decrement();
   }
+  handleGetPost = () =>{
+   
+  }
+
+  componentWillReceiveProps(nextProps){
+    const {number}= this.props;
+    if(number !== nextProps.number){
+      CounterActions.getPostApi(nextProps.number);
+    }
+  }
   render() {
     const {number} = this.props;
     return (
@@ -18,6 +28,7 @@ class CounterContainer extends Component {
           number={number}
           increment = {this.handleIncrement}
           decrement = {this.handleDecrement}
+          getPost = {this.handleGetPost}
         />
       </div>
     );
