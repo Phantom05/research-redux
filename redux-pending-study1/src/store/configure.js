@@ -5,19 +5,47 @@ import {createStore, applyMiddleware} from 'redux';
 import {createLogger} from 'redux-logger';
 import ReduxThunk from 'redux-thunk'
 import penderMiddleware from 'redux-pender';
+// import socketMiddleware from 'lib/middleware/socketMiddleware';
+import {websocketMiddleware} from 'store/modules/websocket';
 
-const configure = () =>{
+import thunkMiddleware from "redux-thunk";
 
-  const logger = createLogger();
-  const store = createStore(
-    modules,
-    applyMiddleware(
-      logger,
-      ReduxThunk,
-      penderMiddleware()
-    )
-  );
 
-  return store
+import { setupWebsocket } from 'lib/websocket';
+
+
+const socketSettings = async () => {
+  try {
+    return await setupWebsocket ({host:'127.0.0.1',port:5501})
+    .then(({send,receive}) =>{
+      console.log('Websocket Connect');
+      resolve({send,receive});
+    })
+
+  } catch (e) {
+    console.log(e);
+  }
 }
-export default configure;
+
+
+
+
+const  configure = (callback) =>{
+  callback().then()
+  return () =>{
+
+    const logger = createLogger();
+    const store =  createStore(
+      modules,
+      applyMiddleware(
+        // logger,
+        ReduxThunk,
+        websocketMiddleware,
+        penderMiddleware()
+      )
+    );
+    return store
+  }
+
+}
+export default configure(socketSettings);

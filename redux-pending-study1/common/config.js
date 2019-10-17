@@ -1,0 +1,1 @@
+const host = 'ws://localhost:5501';

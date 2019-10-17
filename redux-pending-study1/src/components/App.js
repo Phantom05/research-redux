@@ -1,40 +1,46 @@
 import React, { Component } from 'react';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
+import withSocketConnect from 'Hoc/withSocketConnect';
 import CounterContainer from 'containers/CounterContainer';
+import MainContainer from 'containers/MainContainer';
+
+
+
 import store from 'store';
-import {QWebChannel} from 'qwebchannel';
-import {ScapApp} from 'lib/api/ScapAppQWebchannel';
+// import {QWebChannel} from 'qwebchannel';
+// import {ScapApp} from 'lib/api/ScapAppQWebchannel';
+// ScapApp = (ws) =>{
+//   ws.send(JSON.stringify({'hello':"world1"}))
+// }
+// import {setupWebsocket } from 'lib/websocket';
+// const client = new W3CWebSocket(serverHost);
+// import { connect,send  } from '@giantmachines/redux-websocket';
+// const serverHost = testMode ? 'ws://127.0.0.1:5501':'ws://127.0.0.1:5501';
+// import {w3cwebsocket as W3CWebSocket} from 'websocket';
+// const testMode = true;
 
-import {w3cwebsocket as W3CWebSocket} from 'websocket';
-
-
-const testMode = true;
-const serverHost = testMode ? 'ws://127.0.0.1:8082':'ws://127.0.0.1:5501';
-const client = new W3CWebSocket(serverHost);
 
 class App extends Component {
-  componentDidMount(){
-    client.onopen =() =>{
-      console.log('WebSocket Client Connected');
-      if(testMode){ 
-        ScapApp(client);
-      }else{  
-        new QWebChannel(client, App); 
-      }
-    }
-    client.onmessage = (message) =>{
-      console.log(message.data);
-    }
-  }
+
   render() {
+    const { data } = this.props;
+    console.log(data, 'props');
+    // if (!data.connect) return null;
     return (
       <div>
-        <Provider store={store}>
-          <CounterContainer/>
-        </Provider>
+        {!data.connect
+          ? <p>Loading...</p>
+          : (
+            <Provider store={store}>
+              {console.log('Container Render')}
+              <CounterContainer />
+              <MainContainer />
+            </Provider>
+          )}
+
       </div>
     );
   }
 }
 
-export default App;
+export default withSocketConnect({host:'127.0.0.1',port:5501})(App);
