@@ -1,33 +1,12 @@
 import React, { Component } from 'react';
-import { setupWebsocket } from 'lib/websocket';
+import {connect} from 'react-redux';
+import {SocketActions} from 'store/actionCreators';
+
 
 const withSocketConnect = (url) => (WrappedComponent) => {
   return class extends Component {
-    state = {
-      connect:false,
-      send: null,
-      receive:null
-    }
-
-    async initialize() {
-      try {
-        await setupWebsocket (url)
-        .then(({send,receive}) =>{
-          console.log('Websocket Connect');
-          this.setState({
-            connect:true,
-            send: send,
-            receive:receive
-          });
-        })
-
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    componentDidMount() {
-      this.initialize();
+    componentDidMount(){
+      SocketActions.wsConnect('ws://localhost:5501');
     }
 
     render() {
@@ -38,4 +17,8 @@ const withSocketConnect = (url) => (WrappedComponent) => {
     }
   }
 }
-export default withSocketConnect;
+export default connect(
+  ({websocket})=>({
+    connect:websocket.connect
+  })
+)(withSocketConnect);

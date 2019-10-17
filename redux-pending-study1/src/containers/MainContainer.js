@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import ScanButton from 'components/Navigation/ScanButton';
-import { SocketActions } from 'store/actionCreators';
+// import { SocketActions } from 'store/actionCreators';
+
 
 class MainContainer extends Component {
 
   handleClick = () =>{
-    SocketActions.socketConnect();
-    SocketActions.TestSocketMiddleware()
+
+
   }
   render() {
     return (
@@ -22,6 +23,6 @@ class MainContainer extends Component {
 
 export default connect(
   (state)=>({
-    response:state.websocket.response
+    // response:state.websocket.response
   })
 )(MainContainer);
