@@ -15,7 +15,13 @@ export const increment = createAction(INCREMENT);
 export const decrement = createAction(DECREMENT);
 
 let initialState = {
-  number:0
+  number:0,
+  pending:false,
+  error:false,
+  post:{
+    title:'',
+    body:''
+  }
 }
 
 export default handleActions({
@@ -31,11 +37,18 @@ export default handleActions({
   },
   ...pender({
     type:GET_POST,
-    onSuccess:(state,{payload:response})=>{
-      const {data} = response;
+    onPending:(state,{payload:response})=>{
       return produce(state,draft=>{
-        console.log(data,'datadata');
-        // console.log();
+        draft.pending = true;
+        draft.error = false;
+      })
+    },
+    onSuccess:(state,{payload:response})=>{
+      const {data:{title, body}} = response;
+      return produce(state,draft=>{
+        draft.pending=false;
+        draft.error=false;
+        draft.post = {title,body}
       })
     }
   })
