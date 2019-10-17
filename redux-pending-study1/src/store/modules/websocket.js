@@ -13,6 +13,8 @@ export const socketMiddleware  = () =>{
 
   const onOpen = store => (event) =>{
     console.log(`websocket open`, event.target.url);
+    console.log(event,'event');
+    console.log(store,'eventevent');
     store.dispatch({type:SOCKET_CONNECT})
   }
 
