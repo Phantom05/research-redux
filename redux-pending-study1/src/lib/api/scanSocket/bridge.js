@@ -1,10 +1,12 @@
 
 
+import { socketConnect } from 'store/modules/websocket';
 import { wsSend } from 'store/modules/websocket';
  
-const bridge = ({getState,dispatch},event) =>{
+const bridge = (store,ws,event) =>{
   console.log('bridge');
-  dispatch(wsSend({'hello':'world'}))
+  store.dispatch(socketConnect());
+  // store.dispatch(wsSend({'hello':'world'}))
   
 }
 export default bridge

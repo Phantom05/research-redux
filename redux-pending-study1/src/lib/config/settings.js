@@ -4,6 +4,10 @@
 export const mode_development = process.env.NODE_ENV === 'development';
 export const mode_production = process.env.NODE_ENV === 'production'
 
+var data = require('./protocol.json');
+console.log(data);
+
+
 let host ='127.0.0.1',port;
 if(mode_development){
   port = '8082';

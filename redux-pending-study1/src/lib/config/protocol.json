@@ -1,0 +1,37 @@
+{
+  "server":
+  [ 
+      { "name":"connect_app_state","key":"DOF_IOS_1010", "value":"true"},
+      { "name":"scanner_connect_state","key":"DOF_IOS_1011", "value":"2"},
+      { "name":"scanner_disconnect","key":"DOF_IOS_1012", "value":"true"},
+      { "name":"scanner_play_state","key":"DOF_IOS_0322", "value":"true"}
+  ],
+
+  "client":
+  [
+      {"DOF_0510":[1, 1]},
+      {"DOF_0510":[1, 2]},
+      {"name":"navigation_control_export_all",    "key":"DOF_IOS_0710", "value":"all"},
+
+      {"DOF_0211":[1, 1]},
+      {"DOF_0211":[1, 2]},
+      {"DOF_0211":[1, 3]},
+
+      {"name":"controller_prev_btn",              "key":"DOF_IOS_0210", "value":"true"},
+      {"name":"controller_next_btn",              "key":"DOF_IOS_0211", "value":"true"},
+      {"name":"controller_play_btn",              "key":"DOF_IOS_0312", "value":"start"},
+      {"name":"controller_delete_btn",            "key":"DOF_IOS_0212", "value":"true"},
+
+      {"name":"controller_check_btn",             "key":"DOF_IOS_0324", "value":"upper"},
+
+      {"name":"controller_viewbox_left",          "key":"DOF_IOS_0620", "value":"5"},
+      {"name":"controller_viewbox_right",         "key":"DOF_IOS_0620", "value":"6"},
+      {"name":"controller_viewbox_top",           "key":"DOF_IOS_0620", "value":"3"},
+      {"name":"controller_viewbox_bottom",        "key":"DOF_IOS_0620", "value":"4"},
+      {"name":"controller_viewbox_front",         "key":"DOF_IOS_0620", "value":"1"},
+      {"name":"controller_viewbox_back",          "key":"DOF_IOS_0620", "value":"2"}
+    ]
+}
+
+
+
