@@ -19,7 +19,8 @@
     "redux-pender": "^2.0.12",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.4.0",
-    "websocket": "^1.0.30"
+    "websocket": "^1.0.30",
+    "ws-await": "^4.0.0"
   },
   "scripts": {
     "start": "cross-env NODE_PATH=src react-scripts start",
