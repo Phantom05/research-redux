@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
 import Counter from 'components/Counter';
 import {connect} from 'react-redux';
-import {ReducerActions} from 'store/actionCreators';
+import {CounterActions} from 'store/actionCreators';
 // import {ReducerActions} from 'store/actins';
 
 class CounterContainer extends Component {
   handleIncrement = ()=>{
-    ReducerActions.increment();
+    CounterActions.increment();
   }
   handleDecrement = () =>{
-    ReducerActions.decrement();
+    CounterActions.decrement();
   }
 
   UNSAFE_componentWillReceiveProps (nextProps){
     const {number}= this.props;
     if(number !== nextProps.number){
-      ReducerActions.getPostApi(nextProps.number);
+      CounterActions.getPostApi(nextProps.number);
     }
+  }
+  handleClick = () =>{
+    this.props.history.push("/")
   }
   render() {
     const {number,pending,post} = this.props;
     return (
       <div>
+            
+      <button onClick={this.handleClick}>View Main</button>
         <Counter 
           number={number}
           pending = {pending}

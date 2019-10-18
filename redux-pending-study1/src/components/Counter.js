@@ -11,10 +11,14 @@ const Styled = {
   `
 }
 class Counter extends Component {
+  handleClick = () =>{
+
+  }
   render() {
     const {number,increment,decrement,getPost, post,pending} = this.props;
     return (
       <div>
+       
           <h2>{number}</h2>
           <Styled.Button onClick={increment}>+</Styled.Button>
           <Styled.Button onClick={decrement}>-</Styled.Button>

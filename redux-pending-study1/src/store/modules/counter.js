@@ -2,11 +2,22 @@
 import {createAction,handleActions} from 'redux-actions';
 import produce from 'immer';
 import {pender} from 'redux-pender';
-import {
-  INCREMENT,
-  DECREMENT,
-  GET_POST
-} from 'store/actions';
+import * as api from 'lib/api'; 
+// import {
+//   INCREMENT,
+//   DECREMENT,
+//   GET_POST
+// } from 'store/actions';
+
+
+export const INCREMENT = 'counter/INCREMENT';
+export const DECREMENT = 'counter/DECREMNET';
+export const GET_POST  = 'post/GET_POST';
+
+export const getPostApi = createAction(GET_POST,api.getPost)
+export const increment  = createAction(INCREMENT);
+export const decrement  = createAction(DECREMENT);
+
 
 let initialState = {
   number:0,

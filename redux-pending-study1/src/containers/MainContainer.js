@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import ScanButton from 'components/Navigation/ScanButton';
+import { connect } from 'react-redux';
+// import ScanButton from 'components/Navigation/ScanButton';
 // import { SocketActions } from 'store/actionCreators';
 
 
 class MainContainer extends Component {
 
-  handleClick = () =>{
-
+  handleClick = () => {
+    this.props.history.push("/setting")
 
   }
   render() {
     return (
       <div>
-        <ScanButton 
-          onClick = {this.handleClick}
-        />
+        <h3>MainContainer</h3>
+        <button onClick={this.handleClick}>View Setting</button>
       </div>
     );
   }
 }
 
 export default connect(
-  (state)=>({
+  (state) => ({
     // response:state.websocket.response
   })
 )(MainContainer);

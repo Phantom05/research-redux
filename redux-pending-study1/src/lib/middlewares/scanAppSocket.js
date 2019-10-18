@@ -7,20 +7,16 @@
 import {
   WS_CONNECT,
   WS_DISCONNECT,
-  // SOCKET_CONNECT,
-  // SOCKET_DISCONNECT,
   socketDisconnect,
   socketConnect
-} from 'store/actions';
+} from 'store/modules/websocket';
 
 // Middleware
-
 export const socketMiddleware  = () =>{
   let socket = null;
 
   const onOpen = store => (event) =>{
     console.log(`websocket open`, event.target.url);
-    console.log(socketConnect);
     store.dispatch(socketConnect())
   }
 

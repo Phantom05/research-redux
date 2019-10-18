@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
 import CounterContainer from 'containers/CounterContainer';
 import MainContainer from 'containers/MainContainer';
+import SettingContainer from 'containers/SettingContainer';
 import SocketWrapper from 'containers/SocketWrapper';
-import store from 'store';
-import {ScanAppSocketConfig as wsConfig} from 'lib/config/settings';
+import { ScanAppSocketConfig as wsConfig } from 'lib/config/settings';
+import { Redirect,Switch, Route } from 'react-router-dom';
+import 'reset-css';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Provider store={store}>
-          <SocketWrapper host={wsConfig.host} port={wsConfig.port}>
-            <CounterContainer />
-            <MainContainer />
-          </SocketWrapper>
-        </Provider>
+        <SocketWrapper host={wsConfig.host} port={wsConfig.port}>
+          <Switch>
+
+            <Route exact  path='/' component={MainContainer} />
+            <Route path='/setting' component={SettingContainer} />
+            <Route path='/counter' component={CounterContainer} />
+          </Switch>
+        </SocketWrapper>
       </div>
     );
   }
