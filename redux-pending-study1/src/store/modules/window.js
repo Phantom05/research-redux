@@ -3,7 +3,10 @@ import produce from 'immer';
 
 
 export const COMMON_WINDOW      = 'common/WINDOW';
-export const CommonWindow        = createAction(COMMON_WINDOW );
+export const MINIMIZE = 'window/MINIMIZE';
+
+export const commonwindow        = createAction(COMMON_WINDOW );
+export const minimize = createAction(MINIMIZE)
 
 
 const initialState = {
@@ -38,6 +41,11 @@ export default  handleActions({
   [COMMON_WINDOW]:(state,{payload:diff})=>{
     return produce(state,draft=>{
       console.log(diff);
+    })
+  },
+  [MINIMIZE]:(state,{payload:diff})=>{
+    return produce(state,draft=>{
+      console.log(' minimize');
     })
   }
 },initialState)

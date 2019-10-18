@@ -1,17 +1,17 @@
 import {createAction,handleActions} from 'redux-actions';
 import produce from 'immer';
 
-export const MAIN_PLAY        = "main/PLAY";
-export const MAIN_DELETE      = "main/DELETE";
+export const PLAY        = "main/PLAY";
+export const DELETE      = "main/DELETE";
 
-export const MAIN_VIEWBOX     = 'main/VIEWBOX';
-export const MAIN_EDIT        = 'main/EDIT';
+export const VIEWBOX     = 'main/VIEWBOX';
+export const EDIT        = 'main/EDIT';
 
-export const MainPlay             = createAction(MAIN_PLAY);
-export const MainDelete           = createAction(MAIN_DELETE);
-export const MainClickViewbox     = createAction(MAIN_VIEWBOX);
+export const Play             = createAction(PLAY);
+export const Delete           = createAction(DELETE);
+export const ClickViewbox     = createAction(VIEWBOX);
 
-export const MainEdit             = createAction(MAIN_EDIT);
+export const Edit             = createAction(EDIT);
 
 const initialState = {
   play: {
@@ -67,7 +67,7 @@ const initialState = {
 };
 
 export default  handleActions({
-    [MAIN_PLAY]: (state, {
+    [PLAY]: (state, {
       payload: diff
     }) => {
       return produce(state, draft => {
@@ -114,7 +114,7 @@ export default  handleActions({
             if (draft.controller.play.count > 0) {
               draft.stage[mode][draft.stage[mode].current].checked = true;
               draft.navigation.save.status = true;
-              if (draft.stage.checkedList.indexOf(draft.stage[mode].current) == -1) {
+              if (draft.stage.checkedList.indexOf(draft.stage[mode].current) === -1) {
                 draft.stage.checkedList.push(draft.stage[mode].current);
               }
             }
@@ -123,7 +123,7 @@ export default  handleActions({
   
       })
     },
-    [MAIN_DELETE]: (state, {
+    [DELETE]: (state, {
       payload: diff
     }) => {
       return produce(state, draft => {
@@ -145,13 +145,13 @@ export default  handleActions({
         }
       })
     },
-    [MAIN_VIEWBOX]: (state,{payload:diff})=>{
+    [VIEWBOX]: (state,{payload:diff})=>{
       console.log(diff);
       return produce(state,draft=>{
         
       })
     },
-    [MAIN_EDIT]:(state,{payload:diff})=>{
+    [EDIT]:(state,{payload:diff})=>{
       return produce(state,draft=>{
         console.log(diff);
       })

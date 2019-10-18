@@ -12,7 +12,6 @@ class Root extends Component {
           <App />
         </BrowserRouter>
       </Provider>
-
     );
   }
 }

@@ -8,7 +8,6 @@ class MainContainer extends Component {
 
   handleClick = () => {
     this.props.history.push("/setting")
-
   }
   render() {
     return (
