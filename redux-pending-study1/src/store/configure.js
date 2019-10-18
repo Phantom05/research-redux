@@ -5,7 +5,7 @@ import {createStore, applyMiddleware} from 'redux';
 import {createLogger} from 'redux-logger';
 import ReduxThunk from 'redux-thunk'
 import penderMiddleware from 'redux-pender';
-import {socketMiddleware} from 'store/modules/websocket';
+import {socketMiddleware} from 'lib/middlewares/scanAppSocket';
 
 
 const  configure = (callback) =>{

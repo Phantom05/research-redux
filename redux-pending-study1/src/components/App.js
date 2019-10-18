@@ -4,14 +4,14 @@ import CounterContainer from 'containers/CounterContainer';
 import MainContainer from 'containers/MainContainer';
 import SocketWrapper from 'containers/SocketWrapper';
 import store from 'store';
+import {ScanAppSocketConfig as wsConfig} from 'lib/config/settings';
 
 class App extends Component {
-
   render() {
     return (
       <div>
         <Provider store={store}>
-          <SocketWrapper>
+          <SocketWrapper host={wsConfig.host} port={wsConfig.port}>
             <CounterContainer />
             <MainContainer />
           </SocketWrapper>
@@ -21,5 +21,4 @@ class App extends Component {
   }
 }
 
-export default App
-// export default App
+export default App;

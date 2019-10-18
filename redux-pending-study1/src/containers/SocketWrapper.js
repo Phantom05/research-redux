@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SocketActions } from 'store/actionCreators';
+import { ReducerActions } from 'store/actionCreators';
 import styled from 'styled-components';
 
 const Styled = {
@@ -21,12 +21,11 @@ const Styled = {
 }
 class SocketWrapper extends Component {
   componentDidMount() {
-    SocketActions.wsConnect('ws://localhost:5501');
+    const {host,port} = this.props;
+    ReducerActions.wsConnect(`ws://${host}:${port}`);
   }
   render() {
-    const { children, connect } = this.props;
-    console.log(connect);
-
+    const { children, connect, } = this.props;
     return (
       <div>
         {!connect
