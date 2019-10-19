@@ -21,6 +21,11 @@ const Styled = {
       top:50%;
       transform:translate(-50%,-50%);
       font-size:14px;
+      cursor: pointer;
+      & > span{
+        font-size:11px;
+        color:#a5a5a5;
+      }
     }
     & img{
       width:100%;
@@ -51,14 +56,14 @@ const Styled = {
 }
 class Window extends Component {
   render() {
-    const { onClick,value } = this.props;
+    const { onClick,value,subTitle } = this.props;
     return (
       <Styled.Window>
         <span className="logo__box">
-          <span><img src={logoImage} alt="logo" /></span>
+          <span onClick={()=>onClick('home')}><img src={logoImage} alt="logo" /></span>
         </span>
-        <span className="center__value">
-          {value}
+        <span className="center__value" onClick={()=>onClick('hello')}>
+          {value} <span>{subTitle.view && subTitle.value}</span>
         </span>
         <span className="controll__box">
           <span onClick={() => onClick('minimize')}><img src={miniImage} alt="miniImage" /></span>

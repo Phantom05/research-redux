@@ -10,5 +10,9 @@ const message = (store,event) =>{
     default:
       break;
   }
+
+  return () =>{
+    // QT들이 들어옴./
+  }
 }
 export default message

@@ -1,22 +1,20 @@
 import * as websocketActions from 'store/modules/websocket';
-import {message,send} from 'lib/api/websocket';
-
+import { message, send } from 'lib/api/websocket';
+import { QWebChannel } from 'qwebchannel';
+import { modeProd } from 'lib/config/settings';
 const socketMiddleware = () => {
-  let socket = null;
-
+  let socket = null, ws = null;
   const onOpen = store => (event) => {
     console.log('websocket open', event.target.url);
-    store.dispatch(websocketActions.ws_connected(event.target.url)
-    )
+    store.dispatch(websocketActions.ws_connected(event.target.url));
+    if(modeProd)  ws = new QWebChannel(socket,message(store,event));
   };
   const onClose = store => () => {
     console.log('websocket disconnect');
     store.dispatch(websocketActions.ws_disconnected());
   };
-
-  const onMessage = store => (event) => {
-    message(store,event)
-  };
+  // productuon에서는 안쓰임.
+  const onMessage = store => (event) => message(store, event)
 
   // the middleware part of this function
   return store => next => action => {
@@ -34,7 +32,9 @@ const socketMiddleware = () => {
         console.log('Websocket Closed');
         break;
       case websocketActions.WS_SEND:
-        send(store,action)
+        // 보낼떄만 socket이 있으면 됨, 받을떈, 상태만 변경해주면됨.
+        // 받을 값을  reducer로 변경해주고 reducer에 따라서 엘리먼트가 send하게만 하면됨.
+        send(store, action,socket)
         break;
       default:
         console.log('the next action:', action);
@@ -42,5 +42,6 @@ const socketMiddleware = () => {
     }
   };
 };
+
 
 export default socketMiddleware();
