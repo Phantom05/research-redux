@@ -52,8 +52,8 @@ class SocketWrapper extends Component {
       <div>
         {!connect
           ? <Styled.Loading>
-              <span>Loading</span>
-            </Styled.Loading>
+            <span>Loading</span>
+          </Styled.Loading>
           : children }
       </div>
     );
