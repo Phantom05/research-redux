@@ -7,14 +7,15 @@ export const logged = createAction(LOGGED);
 
 let initialState ={
   logged:false,
-  email:'',
+  email:'test@test.com',
   password:'',
-  remember:'',
+  remember:true,
 }
 export default handleActions({
   [LOGGED]:(state,{payload:diff})=>{
     return produce(state,draft=>{
       console.log('hello logged');
+      draft.logged = diff;
     })
   }
 },initialState )

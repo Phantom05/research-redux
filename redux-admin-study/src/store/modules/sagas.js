@@ -2,7 +2,6 @@ import {handleActions} from 'redux-actions'
 import produce from 'immer';
 
 import { call, put, takeEvery, takeLatest,all } from 'redux-saga/effects'
-import {login as Api} from 'lib/api/login'
 
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
@@ -14,22 +13,22 @@ export function* incrementAsync() {
 }
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* fetchUser(action) {
-   try {
-      const user = yield call(Api.fetchUser, action.payload.userId);
-      yield put({type: "USER_FETCH_SUCCEEDED", user: user});
-   } catch (e) {
-      yield put({type: "USER_FETCH_FAILED", message: e.message});
-   }
-}
+// function* fetchUser(action) {
+//    try {
+//       const user = yield call(Api.fetchUser, action.payload.userId);
+//       yield put({type: "USER_FETCH_SUCCEEDED", user: user});
+//    } catch (e) {
+//       yield put({type: "USER_FETCH_FAILED", message: e.message});
+//    }
+// }
 
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
 */
-function* mySaga() {
-  yield takeEvery("USER_FETCH_REQUESTED", fetchUser);
-}
+// function* mySaga() {
+//   yield takeEvery("USER_FETCH_REQUESTED", fetchUser);
+// }
 
 // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
 export function* watchIncrementAsync() {

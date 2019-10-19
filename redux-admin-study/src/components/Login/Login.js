@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import AuthTemplate from 'components/common/AuthForm/AuthTemplate';
 import { Link } from 'react-router-dom';
-import {SagaActions} from 'store/actionsCreators';
-
-// import { connect } from "react-redux";
-// import WithLogged from 'lib/hoc/WithLogged';
-
 import { Input, Button, Checkbox } from 'antd';
+import {storage,keys} from 'lib/library';
+
 
 const Styled = {
   Login: styled.div`
@@ -58,39 +55,46 @@ const Styled = {
      }
   `
 }
-
 class Login extends Component {
   state = {
-    email: '',
-    password: '',
-    remember: '',
-    checkbox: false,
+    email: null,
+    password: null,
+    remember: false,
   }
-
   handleChange = (e) => {
     const { state } = this;
     const { name, value } = e.target;
-    const {handleTest} = this.props;
     this.setState({
-      [name]: name === 'checkbox' ? !state.checkbox : value
+      [name]: name === 'remember' ? !state.remember : value
     });
-    handleTest()
   }
   handleSubmit = (e) => {
+    const {props,state} = this;
+    const {email} = state;
     e.preventDefault();
-    console.log('handleSubmit');
-    const {asyncSaga} = this.props;
-    asyncSaga()
-    // SagaActions.helloSaga()
+    if(state.remember){
+      storage.set(`remember`,true)
+      storage.set(`email`,email)
+    }else{
+      storage.clear()
+    }
+    props.handleLogin(state);
+  }
 
+  componentDidMount(){
+    storage.set(keys);
+    const remember = storage.get(`remember`);
+    const email = storage.get(`email`);
+    this.setState({
+      email,
+      remember
+    })    
   }
 
   render() {
-    const { props, state, handleLogin, handleChange, handleSubmit } = this;
-    // const { logged, email, password, remember } = props;
+    const { state, handleLogin, handleChange, handleSubmit } = this;
     return (
       <Styled.Login>
-        {/* <WithLogged url="/" /> */}
         <AuthTemplate title="Admin" align="center" >
           <form onSubmit={handleSubmit}>
             <div className="login__row">
@@ -117,9 +121,11 @@ class Login extends Component {
               <Checkbox
                 onChange={handleChange}
                 className="remember"
-                checked={state.checkbox}
-                name="checkbox"
-              >Remember</Checkbox>
+                checked={state.remember}
+                name="remember"
+              >
+                Remember
+              </Checkbox>
               <Link to="/reset" className="link">Forgot Password?</Link>
             </div>
             <div className="login__row login">
@@ -128,7 +134,9 @@ class Login extends Component {
                 block
                 onClick={handleLogin}
                 className="login__btn"
-              >Login</Button>
+              >
+                Login
+              </Button>
             </div>
             <div className="login__row signup">
               <Link to="/" className="link">Home</Link>
@@ -136,7 +144,6 @@ class Login extends Component {
             </div>
           </form>
         </AuthTemplate>
-
       </Styled.Login>
     );
   }

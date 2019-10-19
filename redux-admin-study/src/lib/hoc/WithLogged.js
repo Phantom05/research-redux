@@ -20,14 +20,16 @@ import {connect} from 'react-redux';
 class WithLogged extends Component{
     
   render() {
-    const {url, logged} = this.props;
+    const {url, logged, isLogged,isNotLogged} = this.props;
     console.log(logged);
     return (
       <>
-        {!logged 
+        {isLogged && logged &&  <Redirect to={url? url : '/'} />}
+        {isNotLogged && !logged && <Redirect to={url? url : '/login'} />}
+        {/* {!logged 
         ? <Redirect to={url? url : '/login'} />
         : <Redirect to={url? url : '/'} />
-        }
+        } */}
         {/* <WrappedComponent {...this.props} data={data}/> */}
       </>
     )
