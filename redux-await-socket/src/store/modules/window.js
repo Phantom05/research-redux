@@ -4,11 +4,11 @@ import produce from 'immer';
 
 export const TITLE = 'window/TITLE';
 export const SUB_TITLE = 'window/SUB_TITLE';
-export const CHANGE_PAGE = 'window/CHANGE_PAGE'; 
+export const PAGE = 'window/PAGE'; 
 
 export const title = createAction(TITLE);
 export const subTitle = createAction(SUB_TITLE);
-export const change_page = createAction(CHANGE_PAGE);
+export const page = createAction(PAGE);
 
 let initialState = {
   page:'/',
@@ -32,7 +32,7 @@ export default handleActions({
       draft.subTitle.value = diff.toUpperCase(); 
     })
   },
-  [CHANGE_PAGE]:(state,{payload:diff})=>{
+  [PAGE]:(state,{payload:diff})=>{
     return produce(state,draft=>{
       draft.page = diff;
     })

@@ -7,6 +7,7 @@ const data = require('lib/config/protocol.json');
 class Setting extends Component {
 
   render() {
+    console.log(data);
     const { page } = this.props;
     return (
       <div>
@@ -23,4 +24,4 @@ export default connect(
     subTitle: window.subTitle,
     disable: websocket.disable
   })
-)(withRouter(Setting));
+)(Setting);

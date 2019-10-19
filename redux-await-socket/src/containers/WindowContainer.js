@@ -54,4 +54,4 @@ export default connect(
     subTitle: window.subTitle,
     disable: websocket.disable
   })
-)(withRouter(WindowContainer));
+)(WindowContainer);

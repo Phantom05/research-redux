@@ -24,7 +24,7 @@ const message = (store,event) =>{
 
   if(server_key === 'KOF_1000'){
     console.log('>>> func!! page!');
-    WindowActions.change_page('setting');
+    WindowActions.page('setting');
     
   }
 
