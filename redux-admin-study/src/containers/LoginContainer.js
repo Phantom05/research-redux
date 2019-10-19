@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Login from 'components/Login';
-import {AuthActions} from 'store/actionsCreators';
+import Counter from 'components/Counter';
+import { AuthActions, SagaActions } from 'store/actionsCreators';
 
 
 class LoginContainer extends Component {
-  handleTest = () =>{
+  handleTest = () => {
     AuthActions.logged()
+  }
+  asyncSaga = () => {
+    console.log('asyncSaga');
   }
   render() {
     const {
@@ -17,22 +21,28 @@ class LoginContainer extends Component {
     } = this.props;
     return (
       <div>
-        <Login 
+        <Login
           logged={logged}
           email={email}
           password={password}
           remember={remember}
-          handleTest ={this.handleTest}
+          handleTest={this.handleTest}
+          asyncSaga={this.asyncSaga}
         />
+        <Counter
+          value={store.getState()}
+          onIncrement={() => action('INCREMENT')}
+          onDecrement={() => action('DECREMENT')}
+          onIncrementAsync={() => action('INCREMENT_ASYNC')} />,
       </div>
     );
   }
 }
 export default connect(
-  ({auth})=>({
-    logged:auth.logged,
-    email:auth.email,
-    password:auth.password,
-    remember:auth.remember,
+  ({ auth }) => ({
+    logged: auth.logged,
+    email: auth.email,
+    password: auth.password,
+    remember: auth.remember,
   })
 )(LoginContainer);

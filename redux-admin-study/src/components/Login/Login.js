@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import AuthTemplate from 'components/common/AuthForm/AuthTemplate';
 import { Link } from 'react-router-dom';
+import {SagaActions} from 'store/actionsCreators';
+
+// import { connect } from "react-redux";
 // import WithLogged from 'lib/hoc/WithLogged';
 
 import { Input, Button, Checkbox } from 'antd';
@@ -76,8 +79,9 @@ class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('handleSubmit');
-
-
+    const {asyncSaga} = this.props;
+    asyncSaga()
+    // SagaActions.helloSaga()
 
   }
 
