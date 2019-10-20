@@ -4,7 +4,8 @@ import Login from 'components/Login';
 import Counter from 'components/Counter';
 import WithLogged from 'lib/hoc/WithLogged';
 import { AuthActions, SagaActions } from 'store/actionsCreators';
-import {postLogin} from 'lib/api/login'
+import {postLogin} from 'lib/api/login';
+// import FullscreenLoader from 'components/base/FullscreenLoader';
 // import store from 'store';
 
 

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Input, Button, Checkbox } from 'antd';
 import {storage,keys} from 'lib/library';
 
+// import ProgressBar from 'components/base/ProgressBar';
 
 const Styled = {
   Login: styled.div`
@@ -94,6 +95,8 @@ class Login extends Component {
   render() {
     const { state, handleLogin, handleChange, handleSubmit } = this;
     return (
+      <>
+        
       <Styled.Login>
         <AuthTemplate title="Admin" align="center" >
           <form onSubmit={handleSubmit}>
@@ -145,6 +148,7 @@ class Login extends Component {
           </form>
         </AuthTemplate>
       </Styled.Login>
+      </>
     );
   }
 }
