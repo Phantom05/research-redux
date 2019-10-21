@@ -35,6 +35,7 @@ export default handleActions({
   [SUCCESS_USER]:(state,{payload:diff})=>{
     return produce(state,draft=>{
       console.log('success');
+      console.log(diff);
       draft.error = false;
       draft.data = JSON.stringify(diff);
     })

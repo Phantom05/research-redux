@@ -12,8 +12,9 @@ class CounterContainer extends Component {
   handleDecrement = () =>{
     CounterActions.decrement()
   }
-  handleGetUser= () =>{
-    UsersActions.get_user('hello');
+  handleGetUser= (text) =>{
+    console.log('get user');
+    UsersActions.get_user(text);
   }
   handleAsyncIncrement = () =>{
     CounterActions.asyncIncrement();

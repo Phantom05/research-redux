@@ -2,6 +2,7 @@
   "name": "d-redux-saga-study1",
   "version": "0.1.0",
   "private": true,
+  "hompage":".",
   "dependencies": {
     "axios": "^0.19.0",
     "cross-env": "^6.0.3",
