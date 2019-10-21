@@ -1,0 +1,17 @@
+{
+  "server_connect":{
+    "KOF_8081":[0,false]
+  },
+  "window_title":{
+    "KOF_0000":[0,true]
+  },
+  "window_minimize":{
+    "KOF_0001":[0,true]
+  },
+  "window_maxmize":{
+    "KOF_0002":[0,true]
+  },
+  "window_exit":{
+    "KOF_0003":[1,null]
+  }
+}
