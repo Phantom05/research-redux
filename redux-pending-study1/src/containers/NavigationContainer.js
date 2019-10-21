@@ -7,9 +7,6 @@ class NavigationContainer extends Component {
     return (
       <div>
           Navigation
-          <Test theme={'black'} text={'첫번째 버튼'} />
-          <Test theme={'red'}   text={'test'}/>
-          <Test theme={'blue'}  text={'마지막 버튼'}/>
       </div>
     );
   }
