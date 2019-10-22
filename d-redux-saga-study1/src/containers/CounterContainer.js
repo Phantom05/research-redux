@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Counter from 'components/counter';
+
 import { connect } from 'react-redux';
 import {CounterActions,UsersActions} from 'store/actionCreators';
 
@@ -7,7 +8,6 @@ class CounterContainer extends Component {
   handleIncrement = () =>{
     const {number} = this.props;
     CounterActions.increment();
-   
   }
   handleDecrement = () =>{
     CounterActions.decrement()
@@ -26,6 +26,8 @@ class CounterContainer extends Component {
     console.log('get Post');
     UsersActions.get_post(number)
   }
+
+
   render() {
     const {number,error,data} = this.props;
 

@@ -1,4 +1,4 @@
-import { call, put, fork, takeEvery, take, select, all, delay } from 'redux-saga/effects';
+import { call, put, fork, takeEvery, all, delay } from 'redux-saga/effects';
 import { 
   GET_USER,
   GET_POST,

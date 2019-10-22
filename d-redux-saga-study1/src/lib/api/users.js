@@ -17,10 +17,10 @@ function getServerResult(){
   })
 }
 
-function getUsers(payload){
-  console.log(payload,'>>> payload in API func getUsers arguments');
+function getUsers(userId){
+  console.log(userId,'>>> payload in API func getUsers arguments');
   const config ={
-    url:'http://jsonplaceholder.typicode.com/users',
+    url:`http://jsonplaceholder.typicode.com/users?id=${userId}`,
     method:'get'
   }
   return axios(config).then((response)=>{

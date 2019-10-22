@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Styled = {
-  Counter:styled.div`
+  Counter: styled.div`
   .title{
     font-weight:bold;
   }
@@ -29,26 +29,28 @@ class Counter extends Component {
     } = this.props;
 
     let resultData = data && JSON.parse(data).map(
-      list=>(
-      <div key={list.id}>
-        {list.name && list.name}
-        <div className="title">{list.title}</div>
-        <div>{list.body}</div>
-      </div>
+      list => (
+        <div key={list.id}>
+          <p>{list.name && list.name}</p>
+          <p>{list.email && list.email}</p>
+          <p>{list.phone && list.phone}</p>
+          <div className="title">{list.title}</div>
+          <div>{list.body}</div>
+        </div>
       ));
     return (
       <Styled.Counter>
-        {error? 'Error'
+        {error ? 'Error'
           : (
             <div>
               <div>{number}</div>
               <div>
                 <Styled.Button onClick={increment}>+</Styled.Button>
-                <Styled.Button onClick={decrement}>-</Styled.Button> <br/>
+                <Styled.Button onClick={decrement}>-</Styled.Button> <br />
                 <Styled.Button onClick={() => getUser(number)}>getUser</Styled.Button>
                 <Styled.Button onClick={() => getPost(number)}>getPost</Styled.Button>
-                <div>{data && data.length >0 ? resultData : 'No Data'}</div>
-              </div> 
+                <div>{data && data.length > 0 ? resultData : 'No Data'}</div>
+              </div>
             </div>
           )}
       </Styled.Counter>
