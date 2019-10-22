@@ -20,6 +20,9 @@ class HomeContainer extends Component {
       console.log('>>> click TEST BUTTON');
       Actions.ws_send({"DOF_0001":[0,true]})
     }
+    if(type ==='wsSend'){
+      Actions.saga_socket_request({"test":[1,true]})
+    }
   }
   render() {
     const {data,number,error} = this.props;

@@ -9,11 +9,12 @@ class Home extends Component {
       <div>
         <h1>{number}</h1>
         <div>
-          <button onClick={()=>onClick('increment')}>+</button>
+          <button id="ff" onClick={()=>onClick('increment')}>+</button>
           <button onClick={()=>onClick('decrement')}>-</button>
         </div>
         <button onClick={()=>onClick('getUser')}>Get User</button> <br/>
         <button onClick={() => onClick('test')}>TEST BUTTON</button>
+        <button onClick={()=>onClick('wsSend')}>Socket REQUEST</button>
         <div>{data}</div>
       </div>
     );

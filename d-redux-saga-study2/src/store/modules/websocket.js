@@ -1,4 +1,4 @@
-import {createAction,handleActions} from 'redux-actions';
+import {handleActions} from 'redux-actions';
 import produce from 'immer';
 import * as actions from 'store/actions';
 

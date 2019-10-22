@@ -7,10 +7,10 @@ import {path,settings,protocol} from 'config';
 import malt_image from 'static/images/malt.svg';
 
 
-console.log('protocol json',protocol);
-console.log('path json',path);
-console.log('image url in path.json',path.malt_image);
-console.log('apiAddress in settings',settings.socketAddress);
+// console.log('protocol json',protocol);
+// console.log('path json',path);
+// console.log('image url in path.json',path.malt_image);
+// console.log('apiAddress in settings',settings.socketAddress);
 
 class Root extends Component {
   render() {

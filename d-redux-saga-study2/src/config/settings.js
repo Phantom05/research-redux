@@ -13,4 +13,11 @@ export const socketAddress =  (DevMode)
 : (ProdMode) 
 ? 'ws://127.0.0.1:5501'
 : null;
+
+export const setValueOf =() =>{
+
+  // const getId = (id) => document.getElementById(id)
+  // getId('ff').setAttribute('data-valueOf','dof')
+
+}
  
