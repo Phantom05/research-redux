@@ -3,7 +3,7 @@ import FullscreenError from 'components/base/FullscreenError';
 
 class Home extends Component {
   render() {
-    const {number,data,onClick,error} = this.props;
+    const {number,data,onClick,error,wsConnect} = this.props;
     if(error) return <FullscreenError />
     return (
       <div>
@@ -13,8 +13,12 @@ class Home extends Component {
           <button onClick={()=>onClick('decrement')}>-</button>
         </div>
         <button onClick={()=>onClick('getUser')}>Get User</button> <br/>
-        <button onClick={() => onClick('test')}>TEST BUTTON</button>
         <button onClick={()=>onClick('wsSend')}>Socket REQUEST</button>
+        <button onClick={()=>onClick('blocking')}>Blocking</button>
+        <button onClick={()=>onClick('unblocking')}>unBlocking</button>
+        <div>
+          {wsConnect ? 'connect' : 'disconnect'}
+        </div>
         <div>{data}</div>
       </div>
     );
