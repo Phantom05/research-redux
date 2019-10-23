@@ -2,6 +2,7 @@
 import {all,fork,takeEvery,select} from 'redux-saga/effects';
 import * as actions from 'store/actions';
 import {Actions} from 'store/actionCreators';
+import {settings} from 'config';
 
 const getState= (name) => (state) => state[name];
 
@@ -13,7 +14,7 @@ const consoleWrapper = (txt)=>{
 function* handleConnect(payload){
   const {payload:ws} = payload;
   Actions.ws_connected();
-  console.log(ws,'payloadpayload');
+  // console.log(ws,'payloadpayload');
   yield takeEvery(actions.SAGA_SOCKET_REQUEST,handleRequest(ws));
 }
 
@@ -26,7 +27,9 @@ export const handleRequest = (ws) => {
     if(socketState.blocking) return ;
     
     console.log('in');
-    console.log(socketState);
+    // console.log(socketState);
+ 
+
 
     if(dataValues[0] === 1){
       // console.log('disable');
@@ -35,18 +38,25 @@ export const handleRequest = (ws) => {
       // console.log('inable');
     }
 
-    ws.send(JSON.stringify(valueOf));
+    if(settings.DevMode){
+      ws.send(JSON.stringify(valueOf));
+
+    }else{
+      console.log(ws);
+      ws.executeCommand(valueOf)
+    }
   }
 }
 
 
 function* handleResponse(response){
-  const {payload} = response;
-  const dataValues = Object.values(response)[0];
-  console.log(response);
-  if(dataValues[0] === 1){
+  console.log(response,'responseresponseresponseresponse/*****');
+  // const {payload} = response;
+  // const dataValues = Object.values(response)[0];
+  // console.log(response);
+  // if(dataValues[0] === 1){
     
-  }
+  // }
 }
 
 function* watchSocket(){

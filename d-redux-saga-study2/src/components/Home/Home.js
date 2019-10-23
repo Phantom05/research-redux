@@ -16,6 +16,8 @@ class Home extends Component {
         <button onClick={()=>onClick('wsSend')}>Socket REQUEST</button>
         <button onClick={()=>onClick('blocking')}>Blocking</button>
         <button onClick={()=>onClick('unblocking')}>unBlocking</button>
+        <hr/>
+        <button>DOF</button>
         <div>
           {wsConnect ? 'connect' : 'disconnect'}
         </div>

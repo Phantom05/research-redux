@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Home from 'components/Home';
 import {connect} from 'react-redux';
 import {Actions} from 'store/actionCreators';
+import {Link} from 'react-router-dom';
 
 class HomeContainer extends Component {
   handleGetUser = (type) =>{
@@ -30,6 +31,7 @@ class HomeContainer extends Component {
     console.log(wsConnect,'wsConnect');
     return (
       <div>
+        Hello Home Containers
         <Home
           data ={data}
           error={error}
@@ -37,6 +39,7 @@ class HomeContainer extends Component {
           onClick={this.handleGetUser}
           wsConnect={wsConnect}
         />
+         <Link to="/setting">Setting page Link</Link>
       </div>
     );
   }

@@ -4,7 +4,7 @@ import * as actions from 'store/actions';
 
 
 let initialState={
-  connect:false,
+  connect:true,
   host:null,
   blocking:false
 }

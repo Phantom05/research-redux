@@ -7,15 +7,36 @@ import {QWebChannel} from 'qwebchannel';
 const websocketInitChannel = ws=> {
   return  eventChannel( emitter => {
     ws.onopen= e => {
+
       if(settings.ProdMode){
-        new QWebChannel(settings.socketAddress,(msg)=>{
-          emitter(actions.saga_socket_response(msg))
+        new QWebChannel(ws, function(channel){
+          const handler = channel.objects.handler;
+          console.log('Qwebchannel in !!');
+          console.log(channel,' channel message!!!');
+
+          handler.connectMessage.connect(function(message){
+            console.log('Qwebchannel Connect handler message in ');
+            emitter(actions.saga_socket_connect(handler));
+          });
+
+          handler.sendCommand.connect(function(message){
+            console.log(message,'Qwebchannel Connect handler inininiiiin***');
+            emitter(actions.saga_socket_response(message));
+          });
+
+          handler.executeCommand({'HELLO':'MAIN QWEBCHANNEL CONTACT'})
+
+          // return emitter(actions.saga_socket_response(channel));
         });
       }else if (settings.DevMode){
         emitter(actions.saga_socket_connect(ws));
+        // emitter(actions.saga_socket_connect(ws));
       }
+
+
     }
     ws.onmessage = e => {
+      console.log('websocekt on message');
       let msg = null
       try { msg = JSON.parse(e.data);
       } catch(e) { console.error(`Error parsing : ${e.data}`)}
@@ -40,7 +61,7 @@ const websocketInitChannel = ws=> {
 
 export default function* wsSaga() {
   // init the connection here
-  const  ws = new WebSocket(settings.socketAddress);
+  const  ws = new WebSocket(settings.wsAddress);
   const channel = yield call(websocketInitChannel,ws);
   while (true) {
     // take는 기본적으로 pattern과 channel을 넣어서 사용할 수가 있음. 공식 도큐 보기

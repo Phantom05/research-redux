@@ -8,7 +8,7 @@ export const apiAddress = (DevMode)
 ? 'http://127.0.0.1:5501'
 : null;
 
-export const socketAddress =  (DevMode) 
+export const wsAddress =  (DevMode) 
 ? 'ws://127.0.0.1:8082' 
 : (ProdMode) 
 ? 'ws://127.0.0.1:5501'
