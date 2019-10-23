@@ -5,19 +5,25 @@ import {Actions} from 'store/actionCreators';
 
 const getState= (name) => (state) => state[name];
 
+const consoleWrapper = (txt)=>{
+  console.log(txt);
+  return (fn)=>fn;
+}
+
+function* handleConnect(payload){
+  Actions.ws_connected();
+}
+
+
 export const handleRequest = (ws) => {
   return function* ({payload:valueOf}){
     console.log('>>> handleRequest Saga');
-    const dataValues = Object.values(valueOf)[0];
     const socketState = yield select(getState('websocket'));
-    if(socketState.blocking){
-      console.log('blocking!');
-      return
-    }
+    const dataValues = Object.values(valueOf)[0];
+    if(socketState.blocking) return ;
+    
     console.log('in');
     console.log(socketState);
-
-
 
     if(dataValues[0] === 1){
       console.log('disable');
@@ -30,15 +36,9 @@ export const handleRequest = (ws) => {
   }
 }
 
-function* handleConnect(payload){
-  console.log('>>> handleConnect Saga');
-  Actions.ws_connected();
-}
 
 function* handleResponse(response){
-  console.log('>>> handleResponse Saga');
   const {payload} = response;
-  console.log(payload);
   const dataValues = Object.values(response)[0];
   console.log(response);
   if(dataValues[0] === 1){
@@ -49,8 +49,8 @@ function* handleResponse(response){
 function* watchSocket(){
   yield all([
     // takeEvery(actions.SAGA_SOCKET_REQUEST,handleRequest),
-    takeEvery(actions.SAGA_SOCKET_CONNECT,handleConnect),
-    takeEvery(actions.SAGA_SOCKET_RESPONSE,handleResponse)
+    takeEvery(actions.SAGA_SOCKET_CONNECT,consoleWrapper('>>> handleConnect Saga')(handleConnect)),
+    takeEvery(actions.SAGA_SOCKET_RESPONSE,consoleWrapper('>>> handleResponse Saga')(handleResponse))
   ])
 }
 export default function* socketSaga(){

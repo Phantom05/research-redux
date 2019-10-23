@@ -3,10 +3,19 @@ import {call,put,take,takeEvery} from 'redux-saga/effects';
 import {settings} from 'config';
 import * as actions from 'store/actions';
 import {handleRequest} from 'store/sagas/socket';
+import {QWebChannel} from 'qwebchannel';
 
 const websocketInitChannel = ws=> {
   return eventChannel( emitter => {
-    ws.onopen= e =>emitter(actions.saga_socket_connect(ws));
+    ws.onopen= e => {
+      if(settings.ProdMode){
+        new QWebChannel(settings.socketAddress,(msg)=>{
+          emitter(actions.saga_socket_response(msg))
+        });
+      }else if (settings.DevMode){
+        emitter(actions.saga_socket_connect(ws));
+      }
+    }
     ws.onmessage = e => {
       let msg = null
       try { msg = JSON.parse(e.data)
@@ -14,6 +23,12 @@ const websocketInitChannel = ws=> {
 
       if(msg){ console.log(msg); }
       return emitter(actions.saga_socket_response(msg))
+    }
+    ws.onerror= e =>{
+      console.log('onerror');
+    }
+    ws.onclose = e =>{
+      console.log('disconnect');
     }
     return () => {
       console.log('socket disconnect');
@@ -24,7 +39,7 @@ const websocketInitChannel = ws=> {
 
 export default function* wsSaga() {
   // init the connection here
-  const ws = new WebSocket(settings.socketAddress);
+  const  ws = new WebSocket(settings.socketAddress);
   const channel = yield call(websocketInitChannel,ws);
   yield takeEvery(actions.SAGA_SOCKET_REQUEST,handleRequest(ws))
   while (true) {

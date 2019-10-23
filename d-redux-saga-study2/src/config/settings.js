@@ -15,9 +15,7 @@ export const socketAddress =  (DevMode)
 : null;
 
 export const setValueOf =() =>{
-
   // const getId = (id) => document.getElementById(id)
   // getId('ff').setAttribute('data-valueOf','dof')
-
 }
  
