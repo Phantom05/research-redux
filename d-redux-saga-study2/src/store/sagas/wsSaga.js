@@ -1,12 +1,11 @@
 import {eventChannel} from 'redux-saga';
-import {call,put,take,takeEvery} from 'redux-saga/effects';
+import {call,put,take} from 'redux-saga/effects';
 import {settings} from 'config';
 import * as actions from 'store/actions';
-import {handleRequest} from 'store/sagas/socket';
 import {QWebChannel} from 'qwebchannel';
 
 const websocketInitChannel = ws=> {
-  return eventChannel( emitter => {
+  return  eventChannel( emitter => {
     ws.onopen= e => {
       if(settings.ProdMode){
         new QWebChannel(settings.socketAddress,(msg)=>{
@@ -18,10 +17,12 @@ const websocketInitChannel = ws=> {
     }
     ws.onmessage = e => {
       let msg = null
-      try { msg = JSON.parse(e.data)
+      try { msg = JSON.parse(e.data);
       } catch(e) { console.error(`Error parsing : ${e.data}`)}
 
       if(msg){ console.log(msg); }
+      // emitter 이함수를 실행해야지 channel의 take가 동작하고 아랫부분 while에서 take로 포착할 수가 있음. 반드시 emiiter를 써줘야함.
+      // emit으로 actions이 들어가게 되면 아래 put으로 실행하고 다시 take상태로 돌아가게됨.
       return emitter(actions.saga_socket_response(msg))
     }
     ws.onerror= e =>{
@@ -41,10 +42,10 @@ export default function* wsSaga() {
   // init the connection here
   const  ws = new WebSocket(settings.socketAddress);
   const channel = yield call(websocketInitChannel,ws);
-  yield takeEvery(actions.SAGA_SOCKET_REQUEST,handleRequest(ws))
   while (true) {
+    // take는 기본적으로 pattern과 channel을 넣어서 사용할 수가 있음. 공식 도큐 보기
     const action = yield take(channel);
-    yield put(action)
+    yield put(action);
   }
 }
 

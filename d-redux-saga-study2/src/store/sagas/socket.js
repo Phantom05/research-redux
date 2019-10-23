@@ -11,7 +11,10 @@ const consoleWrapper = (txt)=>{
 }
 
 function* handleConnect(payload){
+  const {payload:ws} = payload;
   Actions.ws_connected();
+  console.log(ws,'payloadpayload');
+  yield takeEvery(actions.SAGA_SOCKET_REQUEST,handleRequest(ws));
 }
 
 
@@ -26,10 +29,10 @@ export const handleRequest = (ws) => {
     console.log(socketState);
 
     if(dataValues[0] === 1){
-      console.log('disable');
+      // console.log('disable');
       // Actions.ws_bloking();
     }else{
-      console.log('inable');
+      // console.log('inable');
     }
 
     ws.send(JSON.stringify(valueOf));
