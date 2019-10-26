@@ -1,15 +1,13 @@
-import {createAction,handleActions} from 'redux-actions';
+import {handleActions} from 'redux-actions';
 import produce from 'immer';
+import * as acions from 'store/actions';
 
-export const PAGE = 'window/PAGE';
-
-export const page = createAction(PAGE);
 
 let initialState ={
   page:'/'
 }
 export default handleActions({
-  [PAGE]:(state,{payload:diff})=>{
+  [acions.PAGE]:(state,{payload:diff})=>{
     return produce(state,draft=>{
       
     })

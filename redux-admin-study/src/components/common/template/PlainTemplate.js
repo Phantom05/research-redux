@@ -10,18 +10,34 @@ const Styled = {
     top:0;
     width:100%;
   `,
+  SideBar:styled.div`
+    padding-top:${props => props.header ? headerHight:0};
+    float:left;
+  `,
   Main:styled.main`
-    padding-top:${headerHight};
+    padding-top:${props => props.header ? headerHight:0};
+    float:left;
+  `,
+  TemplateBox:styled.div`
+    &:after{
+      display:block;
+      content:'';
+      clear: both;
+    }
   `
 }
 
 class PlainTemplate extends Component {
   render() {
-    const {header, children} = this.props;
+    const {header, main,sidebar} = this.props;
     return (
       <div>
         <Styled.Header>{header}</Styled.Header>
-        <Styled.Main>{children}</Styled.Main>
+        <Styled.TemplateBox className="template__box">
+          <Styled.SideBar header={header &&true}>{sidebar}</Styled.SideBar>
+          <Styled.Main header={header&& true} sidebar={sidebar&& true}>{main}</Styled.Main>
+        </Styled.TemplateBox>
+
       </div>
     );
   }

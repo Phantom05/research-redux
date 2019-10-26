@@ -1,15 +1,13 @@
-import {createAction,handleActions} from 'redux-actions';
+import {handleActions} from 'redux-actions';
 import produce from 'immer';
+import * as actions from 'store/actions';
 
-export const TITLE = 'dashboard/TITLE';
-
-export const title = createAction(TITLE);
 
 let initialState ={
   title:"dashboard"
 }
 export default handleActions({
-  [TITLE]:(state,{payload:diff})=>{
+  [actions.DASHBOARD_TITLE]:(state,{payload:diff})=>{
     return produce(state,draft=>{
       console.log('hello dashboard title');
 

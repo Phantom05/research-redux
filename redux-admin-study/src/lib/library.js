@@ -1,43 +1,40 @@
 
-export const keys ={
-  user:`__$$user$$__`
+export const keys = {
+  user: `__$$user$$__`
 }
 
-export const pressedEnter = (fn = () =>{} ) => (e) => {
-  if (e.key === 'Enter') {
-    fn();
+class Storage {
+  constructor() {
+    this.st = typeof localStorage === 'object' ? localStorage : {};
   }
-  return null;
-};
-
-
-
-const st = typeof localStorage === 'object' ? localStorage : {};
-export const storage = {
   set(key, value) {
-    st[key] = JSON.stringify(value);
-  },
+    this.st[key] = JSON.stringify(value);
+  }
   get(key) {
-    if (!st[key]) return null;
-    const value = st[key];
+    if (!this.st[key]) return null;
+    const value = this.st[key];
     try {
       const parsed = JSON.parse(value);
       return parsed;
     } catch (e) {
       return value;
     }
-  },
+  }
   remove(key) {
-    delete st[key];
-  },
+    delete this.st[key];
+  }
   clear() {
-    if (st.clear) {
-      st.clear();
-    }
-  },
-};
- ;
+    return (this.st.clear) && this.st.clear();
+  }
+}
+export const storage = new Storage();
 
+export const pressedEnter = (fn = () => { }) => (e) => {
+  if (e.key === 'Enter') {
+    fn();
+  }
+  return null;
+};
 
 
 export const getScrollTop = () => {
@@ -66,3 +63,33 @@ export const preventStickBottom = () => {
     document.body.scrollTop -= 1;
   }
 };
+
+
+
+
+
+// const st = typeof localStorage === 'object' ? localStorage : {};
+// export const storage = {
+//   set(key, value) {
+//     st[key] = JSON.stringify(value);
+//   },
+//   get(key) {
+//     if (!st[key]) return null;
+//     const value = st[key];
+//     try {
+//       const parsed = JSON.parse(value);
+//       return parsed;
+//     } catch (e) {
+//       return value;
+//     }
+//   },
+//   remove(key) {
+//     delete st[key];
+//   },
+//   clear() {
+//     if (st.clear) {
+//       st.clear();
+//     }
+//   },
+// };
+

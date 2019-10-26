@@ -1,42 +1,22 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-
-
-// const withLogged = (url = '/login') => (WrappedComponent) =>{
-//   return class extends Component{
-//     render() {
-//       const {logged} = this.props;
-//       return (
-//         <>
-//           {!logged && <Redirect to={url} />}
-//           <WrappedComponent {...this.props} />
-//         </>
-//       )
-//     }
-//   }
-// }
+import { storage, keys } from 'lib/library';
 
 class WithLogged extends Component{
-    
   render() {
-    const {url, logged, isLogged,isNotLogged} = this.props;
-    console.log(logged);
+    let logged = false
+    const loggedStorage = storage.get(`${keys}logged`);
+    logged= loggedStorage ? true : false; 
+    const {url,  isLogged,isNotLogged} = this.props;
+    console.log(logged,'withLogged');
     return (
       <>
         {isLogged && logged &&  <Redirect to={url? url : '/'} />}
         {isNotLogged && !logged && <Redirect to={url? url : '/login'} />}
-        {/* {!logged 
-        ? <Redirect to={url? url : '/login'} />
-        : <Redirect to={url? url : '/'} />
-        } */}
-        {/* <WrappedComponent {...this.props} data={data}/> */}
       </>
     )
   }
 }
-export default connect(
-  ({auth})=>({
-    logged:auth.logged
-  })
-)(WithLogged);
+
+export default WithLogged;

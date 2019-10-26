@@ -1,18 +1,43 @@
 
 import axios from 'axios';
-import {apiAddress} from 'lib/config/settings';
+import { apiAddress } from 'lib/config/settings';
 
 
-export function getAxios(api){
-  return axios.get(apiAddress + api)
-}
-export function postAxios(api,data = {}){
-  return axios.post(apiAddress + api,data)
-}
-export function Axios(api){
-  return axios.post(apiAddress + api)
+export const getAxios = (api) =>
+  axios.get(apiAddress + api)
+    .catch(err => { return { error: err } });
+
+export const postAxios = (api, data = {}) =>{
+  const config={
+    url:apiAddress+api,
+    method:'post',
+    data
+  }
+  return axios(config)
+  .catch(err => { return { error: err } });
 }
 
-export function postLogin(data){
-  return postAxios('/auth/login',data)
+
+export function postLogin(data) {
+  console.log(data);
+  const dataConfig= {
+    email:data.email,
+    password:data.password
+  }
+  return postAxios('/auth/login', dataConfig)
+}
+
+export function postLogout(data) {
+  const dataConfig= {
+    email:data.email,
+    password:data.password
+  }
+  return postAxios('/auth/login', dataConfig)
+}
+
+
+export function postToken(token) {
+  const dataConfig= { token };
+  console.log(dataConfig);
+  return postAxios('/auth/token', dataConfig)
 }

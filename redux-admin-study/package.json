@@ -2,13 +2,17 @@
   "name": "redux-admin-study",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "antd": "^3.24.1",
     "axios": "^0.19.0",
     "cross-env": "^6.0.3",
+    "express": "^4.17.1",
     "immer": "^4.0.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "nodemon": "^1.19.4",
+    "pm2": "^4.1.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
@@ -22,6 +26,7 @@
     "styled-components": "^4.4.0"
   },
   "scripts": {
+    "server":"cross-env nodemon server/server",
     "start": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "react-scripts test",
@@ -41,5 +46,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:9000"
 }

@@ -13,9 +13,12 @@ const Styled ={
 }
 class Header extends Component {
   render() {
+    const {handleLogout} = this.props;
     return (
       <Styled.Header>
         Header
+
+        <button onClick={handleLogout}>Logout</button>
       </Styled.Header>
     );
   }
