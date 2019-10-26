@@ -41,3 +41,7 @@ export function postToken(token) {
   console.log(dataConfig);
   return postAxios('/auth/token', dataConfig)
 }
+//NOTE: token으로 들어왔을떄 reducer 업데이트해줘야함.
+// 로그아웃 작업 해줘야함.
+// PrivateRoute 만들기
+// 그리고 login인 되었을시 자동으로 페이지 던지는 작업 해야함.

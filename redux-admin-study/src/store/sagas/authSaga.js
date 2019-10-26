@@ -9,6 +9,7 @@ import {
 
 
 function* handleLogin({ payload: diff }) {
+  console.log('>>> handleLogin');
   AUTH_LOGIN_SAGA.pending();
   const {email,remember} = diff;
 
@@ -31,11 +32,10 @@ function* handleLogin({ payload: diff }) {
 }
 
 function* handleToken({payload:token}){
-  console.log('handleToken');
+  console.log('>>> handleToken');
   const { data, error } = yield call(AUTH_TOKEN_SAGA.request, token);
   if (data && !error && data.result === 1) {
     AUTH_TOKEN_SAGA.success(data);
-    cookie.set(keys.user,data.token,1);;
   } else {
     AUTH_TOKEN_SAGA.failure();
   }

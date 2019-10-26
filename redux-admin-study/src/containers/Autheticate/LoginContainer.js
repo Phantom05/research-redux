@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter ,Redirect} from 'react-router-dom';
 import Login from 'components/Login';
 import {LoginTemplate} from 'components/common/template';
 import { Actions } from 'store/actionCreators';
-import { cookie, keys } from 'utils';
 import * as utils from 'utils';
 
 class LoginContainer extends Component {
@@ -34,42 +34,37 @@ class LoginContainer extends Component {
     });
   }
   componentDidMount() {
-    const {authLoginEmail,authLoginRemember,isAutheticated} = this.props;
-    const token = cookie.get(keys.user);
-
-    if(token && !isAutheticated){
-      console.log('토큰은 있는데 리듀서 새로고침해서 isAutheticated가 없을떄');
-      Actions.auth_token_request(token);
-
-    }
-
+    const {authLoginEmail,authLoginRemember} = this.props;
     this.setState({
       email:authLoginEmail,
       remember:authLoginRemember
     })
   }
   render() {
+    
     const {email,password,remember} = this.state;
     const {
-      logged,
       pending,
       response,
       isAutheticated,
       authLoginEmail,
-      authLoginRemember
+      authLoginRemember,
+      profile
     } = this.props;
+
     return (
       <div>
+        {isAutheticated && <Redirect to="/" />}
         pending : {JSON.stringify(pending)} <br/>
         isAutheticated : {JSON.stringify(isAutheticated)} <br/>
         authEmail :{JSON.stringify(authLoginEmail)} <br/>
         authRemember : {JSON.stringify(authLoginRemember)} <br/>
+        profile : {JSON.stringify(profile)} <br/>
         <LoginTemplate title="Admin" align="center">
           <Login
             remember={remember}
             email={email}
             password={password}
-            logged={logged}
             pending={pending}
             response={response}
             handleLogin={this.handleLogin}
@@ -83,11 +78,11 @@ class LoginContainer extends Component {
 }
 export default connect(
   ({ auth }) => ({
-    logged: auth.logged,
     pending: auth.pending,
     response: auth.response,
     isAutheticated:auth.isAutheticated,
     authLoginEmail:auth.authLoginEmail,
-    authLoginRemember:auth.authLoginRemember
+    authLoginRemember:auth.authLoginRemember,
+    profile:auth.profile
   })
-)(LoginContainer);
+)(withRouter(LoginContainer));
