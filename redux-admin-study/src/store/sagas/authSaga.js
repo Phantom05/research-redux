@@ -31,14 +31,15 @@ function* handleLogin({ payload: diff }) {
   }
 }
 
- function* handleToken({payload:token}){
+function* handleToken({payload:token}){
   console.log('>>> handleToken');
   const { data, error } = yield call(AUTH_TOKEN_SAGA.request, token);
   console.log('#2');
   if (data && !error && data.result === 1) {
     AUTH_LOGIN_SAGA.success(data);
+    console.log('#login  success');
     AUTH_TOKEN_SAGA.success(data);
-    console.log('#4');
+    console.log('#token success');
   } else {
     AUTH_TOKEN_SAGA.failure();
   }

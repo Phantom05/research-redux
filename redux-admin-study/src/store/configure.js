@@ -15,8 +15,8 @@ const configure = () => {
       trace: true, 
       traceLimit: 25
     }) || compose;
-  const middleware = [ sagaMiddleware];
-  // const middleware = [logger, sagaMiddleware];
+  // const middleware = [ sagaMiddleware];
+  const middleware = [logger, sagaMiddleware];
   const store = createStore(
     modules,
     // applyMiddleware(...middleware)
