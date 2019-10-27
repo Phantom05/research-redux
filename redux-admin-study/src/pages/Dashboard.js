@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PlainTemplate from 'components/common/template/PlainTemplate';
+import DashboardTemplate from 'components/common/template/DashboardTemplate';
 import DashboardContainer from 'containers/DashboardContainer';
 import HeaderContainer from 'containers/HeaderContainer';
 import SideBarContainer from 'containers/SideBarContainer';
@@ -8,8 +8,7 @@ class Dashboard extends Component {
   render() {
     return (
       <>
-      
-        <PlainTemplate
+        <DashboardTemplate
           header={<HeaderContainer/>}
           sidebar={<SideBarContainer/>}
           main={<DashboardContainer />}

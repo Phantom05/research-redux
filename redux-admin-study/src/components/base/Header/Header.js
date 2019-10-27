@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const Styled ={
   Header:styled.div`
@@ -9,16 +10,22 @@ const Styled ={
   width:100%;
   height:100%;
   background: rgb(224, 224, 224);
+  & > button{
+    cursor: pointer;
+  }
   `
 }
 class Header extends Component {
   render() {
-    const {handleLogout} = this.props;
+    const {isAutheticated,handleLogout} = this.props;
+    console.log(isAutheticated,'header isAutheticated');
     return (
       <Styled.Header>
         Header
-
-        <button onClick={handleLogout}>Logout</button>
+        {isAutheticated 
+          ? <button onClick={handleLogout}>Logout</button>
+          :<Link to="/login">Login</Link>}
+        
       </Styled.Header>
     );
   }

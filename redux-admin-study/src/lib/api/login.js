@@ -3,9 +3,10 @@ import axios from 'axios';
 import { apiAddress } from 'lib/config/settings';
 
 
-export const getAxios = (api) =>
-  axios.get(apiAddress + api)
-    .catch(err => { return { error: err } });
+export const getAxios = (api) =>{
+  return axios.get(apiAddress + api)
+  .catch(err => { return { error: err } });
+}
 
 export const postAxios = (api, data = {}) =>{
   const config={
@@ -19,7 +20,6 @@ export const postAxios = (api, data = {}) =>{
 
 
 export function postLogin(data) {
-  console.log(data);
   const dataConfig= {
     email:data.email,
     password:data.password
@@ -28,17 +28,12 @@ export function postLogin(data) {
 }
 
 export function postLogout(data) {
-  const dataConfig= {
-    email:data.email,
-    password:data.password
-  }
-  return postAxios('/auth/login', dataConfig)
+  return getAxios('/auth/logout')
 }
 
-
 export function postToken(token) {
+  console.log('api post');
   const dataConfig= { token };
-  console.log(dataConfig);
   return postAxios('/auth/token', dataConfig)
 }
 //NOTE: token으로 들어왔을떄 reducer 업데이트해줘야함.

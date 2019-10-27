@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PrivateRoute from 'components/base/PrivateRoute';
 import {Switch,Route} from 'react-router-dom';
 import {Home,Login,Dashboard} from 'pages';
 import 'antd/dist/antd.css';
@@ -19,3 +20,5 @@ class App extends Component {
 }
 
 export default App;
+
+// http://localhost:3000/login

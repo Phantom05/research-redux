@@ -26,7 +26,8 @@ export default handleActions({
     })
   },
   [actions.AUTH_LOGIN_SUCCESS]:(state,{payload:diff})=>{
-    return produce(state,draft=>{;
+    return produce(state,draft=>{
+      console.log('#3');
       draft.pending = false;
       draft.response = diff.result;
       draft.profile = diff.profile;
@@ -52,7 +53,6 @@ export default handleActions({
     })
   },
   [actions.AUTH_LOGOUT_SUCCESS]:(state,{payload:diff})=>{
-    
     return produce(state,draft=>{
       draft.pending = false;
       draft.response = 0;
@@ -65,6 +65,9 @@ export default handleActions({
 
     })
   },
+
+
+  
 },initialState )
 
 

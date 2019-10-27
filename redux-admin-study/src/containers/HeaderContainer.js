@@ -1,20 +1,29 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Header from 'components/base/Header';
-import { storage,keys } from 'lib/library';
+import { Actions } from 'store/actionCreators';
 
-class HeaderContainer extends Component {
-
-  handleLogout= () =>{
+class HeaderContainer extends PureComponent {
+  initialize = () =>{
+ 
+  }
+  componentDidMount(){
+    const { isAutheticated,landing } = this.props;
+    this.initialize()
+  }
+  handleLogout = () => {
     console.log('handleLogout');
-    storage.remove(`${keys}logged`);
+    Actions.auth_logout_request();
   }
   render() {
-    console.log('rener');
+    console.log('** Header Components Render');
+    const { isAutheticated,landing } = this.props;
+    console.log(landing,'Header landing');
+    if (landing) return null;
     return (
       <div>
-       
-        <Header 
+        <Header
+          isAutheticated={isAutheticated}
           handleLogout={this.handleLogout}
         />
       </div>
@@ -23,7 +32,8 @@ class HeaderContainer extends Component {
 }
 
 export default connect(
-  (state)=>({
-
+  ({ auth ,base}) => ({
+    isAutheticated: auth.isAutheticated,
+    landing:base.landing
   })
 )(HeaderContainer)

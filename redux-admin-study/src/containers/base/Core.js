@@ -1,39 +1,57 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { cookie, keys } from 'utils';
 import { Actions } from 'store/actionCreators';
 
 
 class Core extends Component {
 
-  updateLogged =() =>{
-    const {isAutheticated} = this.props;
-    const token = cookie.get(keys.user);
-  
-    if(token && !isAutheticated){
-      console.log('토큰은 있는데 리듀서 새로고침해서 isAutheticated가 없을떄');
-      Actions.auth_token_request(token);
+  initializeUserInfo = async () => {
+    console.log('initializeUserInfo');
+    const loggedInfo = cookie.get(keys.user); // 로그인 정보를 로컬 스토리지에서 가져옵니다.
+    if (!loggedInfo) { 
+      // 새로고침하면 reducer는 무조건 날라가기때문에 isAuthicated는 볼것도 없음. 스토리지만 확인해주면됨
+      console.log('Not Userinfo, => Landing status => false');
+      Actions.base_landing_view(false);
+    }; // 로그인 정보가 없다면 랜딩을 풀고 여기서 멈춥니다.
+
+    console.log('>> Login related processing.');
+     Actions.auth_token_request(loggedInfo); /// 토큰을 넣어서 보냄 로그인 정보를 가져오기위함.
+    console.log('#1');
+    try {
+      
+    } catch (e) {
+      cookie.remove(keys.user); //토큰 갱신이 만료됬을때.
+      window.location.href = '/login'
     }
+    console.log(loggedInfo);
   }
-  componentDidMount(){
-    const {updateLogged} = this;
-    updateLogged()
+  componentDidMount() {
+    const {  initializeUserInfo } = this;
+    initializeUserInfo()
+    // updateLogged();
+  }
+  componentWillUnmount() {
+    console.log('core close');
   }
 
   render() {
-    console.log('>>> Core Component');
+    console.log('** Core Component Render');
+    const { landing } = this.props;
+    console.log(landing,'Core landing');
     return <></>
   }
 }
 
 export default connect(
-  ({auth})=>({
+  ({ auth, base }) => ({
     pending: auth.pending,
     response: auth.response,
-    isAutheticated:auth.isAutheticated,
-    authLoginEmail:auth.authLoginEmail,
-    authLoginRemember:auth.authLoginRemember,
-    profile:auth.profile
+    isAutheticated: auth.isAutheticated,
+    authLoginEmail: auth.authLoginEmail,
+    authLoginRemember: auth.authLoginRemember,
+    profile: auth.profile,
+    landing: base.landing
   })
 )(withRouter(Core));

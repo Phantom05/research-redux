@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PlainTemplate from 'components/common/template/PlainTemplate';
-import Header from 'components/base/Header';
 import HomeContainer from 'containers/HomeContainer';
+import HeaderContainer from 'containers/HeaderContainer';
+
 
 class Home extends Component {
   render() {
     return (
-      <PlainTemplate header={<Header />}>
-        <HomeContainer />
-      </PlainTemplate>
+      <PlainTemplate 
+        header={ <HeaderContainer />}
+        main={<HomeContainer />} 
+      />
     );
   }
 }

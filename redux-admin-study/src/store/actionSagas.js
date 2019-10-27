@@ -17,8 +17,8 @@ export const AUTH_LOGOUT_SAGA  ={
 }
 
 export const AUTH_TOKEN_SAGA = {
-  request:(payload)=>API.postToken(payload),
+  request:async (payload)=> await API.postToken(payload),
   pending:()=>Actions.auth_login_pending(),
-  success:(data)=>Actions.auth_login_success(data),
+  success:(data)=>Actions.auth_token_success(data),
   failure:()=>Actions.auth_login_failure(),
 }
