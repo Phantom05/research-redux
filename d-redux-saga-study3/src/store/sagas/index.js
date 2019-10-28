@@ -5,7 +5,7 @@ import wsMiddleware from './wsMiddleware';
 
 export default function* rootSaga(){
   yield all([
-    fork(wsMiddleware),
+    // fork(wsMiddleware),
     fork(homeSaga),
     fork(wsSaga)
   ])

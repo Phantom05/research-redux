@@ -12,6 +12,7 @@ const consoleWrapper = (txt)=>{
 }
 
 function* handleConnect(payload){
+  console.log('handleConnect');
   const {payload:ws} = payload;
   Actions.ws_connected();
   // console.log(ws,'payloadpayload');
