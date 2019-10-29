@@ -19,10 +19,10 @@ const configure = () => {
   const middleware = [logger, sagaMiddleware];
   const store = createStore(
     modules,
-    // applyMiddleware(...middleware)
-    composeEnhancers(
-      applyMiddleware(...middleware)
-    )
+    applyMiddleware(...middleware)
+    // composeEnhancers(
+    //   applyMiddleware(...middleware)
+    // )
   );
   sagaMiddleware.run(rootSaga);
   return store;

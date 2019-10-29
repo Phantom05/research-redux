@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import AuthTemplate from 'components/common/AuthForm/AuthTemplate';
+import AuthTemplate from 'components/common/template/AuthTemplate';
 
 const Styled ={
   LoginTemplate:styled.div`
@@ -12,7 +12,7 @@ const Styled ={
 }
 class LoginTemplate extends Component {
   render() {
-    const {title,children} = this.props;
+    const {children} = this.props;
     return (
       <Styled.LoginTemplate>
       <AuthTemplate {...this.props}>

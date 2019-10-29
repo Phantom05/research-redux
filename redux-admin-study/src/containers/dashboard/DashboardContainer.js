@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
-import Dashboard from 'components/Dashboard';
+// import Dashboard from 'components/Dashboard';
 class DashboardContainer extends Component {
   render() {
-    const {title} = this.props;
+    // const {title} = this.props;
     return (
       <>
-      <Dashboard />
+      {/* <Dashboard /> */}
+      Dashboard Container
       </>
     );
   }

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import LoginContainer from 'containers/Autheticate/LoginContainer';
-
+import {LoginTemplate} from 'components/common/template';
 class Login extends Component {
   render() {
     return (
       <div>
-        <LoginContainer />
+        <LoginTemplate title="Admin" align="center">
+          <LoginContainer />
+        </LoginTemplate>
       </div>
     );
   }

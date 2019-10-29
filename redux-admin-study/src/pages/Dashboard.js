@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import DashboardTemplate from 'components/common/template/DashboardTemplate';
-import DashboardContainer from 'containers/DashboardContainer';
-import HeaderContainer from 'containers/HeaderContainer';
-import SideBarContainer from 'containers/SideBarContainer';
+import DashboardContainer from 'containers/dashboard/DashboardContainer';
+import HeaderContainer from 'containers/header/HeaderContainer';
+import SideBarContainer from 'containers/sidebar/SideBarContainer';
 
 class Dashboard extends Component {
   render() {

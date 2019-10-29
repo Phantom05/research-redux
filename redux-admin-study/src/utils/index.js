@@ -91,14 +91,19 @@ class Cookie {
 }
 export const cookie = new Cookie()
 // if faild login, do alert
-export function alertLogin(result){
+export function alertLogin({result}){
+  console.log('alert login in 0',result);
   const loginResponse ={
       ['1']:()=>{alert('Welcome.');},
       ['2']:()=>{alert('Please check your Email and Password.')},
       ['3']:()=>{alert('User not found Please register.')},
       ['4']:()=>{alert('Server error.')},
     };
-    loginResponse[result]();
+    try{
+      loginResponse[result]();
+    }catch(e){
+      alert('server Error')
+    }
 }
 
 

@@ -7,6 +7,7 @@ import { Actions } from 'store/actionCreators';
 
 class Core extends Component {
 
+
   initializeUserInfo = async () => {
     console.log('initializeUserInfo');
     const token = cookie.get(keys.user); // 로그인 정보를 로컬 스토리지에서 가져옵니다.
@@ -21,6 +22,7 @@ class Core extends Component {
       console.log('#1');
       
     } catch (e) {
+      console.log('catch');
       cookie.remove(keys.user); //토큰 갱신이 만료됬을때.
       window.location.href = '/login'
     }

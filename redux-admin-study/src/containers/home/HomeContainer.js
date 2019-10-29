@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 
 class HomeContainer extends Component {
   render() {
+    const {landing} = this.props;
+    if (landing) return null;
     return (
       <div>
         {/* <WithLogged isNotLogged/> */}
@@ -15,7 +17,8 @@ class HomeContainer extends Component {
 }
 
 export default connect(
-  ({auth})=>({
-    logged:auth.logged
+  ({auth,base})=>({
+    logged:auth.logged,
+    landing:base.landing
   })
 )(HomeContainer);

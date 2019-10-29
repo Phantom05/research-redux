@@ -8,7 +8,7 @@ const Styled = {
     .login__row{
       position:relative;
       margin-bottom:15px;
-      width:300px;
+      min-width:300px;
       &.button{
         text-align:right;
         margin-top:40px;

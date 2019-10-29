@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PrivateRoute from 'components/base/PrivateRoute';
 import {Switch,Route} from 'react-router-dom';
-import {Home,Login,Dashboard} from 'pages';
+import {Home,Login,Dashboard,Register} from 'pages';
 import 'antd/dist/antd.css';
 import Core from 'containers/base/Core';
 class App extends Component {
@@ -10,8 +10,9 @@ class App extends Component {
       <div>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/dashboard" component={Dashboard}/>
+          <Route  path="/login" component={Login}/>
+          <Route  path="/register" component={Register}/>
+          <Route  path="/dashboard" component={Dashboard}/>
         </Switch>
         <Core/>
       </div>

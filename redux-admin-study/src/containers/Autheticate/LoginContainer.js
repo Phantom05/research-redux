@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter ,Redirect} from 'react-router-dom';
 import Login from 'components/Login';
-import {LoginTemplate} from 'components/common/template';
 import { Actions } from 'store/actionCreators';
 import * as utils from 'utils';
 
@@ -60,7 +59,6 @@ class LoginContainer extends Component {
         authEmail :{JSON.stringify(authLoginEmail)} <br/>
         authRemember : {JSON.stringify(authLoginRemember)} <br/>
         profile : {JSON.stringify(profile)} <br/>
-        <LoginTemplate title="Admin" align="center">
           <Login
             remember={remember}
             email={email}
@@ -71,7 +69,7 @@ class LoginContainer extends Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />
-        </LoginTemplate>
+
       </div>
     );
   }
