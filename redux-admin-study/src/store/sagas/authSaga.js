@@ -1,11 +1,12 @@
 import { all,  takeEvery, call } from 'redux-saga/effects';
 import * as actions from 'store/actions';
 import {Actions} from 'store/actionCreators';
-import {cookie,keys,alertLogin} from 'utils'
+import {cookie,keys,alertLogin,alertRegister} from 'utils'
 import {
   AUTH_LOGIN_SAGA,
   AUTH_LOGOUT_SAGA,
-  AUTH_TOKEN_SAGA
+  AUTH_TOKEN_SAGA,
+  AUTH_SIGNUP_SAGA
 } from 'store/actionSagas';
 
 
@@ -60,11 +61,25 @@ function* handleLogout(){
   }
 }
 
+function* handleRegister({payload:diff}){
+  console.log(`>>> handleRegister`);
+  AUTH_SIGNUP_SAGA.pending();
+  const {data, error} = yield call (AUTH_SIGNUP_SAGA.request,diff);
+  if(data && !error && data.result === 1){
+    AUTH_SIGNUP_SAGA.success(data);
+  }else{
+    AUTH_SIGNUP_SAGA.failure();
+    alertRegister(data);
+
+  }
+}
+
 export default function* RootSaga() {
   yield all([
     takeEvery(actions.AUTH_LOGIN_REQUEST, handleLogin),
     takeEvery(actions.AUTH_LOGOUT_REQUEST, handleLogout),
     takeEvery(actions.AUTH_TOKEN_REQUEST, handleToken),
+    takeEvery(actions.AUTH_REGISTER_REQUEST,handleRegister)
   ])
 }
 

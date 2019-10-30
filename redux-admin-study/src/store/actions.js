@@ -9,6 +9,11 @@ export const AUTH_LOGIN_SUCCESS = 'auth/AUTH_LOGIN_SUCCESS';
 export const AUTH_LOGIN_FAILURE = 'auth/AUTH_LOGIN_FAILURE';
 export const AUTH_LOGIN_ALERT   = 'auth/AUTH_LOGIN_ALERT';
 
+export const AUTH_REGISTER_REQUEST = 'auth/AUTH_REGISTER_REQUEST';
+export const AUTH_REGISTER_PENDING = 'auth/AUTH_REGISTER_PENDING';
+export const AUTH_REGISTER_SUCCESS = 'auth/AUTH_REGISTER_SUCCESS';
+export const AUTH_REGISTER_FAILURE = 'auth/AUTH_REGISTER_FAILURE';
+
 export const AUTH_LOGOUT_REQUEST = 'auth/AUTH_LOGOUT_REQUEST';
 export const AUTH_LOGOUT_PENDING = 'auth/AUTH_LOGOUT_PENDING';
 export const AUTH_LOGOUT_SUCCESS = 'auth/AUTH_LOGOUT_SUCCESS';
@@ -37,6 +42,12 @@ export const auth_login_pending = createAction(AUTH_LOGIN_PENDING);
 export const auth_login_success = createAction(AUTH_LOGIN_SUCCESS);
 export const auth_login_failure = createAction(AUTH_LOGIN_FAILURE);
 export const auth_login_alert   = createAction(AUTH_LOGIN_ALERT);
+
+export const auth_register_request = createAction(AUTH_REGISTER_REQUEST);
+export const auth_register_pending = createAction(AUTH_REGISTER_PENDING);
+export const auth_register_success = createAction(AUTH_REGISTER_SUCCESS);
+export const auth_register_failure = createAction(AUTH_REGISTER_FAILURE);
+
 
 export const auth_logout_request = createAction(AUTH_LOGOUT_REQUEST);
 export const auth_logout_pending = createAction(AUTH_LOGOUT_PENDING);

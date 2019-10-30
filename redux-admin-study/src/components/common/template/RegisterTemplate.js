@@ -16,7 +16,7 @@ class RegisterTemplate extends Component {
     const { children, title, align } = this.props;
     return (
       <Styled.Register>
-        <AuthTemplate title={title}>
+        <AuthTemplate title={title} align={align}>
           {children}
         </AuthTemplate>
       </Styled.Register>

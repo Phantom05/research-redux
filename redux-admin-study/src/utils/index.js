@@ -107,3 +107,17 @@ export function alertLogin({result}){
 }
 
 
+export function alertRegister({result}){
+  console.log('alert register in ',result);
+  const registerResponse ={
+    ['1']:()=>{alert('Welcome.');},
+    ['2']:()=>{alert('Please check your Email and Password.')},
+    ['3']:()=>{alert('User not found Please register.')},
+    ['4']:()=>{alert('Email is a duplicate Please check.')},
+  };
+  try{
+    registerResponse[result]();
+  }catch(e){
+    alert('server Error')
+  }
+}

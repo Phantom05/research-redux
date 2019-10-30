@@ -11,7 +11,12 @@ let initialState ={
   pending:false,
   response:0,
   isAutheticated:false,
-  profile:null
+  profile:null,
+  register:{
+    pending:false,
+    result:null,
+    success:false,
+  }
 }
 
 
@@ -63,6 +68,29 @@ export default handleActions({
   [actions.AUTH_LOGOUT_FAILURE]:(state,{payload:diff})=>{
     return produce(state,draft=>{
 
+    })
+  },
+
+  [actions.AUTH_REGISTER_PENDING]:(state,{payload:diff})=>{
+    return produce(state,draft=>{
+      console.log(`AUTH_REGISTER_PENDING`);
+      draft.register.pending = true;
+    })
+  },
+  [actions.AUTH_REGISTER_SUCCESS]:(state,{payload:diff})=>{
+    return produce(state,draft=>{
+      console.log(`AUTH_REGISTER_SUCCESS`);
+      draft.register.pending = false;
+      draft.register.success = true;
+      draft.isAutheticated = true;
+      draft.profile = diff;
+    })
+  },
+  [actions.AUTH_REGISTER_FAILURE]:(state,{payload:diff})=>{
+    return produce(state,draft=>{
+      console.log(`AUTH_REGISTER_FAILURE`);
+      draft.register.pending = false;
+      draft.register.success = false;
     })
   },
 

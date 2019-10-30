@@ -5,7 +5,7 @@ import RegisterContainer from 'containers/Autheticate/RegisterContainer/'
 class Register extends Component {
   render() {
     return (
-      <RegisterTemplate title="SIGN UP">
+      <RegisterTemplate title="SIGN UP" align="center">
         <RegisterContainer />
       </RegisterTemplate>
     );
