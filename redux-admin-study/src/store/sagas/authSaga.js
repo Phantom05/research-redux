@@ -24,25 +24,21 @@ function* handleLogin({ payload: diff }) {
   }
 
   const { data, error } = yield call(AUTH_LOGIN_SAGA.request, diff);
-  console.log(data);
   if (data && !error && data.result === 1) {
     AUTH_LOGIN_SAGA.success(data);
     cookie.set(keys.user,data.token,1);;
   } else {
-    AUTH_LOGIN_SAGA.failure();
-    alertLogin(data)
+    AUTH_LOGIN_SAGA.failure(data);
+
   }
 }
 
 function* handleToken({payload:token}){
   console.log('>>> handleToken');
   const { data, error } = yield call(AUTH_TOKEN_SAGA.request, token);
-  console.log('#2');
   if (data && !error && data.result === 1) {
     AUTH_LOGIN_SAGA.success(data);
-    console.log('#login  success');
     AUTH_TOKEN_SAGA.success(data);
-    console.log('#token success');
     Actions.base_landing_view(false);
   } else {
     AUTH_TOKEN_SAGA.failure();
@@ -68,9 +64,8 @@ function* handleRegister({payload:diff}){
   if(data && !error && data.result === 1){
     AUTH_SIGNUP_SAGA.success(data);
   }else{
-    AUTH_SIGNUP_SAGA.failure();
-    alertRegister(data);
-
+    console.log(data,'datadata');
+    AUTH_SIGNUP_SAGA.failure(data);
   }
 }
 

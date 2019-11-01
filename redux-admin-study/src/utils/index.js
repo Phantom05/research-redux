@@ -4,13 +4,19 @@ export const keys = {
   user: `__$$user$$__`
 }
 
+// 유저네임, 정규식 2~16글자
+export function regUsername(value){
+  var regExp = /^[a-z0-9_-|가-힣]{2,16}$/;
+  return (regExp.test(value)) ? true : false;
+}
+
 //이메일 정규식
 export function regEmail(value) {
   var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
   return (regExp.test(value)) ? true : false;
 }
 
-//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
+//비밀번호 정규식, 숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
 export function regPassword(value) {
   var regExp = /^[A-Za-z0-9]{6,12}$/;
   return (regExp.test(value)) ? true : false;

@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter ,Redirect} from 'react-router-dom';
 import Login from 'components/Login';
 import { Actions } from 'store/actionCreators';
-import * as utils from 'utils';
+import {
+  regPassword,
+  regEmail,
+  alertLogin} from 'utils';
+
+
 
 class LoginContainer extends Component {
   state={
@@ -12,18 +17,24 @@ class LoginContainer extends Component {
     remember:false,
   }
   handleSubmit = (e) => {
+    const {failure} = this.props;
     e.preventDefault()
     const { email, password, remember } = this.state;
 
-    if(!utils.regEmail(email)){
+    if(!regEmail(email)){
       alert('Please check your email format.');
       return false;
     }
-    if(!utils.regPassword(password)){
+    if(!regPassword(password)){
       alert('Please check your Password format.');
       return false;
     }
     Actions.auth_login_request({ email, password,remember });
+
+    console.log(failure,'failure');
+    if(failure){
+      alertLogin(failure)
+    }
   }
 
   handleChange = (e) => {
@@ -44,12 +55,14 @@ class LoginContainer extends Component {
     const {email,password,remember} = this.state;
     const {
       pending,
-      response,
       isAutheticated,
       authLoginEmail,
       authLoginRemember,
       profile
     } = this.props;
+    console.log(isAutheticated,'isAutheticated');
+    
+
 
     return (
       <div>
@@ -64,7 +77,6 @@ class LoginContainer extends Component {
             email={email}
             password={password}
             pending={pending}
-            response={response}
             handleLogin={this.handleLogin}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
@@ -76,11 +88,11 @@ class LoginContainer extends Component {
 }
 export default connect(
   ({ auth }) => ({
-    pending: auth.pending,
-    response: auth.response,
-    isAutheticated:auth.isAutheticated,
+    profile:auth.profile,
+    pending: auth.autheticate.pending,
+    isAutheticated:auth.autheticate.isAutheticated,
+    failure:auth.autheticate.failure,
     authLoginEmail:auth.authLoginEmail,
     authLoginRemember:auth.authLoginRemember,
-    profile:auth.profile
   })
 )(withRouter(LoginContainer));

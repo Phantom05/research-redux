@@ -1,28 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { regEmail } from 'utils';
 import { RegisterForm } from 'components/register';
 import {Actions} from 'store/actionCreators';
 import {Redirect} from 'react-router-dom';
+import { regEmail,regPassword,regUsername,alertRegister } from 'utils';
 
 
 class RegisterContainer extends Component {
   state = {
-    email: 'admin@admin.com',
+    email: 'test1@test.com',
     password: '1234a1234a',
     confirmPassword: '1234a1234a',
-    username: '이쯔녕'
+    username: '1234a1234a'
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('submit');
     const {email,password,confirmPassword,username} = this.state;
+    console.log(email);
+    
+    if(!regUsername(username)){
+      alert('이름을 확인해주세요.')
+      return;
+    }
+    if(!regEmail(email)){
+      alert('이메일 형식을 확인해주세요.');
+      return;
+    }
+    if(!regPassword(password)){
+      alert('비밀번호를 확인해주세요.');
+      return;
+    }
+    if(password !== confirmPassword){
+      alert('Confirm 비밀번호를 확인해주세요.')
+      return;
+    }
+
     Actions.auth_register_request({email,password,confirmPassword,username})
     
   }
   handleChange = (e) => {
-
     const { value, name } = e.target;
     this.setState({
       [name]: value
@@ -31,7 +49,11 @@ class RegisterContainer extends Component {
   }
   render() {
     const { email, password, confirmPassword, username } = this.state;
-    const {pending,success} = this.props.register;
+    const {pending,success,failure} = this.props.register;
+    if(failure){
+      console.log(failure,'failurefailure');
+      alertRegister(failure);
+    }
     return (
       <>
       {success && <Redirect to="/"/>}

@@ -33,7 +33,7 @@ class HeaderContainer extends PureComponent {
 
 export default connect(
   ({ auth ,base}) => ({
-    isAutheticated: auth.isAutheticated,
+    isAutheticated: auth.autheticate.isAutheticated,
     landing:base.landing
   })
 )(HeaderContainer)
