@@ -1,0 +1,52 @@
+{
+  "name": "redux-admin-study",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "antd": "^3.24.1",
+    "axios": "^0.19.0",
+    "cross-env": "^6.0.3",
+    "express": "^4.17.1",
+    "immer": "^4.0.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "nodemon": "^1.19.4",
+    "pm2": "^4.1.2",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "redux": "^4.0.4",
+    "redux-actions": "^2.6.5",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.1.1",
+    "reset-css": "^5.0.0",
+    "styled-components": "^4.4.0",
+    "webfontloader": "^1.6.28"
+  },
+  "scripts": {
+    "server": "cross-env nodemon server/server",
+    "start": "cross-env NODE_PATH=src react-scripts start",
+    "build": "cross-env NODE_PATH=src react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:9000"
+}
