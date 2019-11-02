@@ -22,7 +22,7 @@ class HeaderContainer extends PureComponent {
       category:category
     })
   }
-  componentWillMount(){
+  UNSAFE_componentWillMount (){
     const {match} = this.props;
     let category = match.path.substr(1);
     if(category.trim() === '')  category = 'home'; 

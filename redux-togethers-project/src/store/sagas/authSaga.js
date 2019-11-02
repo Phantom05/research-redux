@@ -69,6 +69,8 @@ function* handleRegister({payload:diff}){
   }
 }
 
+
+
 export default function* RootSaga() {
   yield all([
     takeEvery(actions.AUTH_LOGIN_REQUEST, handleLogin),

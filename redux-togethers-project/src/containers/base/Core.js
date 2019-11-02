@@ -20,13 +20,10 @@ class Core extends Component {
         Actions.auth_token_request(token); /// 토큰을 넣어서 보냄 로그인 정보를 가져오기위함.
         
       } catch (e) {
-        console.log('catch');
         cookie.remove(keys.user); //토큰 갱신이 만료됬을때.
         window.location.href = '/login'
       }
     }
-
-    console.log(token);
   }
   componentDidMount() {
     const {  initializeUserInfo } = this;

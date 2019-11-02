@@ -28,3 +28,5 @@ export const AUTH_SIGNUP_SAGA = {
   success:(data)=>Actions.auth_register_success(data),
   failure:(data)=>Actions.auth_register_failure(data),
 }
+
+// export 

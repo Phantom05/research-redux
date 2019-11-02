@@ -24,10 +24,11 @@ export const AUTH_TOKEN_PENDING = 'auth/AUTH_TOKEN_PENDING';
 export const AUTH_TOKEN_SUCCESS = 'auth/AUTH_TOKEN_SUCCESS';
 export const AUTH_TOKEN_FAILURE = 'auth/AUTH_TOKEN_FAILURE';
 
-// TEST
-export const SET_LOGGED_INFO = 'logged/SET_LOGGED_INFO';
-export const CHECK_STATUS = 'status/CHECK_STATUS';
 
+export const BOARD_GET_DATA_REQUEST = 'board/BOARD_GET_DATA_REQUEST';
+export const BOARD_GET_DATA_PENDING = 'board/BOARD_GET_DATA_PENDING';
+export const BOARD_GET_DATA_SUCCESS = 'board/BOARD_GET_DATA_SUCCESS';
+export const BOARD_GET_DATA_FAILURE = 'board/BOARD_GET_DATA_FAILURE';
 
 export const WINDOW_PAGE = 'window/PAGE';
 
@@ -64,5 +65,7 @@ export const window_page = createAction(WINDOW_PAGE);
 
 export const dashboard_title = createAction(DASHBOARD_TITLE);
 
-export const set_logged_info = createAction(SET_LOGGED_INFO);
-export const check_status = createAction(CHECK_STATUS);
+export const board_get_date_request = createAction(BOARD_GET_DATA_REQUEST);
+export const board_get_date_pending = createAction(BOARD_GET_DATA_PENDING);
+export const board_get_date_success = createAction(BOARD_GET_DATA_SUCCESS);
+export const board_get_date_failure = createAction(BOARD_GET_DATA_FAILURE);
