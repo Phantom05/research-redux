@@ -8,39 +8,36 @@ import {
   regEmail,
   alertLogin} from 'utils';
 
-
-
 class LoginContainer extends Component {
   state={
-    email: "",
+    email: "test1@test.com",
     password: "1234a1234a",
     remember:false,
+    isSubmitting:false
   }
   handleSubmit = (e) => {
-    const {failure} = this.props;
     e.preventDefault()
     const { email, password, remember } = this.state;
-
+    this.setState({ isSubmitting:true })
     if(!regEmail(email)){
       alert('Please check your email format.');
+      this.setState({ isSubmitting:null })
       return false;
     }
     if(!regPassword(password)){
       alert('Please check your Password format.');
+      this.setState({ isSubmitting:null })
       return false;
     }
-    Actions.auth_login_request({ email, password,remember });
 
-    console.log(failure,'failure');
-    if(failure){
-      alertLogin(failure)
-    }
+    Actions.auth_login_request({ email, password,remember });
   }
 
   handleChange = (e) => {
     const [{ state }, { name, value }] = [this, e.target];
     this.setState({
-      [name]: name === 'remember' ? !state.remember : value
+      [name]: name === 'remember' ? !state.remember : value,
+      isSubmitting:false
     });
   }
   componentDidMount() {
@@ -50,19 +47,28 @@ class LoginContainer extends Component {
       remember:authLoginRemember
     })
   }
+  UNSAFE_componentWillUpdate (nextProps,nextState){
+    const {failure} = this.props;
+    console.log(nextProps,'nextState');
+    console.log(nextState);
+    console.log(failure,'failure');
+
+  }
   render() {
     
-    const {email,password,remember} = this.state;
+    const {email,password,remember,isSubmitting} = this.state;
     const {
       pending,
       isAutheticated,
       authLoginEmail,
       authLoginRemember,
-      profile
+      profile,
+      failure
     } = this.props;
-    console.log(isAutheticated,'isAutheticated');
-    
 
+    if(failure && isSubmitting){
+      alertLogin(failure)
+    }
 
     return (
       <div>

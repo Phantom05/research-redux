@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import AuthTemplate from 'components/common/template/AuthTemplate';
+import AuthTemplate from 'components/base/template/AuthTemplate';
 
 const Styled ={
   LoginTemplate:styled.div`

@@ -11,7 +11,8 @@ class RegisterContainer extends Component {
     email: 'test1@test.com',
     password: '1234a1234a',
     confirmPassword: '1234a1234a',
-    username: '1234a1234a'
+    username: '1234a1234a',
+    isSubmitting:false,
   }
 
   handleSubmit = (e) => {
@@ -19,7 +20,7 @@ class RegisterContainer extends Component {
     console.log('submit');
     const {email,password,confirmPassword,username} = this.state;
     console.log(email);
-    
+    this.setState({isSubmitting:true})
     if(!regUsername(username)){
       alert('이름을 확인해주세요.')
       return;
@@ -36,21 +37,20 @@ class RegisterContainer extends Component {
       alert('Confirm 비밀번호를 확인해주세요.')
       return;
     }
-
-    Actions.auth_register_request({email,password,confirmPassword,username})
-    
+    Actions.auth_register_request({email,password,confirmPassword,username});
   }
   handleChange = (e) => {
     const { value, name } = e.target;
     this.setState({
-      [name]: value
+      [name]: value,
+      isSubmitting:false
     })
 
   }
   render() {
-    const { email, password, confirmPassword, username } = this.state;
+    const { email, password, confirmPassword, username,isSubmitting } = this.state;
     const {pending,success,failure} = this.props.register;
-    if(failure){
+    if(failure && isSubmitting){
       console.log(failure,'failurefailure');
       alertRegister(failure);
     }

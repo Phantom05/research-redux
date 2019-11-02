@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PrivateRoute from 'components/base/PrivateRoute';
+// import PrivateRoute from 'components/base/PrivateRoute';
 import {Switch,Route} from 'react-router-dom';
 import {Home,Login,Dashboard,Register} from 'pages';
 import 'antd/dist/antd.css';

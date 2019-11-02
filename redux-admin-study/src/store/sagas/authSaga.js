@@ -25,8 +25,8 @@ function* handleLogin({ payload: diff }) {
 
   const { data, error } = yield call(AUTH_LOGIN_SAGA.request, diff);
   if (data && !error && data.result === 1) {
+    cookie.set(keys.user,data.token,1);
     AUTH_LOGIN_SAGA.success(data);
-    cookie.set(keys.user,data.token,1);;
   } else {
     AUTH_LOGIN_SAGA.failure(data);
 

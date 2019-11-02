@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PlainTemplate from 'components/common/template/PlainTemplate';
+import PlainTemplate from 'components/base/template/PlainTemplate';
 import HomeContainer from 'containers/home/HomeContainer';
 import HeaderContainer from 'containers/header/HeaderContainer';
 

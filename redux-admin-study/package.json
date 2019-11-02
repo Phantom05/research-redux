@@ -23,10 +23,11 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.1.1",
     "reset-css": "^5.0.0",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "server":"cross-env nodemon server/server",
+    "server": "cross-env nodemon server/server",
     "start": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "react-scripts test",

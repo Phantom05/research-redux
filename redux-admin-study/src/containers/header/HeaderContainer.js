@@ -8,17 +8,13 @@ class HeaderContainer extends PureComponent {
  
   }
   componentDidMount(){
-    const { isAutheticated,landing } = this.props;
     this.initialize()
   }
   handleLogout = () => {
-    console.log('handleLogout');
     Actions.auth_logout_request();
   }
   render() {
-    console.log('** Header Components Render');
     const { isAutheticated,landing } = this.props;
-    console.log(landing,'Header landing');
     if (landing) return null;
     return (
       <div>

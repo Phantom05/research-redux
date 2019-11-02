@@ -4,7 +4,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 
 
-const headerHight = '60px';
+const headerHight = '35px';
 const Styled = {
   Header: styled.header`
     position:fixed;

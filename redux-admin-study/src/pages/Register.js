@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RegisterTemplate from 'components/common/template/RegisterTemplate';
+import RegisterTemplate from 'components/base/template/RegisterTemplate';
 import RegisterContainer from 'containers/Autheticate/RegisterContainer/'
 
 class Register extends Component {
