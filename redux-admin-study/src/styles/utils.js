@@ -2,6 +2,9 @@ import  { css } from 'styled-components';
 import {_color,_font} from 'styles/base/_common'; // 꼭 있어야함.
 
 
+var color = _color;
+var fontFamily = _font;
+
 var font = css`
   font-family:${_font.NanumGothic};
   font-size:14px;
@@ -27,10 +30,34 @@ var positionWidthCenter = css`
 `;
 
 
+function smoothBottomLine(borderColor = color.orange,height = '2px'){
+  return css`
+    position:relative;
+    &:after{
+        position:absolute;
+        content:'';
+        width:0%;
+        right:0;
+        bottom:-4px;
+        height:${height};
+        transition:.5s;
+        background:${borderColor};
+    }
+    &:hover:after{
+      transition:.5s;
+      width:100%;
+      left:0
+    }
+  `
+}
+
 
 export {
   positionCenterCenter,
   positionHeightCenter,
   positionWidthCenter,
-  font
+  smoothBottomLine,
+  font,
+  fontFamily,
+  color
 }

@@ -4,23 +4,23 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 
 
-const headerHight = '35px';
+const headerWidth = '250px';
 const Styled = {
   Header: styled.header`
     position:fixed;
-    height:${headerHight};
+    height:100vh;
     left:0;
     top:0;
-    width:100%;
+    width:${headerWidth};
   `,
   Main: styled.main`
-    padding-top:${props => props.header ? headerHight : 0};
+    padding-left:${props => props.header ? headerWidth : 0};
     float:left;
   `,
   Body: createGlobalStyle`
     body{
-      padding-top:${props => props.header ? headerHight : 0};
-      padding-top:100px;
+      padding-left:${props => props.header ? headerWidth : 0};
+      /* padding-top:100px; */
     }
   `,
   TemplateBox: styled.div`

@@ -18,7 +18,14 @@ const _font={
   "NanumGothic":"Nanum Gothic"
 }
 const _color ={
-  red:'red'
+  black:'#000',
+  white:'#fff',
+  orange:'orange',
+  borderGray:'#ececec',
+  bgGray:'rgb(238, 238, 238)',
+  titleBlack:`rgb(82, 82, 82)`,
+
+
 }
 
 export {
