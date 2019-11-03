@@ -11,7 +11,6 @@ function* handleGetBoardMenu({payload:diff}){
   BASE_GET_BOARD_MENU_SAGA.pending();
   let {data,error} = yield call(BASE_GET_BOARD_MENU_SAGA.request,diff);
   if(data && !error){
-    console.log(data);
     BASE_GET_BOARD_MENU_SAGA.success(data);
   }else{
     BASE_GET_BOARD_MENU_SAGA.failure();

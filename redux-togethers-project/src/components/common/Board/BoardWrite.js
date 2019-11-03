@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styled from 'styled-components';
 import cx from 'classnames';
 import { Input, Select, Radio, Button } from 'antd';
 import {font} from 'styles/utils';
-
 
 // import { Editor,EditorState } from 'react-draft-wysiwyg';
 
@@ -39,13 +38,13 @@ const Styled = {
   `,
 }
 
-
-class BoardWrite extends Component {
+class BoardWrite extends PureComponent {
   state = {
     privateValue: false,
     editor: '',
     title: '',
-    boardName:''
+    boardName:'',
+    categoreySeq:''
   }
 
   handleChange = (e) => {
@@ -54,20 +53,28 @@ class BoardWrite extends Component {
       [name]: value
     })
   }
+  handleSelect = (value)=>{
+    this.setState({
+      categoreySeq:value
+    })
+  }
 
   handleSubmit = () =>{
     const {handleWrite} = this.props;
     handleWrite(this.state)
   }
+
   componentDidMount(){
+    const {menuList} = this.props;
     this.setState({
-      
+      categoreySeq:menuList[0].id
     })
   }
 
+
   render() {
-    const { editor, privateValue, title } = this.state;
-    const {uploadPending} = this.props;
+    const { editor, privateValue, title,categoreySeq } = this.state;
+    const {uploadPending,menuList} = this.props;
     const { Option } = Select;
 
     return (
@@ -82,14 +89,18 @@ class BoardWrite extends Component {
           <Option value="1년">1년</Option>
         </Select>
 
-        <Select defaultValue="강남/서초 코딩스터디" style={{ width: 250 }} >
-          <Option value="강남/서초 코딩스터디">강남/서초 코딩스터디</Option>
-          <Option value="1일">1일</Option>
-          <Option value="1주">1주</Option>
-          <Option value="1개월">1개월</Option>
-          <Option value="6개월">6개월</Option>
-          <Option value="1년">1년</Option>
-        </Select>
+        {menuList && 
+        <Select 
+          style={{ width: 250 }} 
+          onChange={this.handleSelect} 
+          name="categoreySeq"
+          value={categoreySeq}
+          >
+          {menuList.map(list=>(
+            <Option key={list.id} value={list.id}>{list.title} {list.group_name}</Option>
+          ))}
+        </Select>}
+
 
         <div className={cx('boardWrite__title')}>
           <Input

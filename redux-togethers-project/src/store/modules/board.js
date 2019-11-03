@@ -12,7 +12,7 @@ let initialState ={
     pending:false,
     success:false,
     failure:false,
-  }
+  },
 }
 
 
@@ -27,6 +27,8 @@ export default handleActions({
       }
     })
   },
+
+
   [actions.BOARD_UPLOAD_PENDING]:(state,{payload:diff})=>{
     console.log('BOARD_UPLOAD_PENDING');
     return produce(state,draft=>{
@@ -36,7 +38,46 @@ export default handleActions({
       boardUpload.failure = false;
     })
   },
+  [actions.BOARD_UPLOAD_SUCCESS]:(state,{payload:diff})=>{
+    console.log('BOARD_UPLOAD_SUCCESS');
+    return produce(state,draft=>{
+      const {boardUpload} = draft;
+      boardUpload.pending = false;
+      boardUpload.success = true;
+      boardUpload.failure = false;
+    })
+  },
+  [actions.BOARD_UPLOAD_FAILURE]:(state,{payload:diff})=>{
+    console.log('BOARD_UPLOAD_FAILURE');
+    return produce(state,draft=>{
+      const {boardUpload} = draft;
+      boardUpload.pending = false;
+      boardUpload.success = false;
+      boardUpload.failure = true;
+    })
+  },
+
+  [actions.BOARD_GET_LIST_PENDING]:(state,{payload:diff})=>{
+    console.log('BOARD_GET_LIST_PENDING');
+    return produce(state,draft=>{
+
+    })
+  },
+  [actions.BOARD_GET_LIST_SUCCESS]:(state,{payload:diff})=>{
+    console.log('BOARD_GET_LIST_SUCCESS');
+    return produce(state,draft=>{
+
+    })
+  },
+  [actions.BOARD_GET_LIST_FAILURE]:(state,{payload:diff})=>{
+    console.log('BOARD_GEBOARD_GET_LIST_FAILURET_LIST_PENDING');
+    return produce(state,draft=>{
+
+    })
+  },
 
 },initialState)
+
+
 
 

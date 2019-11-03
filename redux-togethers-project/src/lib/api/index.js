@@ -61,8 +61,19 @@ export function postRegister(data){
 export function postUploadBoard(data){
   console.log('postUploadBoard');
   console.log(data);
+  const {
+    apiUrl,
+    author,
+    authorSeq,
+    title,
+    editor:body,
+    privateValue:privacy
+  } = data;
+  const dataConfig ={
+    author,authorSeq,title,body,privacy
+  }
 
-  return postAxios('/board/upload',data)
+  return postAxios(`/board${apiUrl}/upload`,dataConfig)
 }
 
 

@@ -197,10 +197,11 @@ class Header extends Component {
                 {values && values.map((itemInfo) => (
                   <Link
                     key={itemInfo.id}
-                    to={'/'}
+                    to={`/${itemInfo.category_en}/list/${itemInfo.id}`}
                     className={cx('header__list_link')}
                   >
                     <span>{itemInfo.title}</span>
+                    <span>{}</span>
                   </Link>
                 ))}
               </div>

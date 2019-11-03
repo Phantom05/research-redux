@@ -8,9 +8,10 @@ import PlainBoardCommonTemplate from 'components/base/template/PlainBoardCommonT
 import PlainWriteTemplate from 'components/base/template/PlainWriteTemplate';
 import { Actions } from 'store/actionCreators';
 import { BoardList, BoardWrite, BoardFilter } from 'components/common/Board';
+import {Redirect} from 'react-router-dom';
+import _ from 'lodash';
 
-
-import { ThinScrollHeader } from 'components/common/scrollHeader';
+// import { ThinScrollHeader } from 'components/common/scrollHeader';
 
 class StudyContainer extends Component {
 
@@ -21,33 +22,39 @@ class StudyContainer extends Component {
     //리스트파트들
     //board/sec1/part1/list1?page=1
 
-    Actions.board_get_date_request();
-  }
-  handleClickWriteBtn = (value) => {
-    console.log('handleClickWriteBtn');
-    Actions.board_view_mode_change(value)
+    console.log('componentDidMount');
 
+    Actions.board_get_list_request();
   }
+
   handleWrite = (value) => {
-    console.log('handleWrite');
-    const {authReducer:{profile}} = this.props;
+    const {authReducer:{profile},match} = this.props;
     const {token,username} = profile;
     if(value){
       value.authorSeq = token;
       value.author = username;
+      value.apiUrl =match.path;
     }
-    Actions.board_upload_request(value)
+    Actions.board_view_mode_change('write');
+    Actions.board_upload_request(value);
   }
+
   render() {
-    const { boardReducer, baseReducer } = this.props;
-    const { mainTitle, subTitle, isWriteMode ,boardUpload} = boardReducer;
-    const {pending:uploadPending} = boardUpload;
-    const { landing } = baseReducer;
-    const { match } = this.props;
+    const { boardReducer, baseReducer , match } = this.props;
+    const { boardUpload, isWriteMode } = boardReducer;
+    const { landing,board:{menuList} } = baseReducer;
+    const {pending:uploadPending,success:uploadSuccess} = boardUpload;
     if (landing) return null;
+    const menuListArr =  _.reduce(menuList,(result,value,key)=>result.concat(value),[]);
+
+    if(uploadSuccess && isWriteMode){
+      alert('등록 되었습니다.');
+      Actions.board_view_mode_change('view');
+    }
+
     return (
       <HalfTemplate
-        header={<ThinScrollHeader title={'강남 / 서초'} />}
+        // header={<ThinScrollHeader title={'강남 / 서초'} />}
         left={
           <Switch>
             <Route path={`${match.path}/list`} component={() => (
@@ -59,17 +66,18 @@ class StudyContainer extends Component {
             } />
             <Route path={`${match.path}/write`} component={() => (
               <PlainWriteTemplate>
+                {uploadSuccess && <Redirect to={'/study/list/56'} />}
                 <BoardWrite 
                   handleWrite={this.handleWrite}
                   uploadPending={uploadPending}
+                  menuList={menuListArr}
                 />
               </PlainWriteTemplate>
             )
             } />
           </Switch>
         }
-        right={<PlainBoardCommonTemplate navigation={'글쓰기 답글'}/>
-        }
+        right={<PlainBoardCommonTemplate navigation={'글쓰기 답글'}/>}
     />
     );
   }

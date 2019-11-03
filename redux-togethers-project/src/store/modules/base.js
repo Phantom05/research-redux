@@ -9,7 +9,8 @@ let initialState ={
   board:{
     menuList:null
   },
-  url:''
+  url:'',
+
 }
 
 
@@ -36,7 +37,6 @@ export default handleActions({
   [actions.BASE_BOARD_GET_MENU_SUCCESS]:(state,{payload:diff})=>{
     console.log('BASE_BOARD_GET_MENU_SUCCESS');
     return produce(state,draft=>{
-      console.log(diff);
       const {boardMenuList} = diff;
       draft.board.menuList = boardMenuList;
     })
@@ -44,7 +44,7 @@ export default handleActions({
   [actions.BASE_BOARD_GET_MENU_FAILURE]:(state,{payload:diff})=>{
     console.log('BASE_BOARD_GET_MENU_FAILURE');
     return produce(state,draft=>{
-
+      
     })
   },
 },initialState)
