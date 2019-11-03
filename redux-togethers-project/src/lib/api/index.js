@@ -52,7 +52,6 @@ export function postToken(token) {
 // signup
 export function postRegister(data){
   console.log('api register');
-  console.log(data);
   return postAxios('/auth/signup',data)
 }
 
@@ -60,7 +59,7 @@ export function postRegister(data){
 // board
 export function postUploadBoard(data){
   console.log('postUploadBoard');
-  console.log(data);
+  console.log(data,'datadatadata');
   const {
     apiUrl,
     author,
@@ -77,6 +76,11 @@ export function postUploadBoard(data){
 }
 
 
+export function postGetBoardList(data){
+  console.log(`postGetBoardList`);
+  const dataConfig ={};
+  // return postAxios(`/board${apiUrl}/upload`,dataConfig)
+}
 
 
 //NOTE: token으로 들어왔을떄 reducer 업데이트해줘야함.
