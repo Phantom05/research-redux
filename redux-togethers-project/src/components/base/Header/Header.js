@@ -237,6 +237,7 @@ class Header extends Component {
           title:`LIST${ran}`,
           link:"/"
         });
+        return list
       });
       menuList.category.study.push(
         {
@@ -244,6 +245,7 @@ class Header extends Component {
           list:listArr
         }
       );
+      return list
     });
 
     return (

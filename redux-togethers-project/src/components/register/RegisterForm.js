@@ -2,29 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
-import { Button, Input, notification, Spin, Icon  } from 'antd';
-
-
-const openTermNoti = () => {
-  const args = {
-    message: 'Notification Title',
-    description:
-      'I will never close automatically. I will be close automatically. I will never close automatically.',
-    duration: 0,
-  };
-  notification.open(args);
-};
-
-const openPolicyNoti = () => {
-  const args = {
-    message: 'Notification Title',
-    description:
-      'I will never close automatically. I will be close automatically. I will never close automatically.',
-    duration: 0,
-  };
-  notification.open(args);
-};
-
+import {  Input,  Spin, Icon  } from 'antd';
 
 const antIcon = <Icon type="loading" style={{ fontSize: 13 }} spin />;
 const Styled = {
@@ -154,11 +132,3 @@ class RegisterForm extends PureComponent {
 export default RegisterForm;
 
 
-{/* <Form.Item
-label="Validating"
-hasFeedback
-validateStatus="validating"
-help="The information is being validated..."
->
-<Input placeholder="I'm the content is being validated" id="validating" />
-</Form.Item> */}

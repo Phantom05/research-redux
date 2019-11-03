@@ -36,7 +36,7 @@ class Core extends Component {
 
   render() {
     // console.log('** Core Component Render');
-    const { landing } = this.props;
+    // const { landing } = this.props;
     // console.log(landing,'Core landing');
     return <></>
   }

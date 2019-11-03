@@ -30,6 +30,8 @@ export const BOARD_GET_DATA_PENDING = 'board/BOARD_GET_DATA_PENDING';
 export const BOARD_GET_DATA_SUCCESS = 'board/BOARD_GET_DATA_SUCCESS';
 export const BOARD_GET_DATA_FAILURE = 'board/BOARD_GET_DATA_FAILURE';
 
+export const BOARD_VIEW_MODE_CHANGE = 'board/BOARD_VIEW_MODE_CHANGE';
+
 export const WINDOW_PAGE = 'window/PAGE';
 
 export const DASHBOARD_TITLE = 'dashboard/TITLE';
@@ -69,3 +71,5 @@ export const board_get_date_request = createAction(BOARD_GET_DATA_REQUEST);
 export const board_get_date_pending = createAction(BOARD_GET_DATA_PENDING);
 export const board_get_date_success = createAction(BOARD_GET_DATA_SUCCESS);
 export const board_get_date_failure = createAction(BOARD_GET_DATA_FAILURE);
+
+export const board_view_mode_change = createAction(BOARD_VIEW_MODE_CHANGE);

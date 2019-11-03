@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled,{createGlobalStyle} from 'styled-components';
+import styled from 'styled-components';
 
 const headerHight = '60px';
 const Styled = {

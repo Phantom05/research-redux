@@ -5,7 +5,7 @@ export const keys = {
 }
 
 // 유저네임, 정규식 2~16글자
-export function regUsername(value){
+export function regUsername(value) {
   var regExp = /^[a-z0-9_-|가-힣]{2,16}$/;
   return (regExp.test(value)) ? true : false;
 }
@@ -31,7 +31,7 @@ export function regExp(type, value) {
   }
 }
 
-export const storage = (() =>{
+export const storage = (() => {
   class Storage {
     constructor() {
       this.st = typeof localStorage === 'object' ? localStorage : {};
@@ -61,12 +61,7 @@ export const storage = (() =>{
 
 
 class Cookie {
-  constructor() {
 
-  }
-  init(){
-
-  }
   set(name, value, exp = 1) {
     // set(변수이름, 변수값, 기간);
     var date = new Date();
@@ -82,7 +77,7 @@ class Cookie {
       x = cookies[i].substr(0, cookies[i].indexOf('='));
       y = cookies[i].substr(cookies[i].indexOf('=') + 1);
       x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
-      if (x == name) {
+      if (x === name) {
         return unescape(y) // unescape로 디코딩 후 값 리턴
       }
     }
@@ -97,33 +92,35 @@ class Cookie {
 }
 export const cookie = new Cookie()
 // if faild login, do alert
-export function alertLogin({result}){
-  console.log('alert login in 0',result);
-  const loginResponse ={
-      ['1']:()=>{alert('Welcome.');},
-      ['2']:()=>{alert('Please check your Email and Password.')},
-      ['3']:()=>{alert('User not found Please register.')},
-      ['4']:()=>{alert('Server error.')},
-    };
-    try{
-      loginResponse[result]();
-    }catch(e){
-      alert('server Error')
-    }
+export function alertLogin({ result }) {
+  const response = {
+    '1': 'Welcome.',
+    '2': 'Please check your Email and Password.',
+    '3': 'User not found Please register.',
+    '4': 'Server error.',
+  };
+  try {
+    const alertInfo = response[result];
+    if (alertInfo === undefined) return
+    alert(alertInfo)
+  } catch (e) {
+    alert('server Error')
+  }
 }
 
 
-export function alertRegister({result}){
-  console.log('alert register in ',result);
-  const registerResponse ={
-    ['1']:()=>{alert('Welcome.');},
-    ['2']:()=>{alert('Please check your Email and Password.')},
-    ['3']:()=>{alert('User not found Please register.')},
-    ['4']:()=>{alert('Email is a duplicate Please check.')},
+export function alertRegister({ result }) {
+  const response = {
+    '1': 'Welcome.',
+    '2': 'Please check your Email and Password.',
+    '3': 'User not found Please register.',
+    '4': 'Email is a duplicate Please check.',
   };
-  try{
-    registerResponse[result]();
-  }catch(e){
+  try {
+    const alertInfo = response[result];
+    if (alertInfo === undefined) return
+    alert(alertInfo)
+  } catch (e) {
     alert('server Error')
   }
 }

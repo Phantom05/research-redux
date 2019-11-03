@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
 
-
-
-const headerWidth = '250px';
+const headerWidth = '270px';
 const Styled = {
   Header: styled.header`
     position:fixed;

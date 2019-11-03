@@ -8,13 +8,13 @@ const sagaMiddleware = createSagaMiddleware();
 
 const configure = () => {
   const logger = createLogger();
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      name: `Redux`,
-      realtime: true, 
-      trace: true, 
-      traceLimit: 25
-    }) || compose;
+  // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+  //   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+  //     name: `Redux`,
+  //     realtime: true, 
+  //     trace: true, 
+  //     traceLimit: 25
+  //   }) || compose;
   // const middleware = [ sagaMiddleware];
   const middleware = [logger, sagaMiddleware];
   const store = createStore(

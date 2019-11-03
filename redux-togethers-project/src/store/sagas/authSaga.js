@@ -1,7 +1,7 @@
 import { all,  takeEvery, call } from 'redux-saga/effects';
 import * as actions from 'store/actions';
 import {Actions} from 'store/actionCreators';
-import {cookie,keys,alertLogin,alertRegister} from 'utils'
+import {cookie,keys} from 'utils'
 import {
   AUTH_LOGIN_SAGA,
   AUTH_LOGOUT_SAGA,

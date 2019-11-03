@@ -6,15 +6,20 @@ import * as actions from 'store/actions';
 
 let initialState ={
   mainTitle:null,
-  subTitle:null
+  subTitle:null,
+  isWriteMode:false,
 }
 
 
 export default handleActions({
-  [actions.BASE_LANDING_VIEW]:(state,{payload:diff})=>{
+  [actions.BOARD_VIEW_MODE_CHANGE]:(state,{payload:diff})=>{
     return produce(state,draft=>{
-      console.log('BASE_LANDING_VIEW');
-      draft.landing = diff;
+      console.log('BOARD_VIEW_MODE_CHANGE');
+      if(diff === 'write'){
+        draft.isWriteMode = true
+      }else if (diff === 'view'){
+        draft.isWriteMode = false
+      }
     })
   },
 
