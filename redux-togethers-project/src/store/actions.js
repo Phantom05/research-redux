@@ -3,6 +3,11 @@ import {createAction} from 'redux-actions';
 // type
 export const BASE_LANDING_VIEW ='base/BASE_LANDING_VIEW';
 
+export const BASE_BOARD_GET_MENU_REQUEST ='common/COMMON_BOARD_GET_MENU_REQUEST'; 
+export const BASE_BOARD_GET_MENU_PENDING ='common/COMMON_BOARD_GET_MENU_PENDING'; 
+export const BASE_BOARD_GET_MENU_SUCCESS ='common/COMMON_BOARD_GET_MENU_SUCCESS'; 
+export const BASE_BOARD_GET_MENU_FAILURE ='common/COMMON_BOARD_GET_MENU_FAILURE'; 
+
 export const AUTH_LOGIN_REQUEST = 'auth/AUTH_LOGIN_REQUEST';
 export const AUTH_LOGIN_PENDING = 'auth/AUTH_LOGIN_PENDING';
 export const AUTH_LOGIN_SUCCESS = 'auth/AUTH_LOGIN_SUCCESS';
@@ -25,12 +30,18 @@ export const AUTH_TOKEN_SUCCESS = 'auth/AUTH_TOKEN_SUCCESS';
 export const AUTH_TOKEN_FAILURE = 'auth/AUTH_TOKEN_FAILURE';
 
 
+
 export const BOARD_GET_DATA_REQUEST = 'board/BOARD_GET_DATA_REQUEST';
 export const BOARD_GET_DATA_PENDING = 'board/BOARD_GET_DATA_PENDING';
 export const BOARD_GET_DATA_SUCCESS = 'board/BOARD_GET_DATA_SUCCESS';
 export const BOARD_GET_DATA_FAILURE = 'board/BOARD_GET_DATA_FAILURE';
 
 export const BOARD_VIEW_MODE_CHANGE = 'board/BOARD_VIEW_MODE_CHANGE';
+
+export const BOARD_UPLOAD_REQUEST = 'board/BOARD_UPLOAD_REQUEST';
+export const BOARD_UPLOAD_PENDING = 'board/BOARD_UPLOAD_PENDING';
+export const BOARD_UPLOAD_SUCCESS = 'board/BOARD_UPLOAD_SUCCESS';
+export const BOARD_UPLOAD_FAILURE = 'board/BOARD_UPLOAD_FAILURE';
 
 export const WINDOW_PAGE = 'window/PAGE';
 
@@ -73,3 +84,18 @@ export const board_get_date_success = createAction(BOARD_GET_DATA_SUCCESS);
 export const board_get_date_failure = createAction(BOARD_GET_DATA_FAILURE);
 
 export const board_view_mode_change = createAction(BOARD_VIEW_MODE_CHANGE);
+
+
+export const board_upload_request = createAction(BOARD_UPLOAD_REQUEST); 
+export const board_upload_pending = createAction(BOARD_UPLOAD_PENDING); 
+export const board_upload_success = createAction(BOARD_UPLOAD_SUCCESS); 
+export const board_upload_failure = createAction(BOARD_UPLOAD_FAILURE); 
+
+
+export const base_board_get_menu_request =createAction(BASE_BOARD_GET_MENU_REQUEST); 
+export const base_board_get_menu_pending =createAction(BASE_BOARD_GET_MENU_PENDING);
+export const base_board_get_menu_success =createAction(BASE_BOARD_GET_MENU_SUCCESS);
+export const base_board_get_menu_failure =createAction(BASE_BOARD_GET_MENU_FAILURE);
+
+
+

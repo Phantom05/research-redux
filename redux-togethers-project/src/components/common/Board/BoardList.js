@@ -4,7 +4,7 @@ import cx from 'classnames';
 import {color,floatClear} from 'styles/utils';
 
 const list =[];
-Array(210).fill(true).map((x,idx)=>{
+Array(10).fill(true).map((x,idx)=>{
   list.push({
     id:idx,
     title:`Title ${idx}`,

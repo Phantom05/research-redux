@@ -6,6 +6,10 @@ import * as actions from 'store/actions';
 
 let initialState ={
   landing:true,
+  board:{
+    menuList:null
+  },
+  url:''
 }
 
 
@@ -22,4 +26,28 @@ export default handleActions({
       draft.landing = false;
     })
   },
+
+  [actions.BASE_BOARD_GET_MENU_PENDING]:(state,{payload:diff})=>{
+    console.log('BASE_BOARD_GET_MENU_PENDING');
+    return produce(state,draft=>{
+
+    })
+  },
+  [actions.BASE_BOARD_GET_MENU_SUCCESS]:(state,{payload:diff})=>{
+    console.log('BASE_BOARD_GET_MENU_SUCCESS');
+    return produce(state,draft=>{
+      console.log(diff);
+      const {boardMenuList} = diff;
+      draft.board.menuList = boardMenuList;
+    })
+  },
+  [actions.BASE_BOARD_GET_MENU_FAILURE]:(state,{payload:diff})=>{
+    console.log('BASE_BOARD_GET_MENU_FAILURE');
+    return produce(state,draft=>{
+
+    })
+  },
 },initialState)
+
+
+

@@ -1,13 +1,13 @@
 
 import axios from 'axios';
 import {apiAddress} from 'lib/config/settings';
+import {cookie,keys} from 'utils';
 
-// common
+// common 
 export const getAxios = (api) =>{
   return axios.get(apiAddress + api)
   .catch(err => { return { error: err } });
 }
-
 export const postAxios = (api, data = {}) =>{
   const config={
     url:apiAddress+api,
@@ -16,6 +16,15 @@ export const postAxios = (api, data = {}) =>{
   }
   return axios(config)
   .catch(err => { return { error: err } });
+}
+
+
+// base
+export function postGetBoardMenu(data){
+  const dataConfig={
+    category:data
+  }
+  return postAxios('/board/menu/list',dataConfig)
 }
 
 
@@ -28,20 +37,17 @@ export function postLogin(data) {
   return postAxios('/auth/login', dataConfig)
 }
 
+// logout
 export function postLogout(data) {
   return getAxios('/auth/logout')
 }
 
+// token get login infomation
 export function postToken(token) {
   console.log('api post');
   const dataConfig= { token };
   return postAxios('/auth/token', dataConfig)
 }
-//NOTE: token으로 들어왔을떄 reducer 업데이트해줘야함.
-// 로그아웃 작업 해줘야함.
-// PrivateRoute 만들기
-// 그리고 login인 되었을시 자동으로 페이지 던지는 작업 해야함.
-
 
 // signup
 export function postRegister(data){
@@ -51,5 +57,18 @@ export function postRegister(data){
 }
 
 
+// board
+export function postUploadBoard(data){
+  console.log('postUploadBoard');
+  console.log(data);
+
+  return postAxios('/board/upload',data)
+}
 
 
+
+
+//NOTE: token으로 들어왔을떄 reducer 업데이트해줘야함.
+// 로그아웃 작업 해줘야함.
+// PrivateRoute 만들기
+// 그리고 login인 되었을시 자동으로 페이지 던지는 작업 해야함.

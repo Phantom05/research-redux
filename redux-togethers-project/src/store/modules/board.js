@@ -8,13 +8,18 @@ let initialState ={
   mainTitle:null,
   subTitle:null,
   isWriteMode:false,
+  boardUpload:{
+    pending:false,
+    success:false,
+    failure:false,
+  }
 }
 
 
 export default handleActions({
   [actions.BOARD_VIEW_MODE_CHANGE]:(state,{payload:diff})=>{
+    console.log('BOARD_VIEW_MODE_CHANGE');
     return produce(state,draft=>{
-      console.log('BOARD_VIEW_MODE_CHANGE');
       if(diff === 'write'){
         draft.isWriteMode = true
       }else if (diff === 'view'){
@@ -22,5 +27,16 @@ export default handleActions({
       }
     })
   },
+  [actions.BOARD_UPLOAD_PENDING]:(state,{payload:diff})=>{
+    console.log('BOARD_UPLOAD_PENDING');
+    return produce(state,draft=>{
+      const {boardUpload} = draft;
+      boardUpload.pending = true;
+      boardUpload.success = false;
+      boardUpload.failure = false;
+    })
+  },
 
 },initialState)
+
+

@@ -29,4 +29,20 @@ export const AUTH_SIGNUP_SAGA = {
   failure:(data)=>Actions.auth_register_failure(data),
 }
 
-// export 
+export const BOARD_UPLOAD_SAGA = {
+  request:async (payload)=> await API.postUploadBoard(payload),
+  pending:()=>Actions.board_upload_pending(),
+  success:(data)=>Actions.board_upload_success(data),
+  failure:(data)=>Actions.board_upload_failure(data),
+}
+
+export const BASE_GET_BOARD_MENU_SAGA = {
+  request:async (payload)=> await API.postGetBoardMenu(payload),
+  pending:()=>Actions.base_board_get_menu_pending(),
+  success:(data)=>Actions.base_board_get_menu_success(data),
+  failure:(data)=>Actions.base_board_get_menu_failure(data),
+}
+
+
+
+

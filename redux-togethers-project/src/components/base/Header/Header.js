@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import styled,{css} from 'styled-components';
-import { Link,NavLink } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { Link, NavLink } from 'react-router-dom';
 import cx from 'classnames';
 import { Icon } from 'antd';
+import _ from 'lodash';
 import {
   font,
   color,
@@ -30,7 +31,7 @@ const Styled = {
     & a{
       position:relative;
       color:${color.titleBlack};
-      ${props=>props.isHome && css`
+      ${props => props.isHome && css`
       &:after{
         content:"";
         display:block;
@@ -111,7 +112,7 @@ const Styled = {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 1px;
     margin-top:20px;
     .category__box{
-      ${props=> `width:calc(100% /  ${props.categoryList.length})`};
+      ${props => `width:calc(100% /  ${props.categoryList.length})`};
       float:left;
       text-align:center;
       padding:8px 0;
@@ -130,130 +131,39 @@ const Styled = {
 class Header extends Component {
 
   render() {
-    const { isAutheticated, handleLogout, category, onClick,isHome } = this.props;
+    const {
+      isAutheticated,
+      handleLogout,
+      onClick,
+      isHome,
+      menuList
+    } = this.props;
     const categoryList = [
-      
+
       {
-        id:'study',
-        name:"스터디"
+        id: 'study',
+        name: "스터디"
       },
       {
-        id:"exercise",
-        name:"운동"
+        id: "exercise",
+        name: "운동"
       },
       {
-        id:"storyTalk",
-        name:"토크"
+        id: "storyTalk",
+        name: "토크"
       },
     ]
-    const menuList = {
-      category: {
-        home: [
-          {
-            title:"GUIDE",
-            list:[
-              {
-                link:"/",
-                title:"Guide"
-              }
-            ]
-          }
-        ],
-        study: [
-           {
-            title: "서울 - 코딩 스터디",
-            list: [
-              {
-                link: '/',
-                title: "강남 / 서초"
-              },
-              {
-                link: '/',
-                title: "강동 / 송파"
-              },
-              {
-                link: '/',
-                title: "관악 / 동작"
-              },
-              {
-                link: '/',
-                title: "영등포 / 구로 / 금천구"
-              },
-              {
-                link: '/',
-                title: "강서구 / 양천구"
-              },
-              {
-                link: '/',
-                title: "서대문 / 은평구"
-              },
-              {
-                link: '/',
-                title: "마포구 / 용산구"
-              },
-            ]
-          },
-          {
-            title: "서울 - 영어 스터디",
-            list: [
-              {
-                link: '/',
-                title: "강남/서초"
-              }
-            ]
-          }
-        ],
-        exercise: [
-          {
-            title:"맨몸운동",
-            list:[
-              {
-                link:"/",
-                title:"턱걸이"
-              }
-            ]
-          }
-        ],
-        storyTalk: [
-          {
-            title:"집들이 토크",
-            list:[
-              {
-                link:"/",
-                title:"시시콜콜"
-              }
-            ]
-          }
-        ],
-      }
-    };
 
-    //NOTE: TEST DATA
-    Array(5).fill(true).map((list,idx)=>{
-      let listArr = []
-      Array(10).fill(true).map(list=>{
-        let ran = Math.random()*10;
-        listArr.push({
-          title:`LIST${ran}`,
-          link:"/"
-        });
-        return list
-      });
-      menuList.category.study.push(
-        {
-          title:`TEST${idx}`,
-          list:listArr
-        }
-      );
-      return list
-    });
+    let menuInfo = _.size(menuList) !== 0 && _.reduce(menuList, (result, values,keyName) => {
+      return result.concat({[keyName]:values})
+    },[]);
 
     return (
-      <Styled.Header categoryList={categoryList}  isHome={isHome}>
-        <h2 
-          className={cx('logo')} 
+      <Styled.Header categoryList={categoryList} isHome={isHome}>
+        <h2
+          className={cx('logo')}
           onClick={() => onClick('home')}>
-            <Link to ="/">TOGETHERS</Link>
+          <Link to="/">TOGETHERS</Link>
         </h2>
 
         <div className={cx('auth__box')}>
@@ -268,33 +178,34 @@ class Header extends Component {
         </div>
 
         <div className={cx('header__category_box')}>
-          {categoryList.map(info=>(
-             <NavLink 
-              to={info.id} 
-              key={info.id} 
-              className={cx('category__box')} 
+          {categoryList.map(info => (
+            <NavLink
+              to={info.id}
+              key={info.id}
+              className={cx('category__box')}
               onClick={() => onClick(info.id)}>{info.name}</NavLink>
           ))}
         </div>
 
         <div className={cx('menu__controll_box')}>
-
-            {menuList.category[category] && menuList.category[category].map((menuInfo, idx) => (
-              <div key={idx}>
-                <div className={cx('header__list_title')}>{menuInfo.title}</div>
-                <div className={cx('header__list_box')}>
-                  {menuInfo.list && menuInfo.list.map((itemInfo, idx) => (
-                    <Link
-                      key={idx}
-                      to={itemInfo.link}
-                      className={cx('header__list_link')}
-                    >
-                      <span>{itemInfo.title}</span>
-                    </Link>
-                  ))}
-                </div>
+          {menuInfo && menuInfo.map((list,idx) => {
+            const keyValue = Object.entries(list)[0];
+            const [keyName, values] = [keyValue[0], keyValue[1]];
+            return <div key={idx}>
+              <div className={cx('header__list_title')}>{keyName}</div>
+              <div className={cx('header__list_box')}>
+                {values && values.map((itemInfo) => (
+                  <Link
+                    key={itemInfo.id}
+                    to={'/'}
+                    className={cx('header__list_link')}
+                  >
+                    <span>{itemInfo.title}</span>
+                  </Link>
+                ))}
               </div>
-            ))}
+            </div>
+          })}
 
         </div>
       </Styled.Header>
