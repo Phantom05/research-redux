@@ -27,7 +27,7 @@ class StudyContainer extends Component {
     Actions.board_get_list_request();
   }
 
-  handleWrite = (value) => {
+  handleWrite = (value) => { 
     const {authReducer:{profile},match} = this.props;
     const {token,username} = profile;
     if(value){

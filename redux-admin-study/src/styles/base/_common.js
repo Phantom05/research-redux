@@ -2,7 +2,7 @@
 // import  { css } from 'styled-components';
 import WebFont from 'webfontloader';
 
-
+ 
 WebFont.load({
   google: {
     families: [
@@ -13,7 +13,7 @@ WebFont.load({
     ]
   }
 });
-
+ 
 const _font={
   "NanumGothic":"Nanum Gothic"
 }
