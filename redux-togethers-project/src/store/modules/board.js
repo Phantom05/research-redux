@@ -13,6 +13,10 @@ let initialState ={
     success:false,
     failure:false,
   },
+  page:{
+
+  },
+  boardList:[],
 }
 
 
