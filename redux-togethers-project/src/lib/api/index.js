@@ -78,8 +78,10 @@ export function postUploadBoard(data){
 
 export function postGetBoardList(data){
   console.log(`postGetBoardList`);
-  const dataConfig ={};
-  // return postAxios(`/board${apiUrl}/upload`,dataConfig)
+  console.log(data);
+  // /board/study/list/59/1
+  const {type,page} = data
+  return postAxios(`/board/${type}/list/59/${page}`)
 }
 
 

@@ -11,13 +11,12 @@ import {
 function* handleGetListBoard({payload:diff}){
   console.log(`>>> handleGetListBoard !!!`);
   BOARD_GET_LIST_SAGA.pending();
-  console.log(diff,'diffdiffdiff');
-  // let {data,error} = yield call(BOARD_GET_LIST_SAGA.request,diff);
-  // if(data && !error){
-  //   BOARD_GET_LIST_SAGA.success(data)
-  // }else{
-  //   BOARD_GET_LIST_SAGA.failure();
-  // }
+  let {data,error} = yield call(BOARD_GET_LIST_SAGA.request,diff);
+  if(data && !error){
+    BOARD_GET_LIST_SAGA.success(data)
+  }else{
+    BOARD_GET_LIST_SAGA.failure();
+  }
 
 }
 

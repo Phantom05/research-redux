@@ -46,8 +46,8 @@ export const BASE_GET_BOARD_MENU_SAGA = {
 export const BOARD_GET_LIST_SAGA = {
   request:async (payload)=> await API.postGetBoardList(payload),
   pending:()=>Actions.base_board_get_menu_pending(),
-  success:(data)=>Actions.base_board_get_menu_success(data),
-  failure:(data)=>Actions.base_board_get_menu_failure(data),
+  success:(data)=>Actions.board_get_list_success(data),
+  failure:(data)=>Actions.board_get_list_failure(data),
 }
 
 

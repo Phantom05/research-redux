@@ -16,7 +16,16 @@ let initialState ={
   page:{
 
   },
-  boardList:[],
+  boardList:{
+    pending:false,
+    success:false,
+    failure:false,
+    list:[],
+  },
+  pagination:{
+
+  }
+  
 }
 
 
@@ -31,8 +40,6 @@ export default handleActions({
       }
     })
   },
-
-
   [actions.BOARD_UPLOAD_PENDING]:(state,{payload:diff})=>{
     console.log('BOARD_UPLOAD_PENDING');
     return produce(state,draft=>{
@@ -60,7 +67,6 @@ export default handleActions({
       boardUpload.failure = true;
     })
   },
-
   [actions.BOARD_GET_LIST_PENDING]:(state,{payload:diff})=>{
     console.log('BOARD_GET_LIST_PENDING');
     return produce(state,draft=>{
@@ -70,7 +76,12 @@ export default handleActions({
   [actions.BOARD_GET_LIST_SUCCESS]:(state,{payload:diff})=>{
     console.log('BOARD_GET_LIST_SUCCESS');
     return produce(state,draft=>{
-
+      const {boardList} = draft;
+      boardList.list = diff.boardList;
+      boardList.pending = false;
+      boardList.success = true;
+      boardList.failure = false;
+      draft.pagination = diff.pagination;
     })
   },
   [actions.BOARD_GET_LIST_FAILURE]:(state,{payload:diff})=>{
