@@ -29,7 +29,8 @@ const _color ={
   red:`rgb(233, 73, 73)`,
   bgBrown:`rgb(45, 45, 45)`,
   redTitle:`#d0021b`,
-  graySubtitle:`#888888`
+  graySubtitle:`#888888`,
+  blackSubtitle:`#333`
 
 }
 

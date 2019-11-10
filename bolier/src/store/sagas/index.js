@@ -1,4 +1,5 @@
 import {all,fork} from 'redux-saga/effects';
+import homeSaga from './homeSaga';
 // import authSaga from './authSaga';
 // import boardSaga from './boardSaga';
 // import baseSaga from './baseSaga';
@@ -6,6 +7,7 @@ import {all,fork} from 'redux-saga/effects';
 
 export default function* RootSaga(){
   yield all([
+    fork(homeSaga),
     // fork(authSaga),
     // fork(boardSaga),
     // fork(baseSaga),

@@ -13,6 +13,9 @@ const Styled = {
     .header{
       ${positionCenterCenter};
       width:95%; 
+      & a.active{
+        font-weight:bold;
+      }
     }
   `
 }
@@ -21,7 +24,9 @@ class MainHeader extends Component {
     return (
       <Styled.Header>
         <div className={cx('header')}>
-          Main Header
+          {/* <NavLink to="/">Home</NavLink> 
+          <NavLink to="/about">About</NavLink>  */}
+          
         </div>
       </Styled.Header>
     );
