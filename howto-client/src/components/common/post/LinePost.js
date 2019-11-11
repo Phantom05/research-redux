@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled,{css} from 'styled-components';
 import cx from 'classnames';
 import { floatClear, font, color } from 'styles/utils';
@@ -79,7 +79,7 @@ const Styled = {
   }
   `
 }
-class LinePost extends Component {
+class LinePost extends PureComponent {
   render() {
     const {
       // id,
@@ -91,7 +91,6 @@ class LinePost extends Component {
       views,
       price
     } = this.props;
-    console.log(price);
     return (
       <Styled.LinePost {...this.props}>
 

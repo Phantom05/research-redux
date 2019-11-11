@@ -11,6 +11,7 @@ const Styled={
       font-weight:bold;
       padding:15px 0;
       margin-bottom:30px;
+      font-family:'Josefin';
     }
   `
 }

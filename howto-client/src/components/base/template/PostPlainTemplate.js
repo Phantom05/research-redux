@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import cx from 'classnames';
-import { floatClear, font, color } from 'styles/utils';
+import {  font, color } from 'styles/utils';
 
 const Styled={
   PostPlainTemplate:styled.div`
     .post__main_title{
       ${font};
-      font-size:18px;
+      font-size:80px;
       font-weight:bold;
-      padding:15px 0;
-      margin-bottom:30px;
+      padding:40px 0;
+      margin-bottom:5px;
+      font-family: 'Patua One', cursive;
+      letter-spacing:5px;
     }
   `
 }

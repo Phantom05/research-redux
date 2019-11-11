@@ -1,5 +1,5 @@
 import  { css } from 'styled-components';
-import {_color,_font} from 'styles/_common'; 
+import {_color,_font,_escape} from 'styles/_common'; 
 
 
 var color = _color;
@@ -68,5 +68,5 @@ export {
   floatClear,
   font,
   fontFamily,
-  color
+  color,
 }

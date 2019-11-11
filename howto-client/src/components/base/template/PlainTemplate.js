@@ -26,10 +26,11 @@ const Styled={
   Main:styled.main`
     position:relative;
     /* ${props=> props.headerHeight ?`height:calc(100vh - ${props.headerHeight}px)`:`height:100vh`}; */
-    ${props=> props.navigationWidth ?`padding-left:${props.navigationWidth}px`:`width:100%`};
+    ${props=> props.navigationWidth ?`padding-left:${props.navigationWidth}px`:`width:100%`}
     ${props=> props.contentBackgroundColor && `background:${props.contentBackgroundColor}`};
 
     .main{
+      width:70%;
       ${props=> props.contentPosition === 'centerCenter' && `
         position:absolute;
         left:50%;

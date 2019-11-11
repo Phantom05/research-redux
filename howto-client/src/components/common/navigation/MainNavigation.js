@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { color, font, positionWidthCenter } from 'styles/utils';
-import { NavLink } from 'react-router-dom';
+import { color, font } from 'styles/utils';
+import { NavLink ,Link} from 'react-router-dom';
 
 import cx from 'classnames';
 
 const Styled = {
   Navigation: styled.nav`
+    position:relative;
     background:white;
     width:240px;
     /* border-right:1px solid ${color.borderGray2}; */
@@ -48,6 +49,24 @@ const Styled = {
     .nav__list_box{
       padding:0 30px;
     }
+    .nav__info_box{
+      position:absolute;
+      width:100%;
+      padding:0 30px;
+      bottom:50px;
+      left:0;
+    }
+    .nav__info_list_an{
+      display:block;
+      ${font};
+      color:${color.greenText};
+      font-weight:bold;
+      margin-bottom:5px;
+      text-decoration:none;
+      &:hover{
+        text-decoration:underline;
+      }
+    }
 
   `
 }
@@ -60,19 +79,19 @@ class MainNavigation extends Component {
             <NavLink to="/">MOYA</NavLink>
           </h1>
           <div className={cx('nav__list_box')}>
-          <div className={cx('nav__list')}>
-              <NavLink to="/" className={cx('nav__list_an')}>홈 2020</NavLink>
+            <div className={cx('nav__list')}>
+              <NavLink exact to="/" className={cx('nav__list_an')}>홈 2020</NavLink>
             </div>
             <div className={cx('nav__list')}>
-              <NavLink to="/in" className={cx('nav__list_an')}>요리 / 레시피</NavLink>
+              <NavLink to="/cook" className={cx('nav__list_an')}>요리 / 레시피</NavLink>
             </div>
             <div className={cx('nav__list')}>
-              <NavLink to="/in" className={cx('nav__list_an')}>인테리어 / 수리</NavLink >
+              <NavLink to="/interior" className={cx('nav__list_an')}>인테리어 / 수리</NavLink >
             </div>
             <div className={cx('nav__list')}>
-              <NavLink to="/in" className={cx('nav__list_an')}>주말 / 휴가</NavLink>
+              <NavLink to="/holiday" className={cx('nav__list_an')}>주말 / 휴가</NavLink>
             </div>
-            <div className={cx('nav__list')}>
+            {/* <div className={cx('nav__list')}>
               <NavLink to="/in" className={cx('nav__list_an')}>여행 / 일상</NavLink>
             </div>
             <div className={cx('nav__list')}>
@@ -80,7 +99,24 @@ class MainNavigation extends Component {
             </div>
             <div className={cx('nav__list')}>
               <NavLink to="/in" className={cx('nav__list_an')}>공구 / 작업</NavLink>
-            </div>
+            </div> */}
+          </div>
+          <div className={cx('nav__info_box')}>
+            <p className={cx('nav__info_list')}>
+              <Link to="/" className={cx('nav__info_list_an')} >Facebook</Link>
+            </p>
+            <p className={cx('nav__info_list')}>
+              <Link to="/" className={cx('nav__info_list_an')} >Instagram</Link>
+            </p>
+            <p className={cx('nav__info_list')}>
+              <Link to="/" className={cx('nav__info_list_an')} >Address</Link>
+            </p>
+            <p className={cx('nav__info_list')}>
+              <Link to="/" className={cx('nav__info_list_an')} >Contact</Link>
+            </p>
+            <p className={cx('nav__info_list')}>
+              <Link to="/" className={cx('nav__info_list_an')} >Privacy</Link>
+            </p>
           </div>
         </div>
       </Styled.Navigation>

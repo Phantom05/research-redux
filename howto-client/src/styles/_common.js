@@ -30,11 +30,12 @@ const _color ={
   bgBrown:`rgb(45, 45, 45)`,
   redTitle:`#d0021b`,
   graySubtitle:`#888888`,
-  blackSubtitle:`#4b4b4b`
+  blackSubtitle:`#4b4b4b`,
+  greenText:`#00a562`
 
-}
+};
 
 export {
   _color,
-  _font
+  _font,
 }
