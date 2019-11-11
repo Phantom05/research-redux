@@ -5,7 +5,8 @@ import cx from 'classnames';
 
 const Styled={
   PlainTemplate:styled.div`
-    ${props => props.headerHeight && `border-top:${props.headerHeight}px solid transparent`}
+    ${props => props.headerHeight && `border-top:${props.headerHeight}px solid transparent`};
+
   `,
   Header: styled.header`
       position:fixed;
@@ -24,9 +25,10 @@ const Styled={
  `,
   Main:styled.main`
     position:relative;
-    ${props=> props.headerHeight ?`height:calc(100vh - ${props.headerHeight}px)`:`height:100vh`};
+    /* ${props=> props.headerHeight ?`height:calc(100vh - ${props.headerHeight}px)`:`height:100vh`}; */
     ${props=> props.navigationWidth ?`padding-left:${props.navigationWidth}px`:`width:100%`};
-    ${props=> props.contentBackgroundColor && `background:${props.contentBackgroundColor}`}
+    ${props=> props.contentBackgroundColor && `background:${props.contentBackgroundColor}`};
+
     .main{
       ${props=> props.contentPosition === 'centerCenter' && `
         position:absolute;
@@ -44,6 +46,7 @@ const Styled={
         left:50%;
         transform:translateX(-50%)
       `}
+       padding-bottom:100px;
     }
   `
 }
