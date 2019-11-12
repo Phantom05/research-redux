@@ -26,3 +26,7 @@ export function postGetBoardMenu(data){
   return postAxios('/board/menu/list',dataConfig)
 }
 
+export function getRecentsPosts(data){
+  console.log(data);
+  // postAxios('/board/menu/list',dataConfig)
+}

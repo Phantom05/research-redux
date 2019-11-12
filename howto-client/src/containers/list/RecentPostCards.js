@@ -52,6 +52,7 @@ class RecentPostCards extends Component {
         }
       )
     };
+
     const { type, filterList } = this.props;
     return (
       <PostPlainTemplate
@@ -71,3 +72,7 @@ export default connect(
 
   })
 )(RecentPostCards);
+
+RecentPostCards.defaultProps = {
+  posts: []
+}

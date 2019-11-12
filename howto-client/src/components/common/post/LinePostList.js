@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import styled from 'styled-components';
 // import cx from 'classnames';
 // import { floatClear, font, color } from 'styles/utils';
+
 import { LinePost } from 'components/common/post';
 
 class LinePostList extends Component {

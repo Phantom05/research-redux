@@ -2,8 +2,16 @@ import { handleActions } from 'redux-actions';
 import produce from 'immer';
 import * as actions from 'store/actions';
 
+
+const initialListingSet = {
+  posts: null,
+  prefetched: null,
+  end: false,
+};
+
 let initialState = {
-  count:10
+  count:10,
+  recent:{...initialListingSet}
 }
 
 
