@@ -2,6 +2,21 @@ import * as API from 'lib/api';
 import { Actions } from 'store/actionCreators';
 import store from 'store';
 
+export function makeActionCreator(actionType,payload) {
+  return store.dispatch({ type: actionType, payload:payload })
+}
+export function makeAsyncCreateActions(actions){
+  const ActionsFunction = (payload)=>makeActionCreator(actions.INDEX,payload);
+  return (api)=>{
+    if(typeof api !== 'function') new Error('api must be Function');
+    ActionsFunction.request = (data)=>  api(data);
+    ActionsFunction.pending = (payload)=>makeActionCreator(actions.PENDING,payload);
+    ActionsFunction.success = (payload)=>makeActionCreator(actions.SUCCESS,payload);
+    ActionsFunction.failure = (payload)=>makeActionCreator(actions.FAILURE,payload);
+    return ActionsFunction
+  }
+}
+
 export const HOME_TEST_SAGA = {
   request: (payload) => API.postGetBoardMenu(payload),
   pending: () => Actions.auth_login_pending(),
@@ -16,32 +31,3 @@ export const LISTING_RECENT_POSTS = {
 }
 
 
-function reduxHelper(actionName, fn) {
-  if (typeof actionName !== 'string') {
-    throw new Error('actionName must be a string')
-  }
-  if (typeof fn !== 'function') {
-    throw new Error('fn must be a function')
-  }
-  const actionNameUpper = actionName.toUpperCase()
-  const actionPending = actionNameUpper + '_PENDING';
-  const actionRequest = actionNameUpper + '_REQUEST';
-  const actionSuccess = actionNameUpper + '_SUCCESS';
-  const actionFailure = actionNameUpper + '_FAILURE';
-
-
-  store.dispatch({type:actionPending})
-
-  return {
-    actionPending,
-    actionRequest,
-    actionSuccess,
-    actionFailure
-  }
-}
-
-console.log(
-  reduxHelper('LISTING_RECENT_POSTS',()=>{
-
-  })
-);

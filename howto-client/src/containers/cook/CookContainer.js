@@ -11,7 +11,7 @@ class CookContainer extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    Actions.listing_get_recent_posts()
+    // Actions.listing_get_recent_posts()
   }
   render() {
     const { listingReducer } = this.props;
