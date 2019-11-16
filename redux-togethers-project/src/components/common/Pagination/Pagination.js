@@ -58,9 +58,6 @@ class Pagination extends Component {
       )
     }
     if(page.endPage !== page.totalPage){
-    }
-
-    {page && page.startPage &&
       pagiNation.push(
         <span
         className={cx('page__item arrow',{disable:page.endPage === page.totalPage})}
@@ -69,7 +66,10 @@ class Pagination extends Component {
         >
           &#62;
         </span>
-      )}
+      )
+    }
+
+
 
     return (
       <Styled.Pagination>
