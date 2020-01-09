@@ -1,0 +1,35 @@
+{
+  "name": "express-nextjs-test2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
+    "export": "next export",
+    "pm2-next": "next build && pm2 start ./node_modules/next/dist/bin/next-start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "next": "^9.1.7",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-markdown": "^4.3.1"
+  },
+  "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "axios": "^0.19.1",
+    "cross-env": "^6.0.3",
+    "express": "^4.17.1",
+    "isomorphic-unfetch": "^3.0.0",
+    "next-compose-plugins": "^2.2.0",
+    "next-optimized-images": "^2.5.4",
+    "node-sass": "^4.13.0",
+    "pm2": "^4.2.1",
+    "swr": "^0.1.16",
+    "webpack": "^4.41.5"
+  }
+}
