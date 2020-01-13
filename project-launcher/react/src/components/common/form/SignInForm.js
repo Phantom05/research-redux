@@ -31,6 +31,9 @@ const useStyles = makeStyles(theme => ({
     '& input:valid:focus + fieldset': {
       borderColor: '#309687',
     },
+    '&$checked': {
+      color: 'green',
+    },
   },
   withoutLabel: {
     marginTop: theme.spacing(3),
@@ -57,17 +60,13 @@ const useStyles = makeStyles(theme => ({
   eyeIcon:{
     width:12,
     fontSize:12
+  },
+  remember_label:{
+    fontSize:12
   }
 }));
 
-const styles = {
 
-  largeIcon: {
-    width: 60,
-    height: 60,
-  },
-
-};
 
 function SignInForm(props) {
   const classes = useStyles();
@@ -145,12 +144,12 @@ function SignInForm(props) {
         <FormGroup aria-label="position" row className="form__cash_box">
         <Grid container  justify="space-between">
           <Grid item xs={6}>
-          <FormControlLabel
-                value="remember"
-                control={<Checkbox color="primary" />}
-                label="Remember Me"
-                labelPlacement="end"
-              />  
+            <FormControlLabel
+              value="remember"
+              control={<Checkbox color="primary" />}
+              label={<span style={{ fontSize: '14px' }}>Remember me</span>}
+              labelPlacement="end"
+            />  
           </Grid>
           <Grid item xs={6}>
             <Link to="/" className="form__cash_tx">Forget password</Link>
@@ -214,7 +213,16 @@ const Styled = {
       border-color:#309687
     }
     .form__cash_tx{
+      position:relative;
       float:right;
+      font-size:14px;
+      top:13px;
+    }
+    .MuiCheckbox-colorPrimary.Mui-checked{
+      color:#309687
+    }
+    .MuiTypography-root .MuiFormControlLabel-label .MuiTypography-body1{
+      font-size:14px;
     }
   `
 }
