@@ -27,13 +27,17 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    '& input:valid:focus + fieldset': {
+      borderColor: '#309687',
+    },
+  },
   withoutLabel: {
     marginTop: theme.spacing(3),
   },
   textField: {
     width: '100%',
-    marginBottom: 15
+    marginBottom: 15,
   },
   loginBtn:{
     width:`300px`,
@@ -42,18 +46,34 @@ const useStyles = makeStyles(theme => ({
     '&:hover':{
       background:`#229987`
     }
+  },
+  input:{
+    height:40,
+  },
+  label:{
+    fontSize:14,
+    top:`-17%`,
+  },
+  eyeIcon:{
+    width:12,
+    fontSize:12
   }
 }));
 
+const styles = {
+
+  largeIcon: {
+    width: 60,
+    height: 60,
+  },
+
+};
 
 function SignInForm(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    amount: '',
     email: '',
     password: '',
-    weight: '',
-    weightRange: '',
     showPassword: false,
   });
 
@@ -69,14 +89,17 @@ function SignInForm(props) {
     event.preventDefault();
   };
 
+
+  console.log(values);
+
   return (
     <Styled.SignInForm>
       <h1 className="signin__title">DOF Launcher</h1>
 
-      <form action="">
+      <form action="" className={classes.root}>
       <FormGroup aria-label="position" row>
           <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-            <InputLabel htmlFor="email">Email Address</InputLabel>
+            <InputLabel htmlFor="email" className={classes.label}>Email Address</InputLabel>
             <OutlinedInput
               autoComplete="off"
               id="email"
@@ -84,18 +107,21 @@ function SignInForm(props) {
               value={values.email}
               onChange={handleChange('email')}
               labelWidth={70}
+              className={classes.input}
+              
             />
           </FormControl>
         </FormGroup>
 
         <FormGroup aria-label="position" row>
           <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-            <InputLabel htmlFor="password">Password</InputLabel>
+            <InputLabel htmlFor="password" className={classes.label}>Password</InputLabel>
             <OutlinedInput
               id="password"
               type={values.showPassword ? 'text' : 'password'}
               value={values.password}
               onChange={handleChange('password')}
+              className={classes.input}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -103,6 +129,8 @@ function SignInForm(props) {
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
+                    // iconStyle={styles.largeIcon}
+                    className={classes.eyeIcon}
                   >
                     {values.showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
@@ -114,14 +142,23 @@ function SignInForm(props) {
         </FormGroup>
         
 
-        <FormGroup aria-label="position" row>
+        <FormGroup aria-label="position" row className="form__cash_box">
+        <Grid container  justify="space-between">
+          <Grid item xs={6}>
           <FormControlLabel
-            value="remember"
-            control={<Checkbox color="primary" />}
-            label="Remember Me"
-            labelPlacement="end"
-          />
-          <Link to="/">Forget password</Link>
+                value="remember"
+                control={<Checkbox color="primary" />}
+                label="Remember Me"
+                labelPlacement="end"
+              />  
+          </Grid>
+          <Grid item xs={6}>
+            <Link to="/" className="form__cash_tx">Forget password</Link>
+          </Grid>
+        </Grid>
+
+            
+          
         </FormGroup>
 
         <FormGroup aria-label="position" row>
@@ -147,7 +184,7 @@ export default SignInForm;
 const Styled = {
   SignInForm: styled.div`
     width:400px;
-    border:1px solid red;
+    /* border:1px solid red; */
     .form__group{
       ${floatClear}
     }
@@ -160,11 +197,24 @@ const Styled = {
       color:#2D9D8D;
       font-size:16px;
     }
+    .form__cash_box{
+      margin-bottom:60px;
+    }
     .signin__title{
       margin-bottom:150px;
       font-size:36px;
       font-weight:bold;
       text-align:center;
+    }
+    .MuiInputLabel-root.Mui-focused{
+      color:#309687; 
+      border-color:#309687
+    }
+    .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+      border-color:#309687
+    }
+    .form__cash_tx{
+      float:right;
     }
   `
 }
