@@ -15,6 +15,8 @@ import {
 function App() {
   return (
     <div>
+      <Stlyed.GlobalStyles />
+      
       <Switch>
         <Route exact path="/" component={Home} />
         <Route  path="/auth" component={Auth} />
@@ -23,7 +25,7 @@ function App() {
         <Route component={NotFound} />
       </Switch>
       <Core />
-      <Stlyed.GlobalStyles />
+      
     </div>
   );
 }
