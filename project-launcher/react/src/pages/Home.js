@@ -1,20 +1,13 @@
 import React,{useEffect} from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import {HomeContainer} from 'containers/home';
 
 
 function Home(props) {
-  console.log(props,'p');
-  
-
-  useEffect(()=>{
-    props.history.push('/auth/signin');
-  },[]);
-
-
   return (
-    <div>
-        Home
-    </div>
+    <HomeContainer >
+      
+    </HomeContainer>
   );
 }
 

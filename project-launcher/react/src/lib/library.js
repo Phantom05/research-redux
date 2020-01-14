@@ -56,10 +56,11 @@ export function regLength(len,value,bool){
     return regExp.test(value)
 }
 
+
 const st = typeof localStorage === 'object' ? localStorage : {};
 export const keys = {
-  user: '__$$_user__',
-  token:'__$$_user_$$__token'
+  user: '__$$_dof__',
+  token:'__$$_dof_$$__token'
 };
 
 export const storage= {
@@ -88,7 +89,7 @@ export const storage= {
 
 class Cookie {
   set(name, value, exp = 1) {
-    // set(변수이름, 변수값, 기간);
+    // set(변수이름, 변수값, 기간(일수));
     var date = new Date();
     date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
     document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
@@ -112,9 +113,20 @@ class Cookie {
     document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
   }
   clear() {
+    var cookies = document.cookie.split(";");
 
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
   }
 }
+
+
+
+
 export const cookie = new Cookie()
 
 export function disableDragSelect(target){
@@ -161,3 +173,4 @@ export function numRangeMap(start,end){
     return (num >= start && num <= end)
   }
 }
+

@@ -1,5 +1,6 @@
-import { useState, useEffect,useReducer,useCallback } from 'react';
 
+import React,{ useState, useEffect,useReducer,useCallback } from 'react';
+import {useSelector} from 'react-redux';
 
 /**
  * usePromise
@@ -48,3 +49,16 @@ export const useInput = (function(){
     return [state,onChange];
   }
 })() 
+
+
+export const useLanding =(Component)=>{
+  const baseReducer = useSelector(state=>state.base);
+  const {landing} = baseReducer;
+
+  if(landing){
+    console.log('Base landing...');
+    return <h4>Landing...</h4>
+  }else{
+    return Component
+  }
+}

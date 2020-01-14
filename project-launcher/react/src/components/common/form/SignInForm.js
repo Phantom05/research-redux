@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { floatClear, color, font } from 'styles/__utils';
 import {ENV_MODE_DEV} from 'lib/setting';
+import {LoadingCircle} from 'components/base/loading';
 
 
 import clsx from 'clsx';
@@ -22,7 +23,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 
-function SignInForm({onSubmit,error}) {
+
+function SignInForm({onSubmit,error,pending}) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     email: '',
@@ -54,8 +56,9 @@ function SignInForm({onSubmit,error}) {
       email:"hello@gmail.com",
       password:"123j123J",
     })
-  }
+  };
 
+  console.log(pending,'pending');
 
 
   return (
@@ -135,7 +138,9 @@ function SignInForm({onSubmit,error}) {
             variant="contained" 
             color="primary" 
             className={classes.loginBtn}
-            onClick={handleSubmit}>Log In</Button>
+            onClick={handleSubmit}>
+             {pending ? <LoadingCircle  className="loading__bar" size={20}/>:'Log In'}
+          </Button>
         </FormGroup>
 
         <FormGroup aria-label="position" row>
@@ -155,9 +160,6 @@ const useStyles = makeStyles(theme => ({
     '& input:valid:focus + fieldset': {
       borderColor: `${color.green}`,
     },
-    '&$checked': {
-      color: `${color.green}`,
-    },
   },
   withoutLabel: {
     marginTop: theme.spacing(3),
@@ -169,6 +171,7 @@ const useStyles = makeStyles(theme => ({
   loginBtn: {
     width: `300px`,
     margin: 'auto',
+    height:'40px',
     background: `${color.green}`,
     '&:hover': {
       background: `${color.green_hover}`
@@ -188,6 +191,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: 12
   }
 }));
+
 const Styled = {
   SignInForm: styled.div`
     width:400px;
@@ -227,6 +231,11 @@ const Styled = {
       &:hover{
         text-decoration:underline;
       }
+    }
+    .loading__bar{
+      position:relative;
+      top:5px;
+      margin-left:5px;
     }
 
     .MuiInputLabel-root.Mui-focused{
