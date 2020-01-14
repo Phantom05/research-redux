@@ -3,10 +3,6 @@ import {_color} from 'styles/__common';
 
 export const color = _color;
 
-export const font = css`
-  color:${color.black};
-  font-family:"arial";
-`;
 
 export const floatClear = css`
   &:after{
@@ -33,3 +29,20 @@ export const positionHeightCenter = css`
   top:50%;
   transform:translateY(-50%);
 `;
+
+export const font = (size=14,color='black') => {
+  return css`
+  color: ${color};
+  font-size: ${size}px;
+  font-family:sans-serif;
+  & :hover{
+     color: $clr;
+  } 
+  @content;
+  `;
+}
+
+
+
+
+

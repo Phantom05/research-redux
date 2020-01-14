@@ -7,7 +7,7 @@ import {
  * 
  * @param {*} param0 ReactElement
  */
-function AuthTemplate({children = null,footer=null}) {
+function AuthTemplate({children = null,footer=null,header=null}) {
   return (
     <Stlyed.AuthTemplate>
       <div className="auth__section">
@@ -22,7 +22,7 @@ function AuthTemplate({children = null,footer=null}) {
 
 const Stlyed ={
   AuthTemplate:styled.div`
-  position:fixed;
+  position:absolute;
   width:100%;
   height:100%;
   .auth__section{
@@ -30,6 +30,7 @@ const Stlyed ={
   }
   .auth__footer{
     ${positionWidthCenter};
+    width:100%;
     bottom:32px;
   }
   `

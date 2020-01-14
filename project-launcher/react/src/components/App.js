@@ -16,11 +16,10 @@ function App() {
   return (
     <div>
       <Stlyed.GlobalStyles />
-      
+
       <Switch>
         <Route exact path="/" component={Home} />
         <Route  path="/auth" component={Auth} />
-        
         <Route  path="/loading" component={FullScreenLoading} />
         <Route component={NotFound} />
       </Switch>

@@ -24,6 +24,9 @@ const _color ={
   grayFont         : `#777777`,
   grayBg2          : `#dddce680`,
   windowBg         : `#353147`,
+  green            : `#309687`,
+  green_hover      : `#229987`,
+  black            : `#243533`,
   scannerGradient  : scannerBgGradient,
 }
 export {_color}

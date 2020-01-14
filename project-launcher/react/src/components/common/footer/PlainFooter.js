@@ -9,10 +9,10 @@ function PlainFooter(props) {
   return (
     <Styled.Footer>
       <div className="footer__con">
-        <div className="footer__box">
+        <div className="footer__box link">
           <Link to="/">이용 약관</Link>
         </div>
-        <div className="footer__box">
+        <div className="footer__box link">
           <Link to="/">개인정보 처리방침</Link>
         </div>
         <div className="footer__box">
@@ -28,8 +28,11 @@ const Styled={
   Footer:styled.div`
     font-size:14px;
     color:#777;
+    width:100%;
+    text-align:center;
     .footer__con{
       ${floatClear}
+      display:inline-block;
     }
     .footer__box{
       position: relative;
@@ -50,6 +53,9 @@ const Styled={
       }
       &:last-child:after{
         display:none
+      }
+      &.link:hover{
+        text-decoration:underline;
       }
     }
   `
