@@ -1,47 +1,19 @@
 
 
 import React from 'react';
-import {LoginForm} from 'compoennts/common/Form';
+import {Link} from 'react-router-dom';
+import { PlainHeader } from 'components/common/header';
 
-const LoginComps = withAjax(<LoginForm />)({
-  url:`https://localhost.com:8080/login`,
-  method:'post',
-});
 
 function Project(props) {
-  const [data,setData] =  useState('');
-
-
   return (
     <div>
-        {<LoginComps /> }
+        <h3>Project Page</h3>
+        <PlainHeader />
+        <hr />
     </div>
   );
 }
 
-export default Project;
+export default Project
 
-
-
-// import React from 'react';
-// import {PlainTemplate} from 'components/base/template';
-// import {HeaderContainer,HomeContainer} from 'containers/common';
-// import hoc from 'utls/hoc';
-
-
-// const ReduxHeaderContainer = hoc(<HeaderContainer />)({project})
-// const ReduxHomeContainer = hoc(<HomeContainer />)({main,auth})
-
-
-// function Project(props) {
-
-  
-//   return (
-//     <PlainTemplate 
-//       header={<ReduxHeaderContainer />}
-//       chidren={<ReduxHomeContainer />}
-//     />
-//   );
-// }
-
-// export default Project;

@@ -3,12 +3,14 @@ import { NotFound } from 'components/base/helpers/error';
 import { Switch, Route } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import reset from "styled-reset";
+import {PrivateRoute,LRoute} from 'components/base/route';
 
 import Core from 'containers/base/Core';
 import {FullScreenLoading} from 'components/base/loading';
 import {
   Home,
   Auth,
+  Project
 } from 'pages';
 
 
@@ -18,14 +20,13 @@ function App() {
       <Stlyed.GlobalStyles />
       <Core />
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/home" component={Home} />
-        <Route path="/auth" component={Auth} />
-        <Route path="/loading" component={FullScreenLoading} />
-        <Route component={NotFound} />
+        <LRoute exact path="/" component={Home} />
+        <LRoute path="/home" component={Home} />
+        <LRoute path="/auth" component={Auth} />
+        <LRoute path="/loading" component={FullScreenLoading} />
+        <PrivateRoute path="/project" component={Project}/>
+        <LRoute component={NotFound} />
       </Switch>
-     
-      
     </div>
   );
 }

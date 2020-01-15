@@ -1,7 +1,11 @@
 
-import React,{ useState, useEffect,useReducer,useCallback } from 'react';
-import {useSelector} from 'react-redux';
+import React, { useState, useEffect, useReducer, useCallback, Component } from 'react';
+import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
+
+// SECTION: use
 /**
  * usePromise
  * @param {*} promiseCreator Promise Object
@@ -9,8 +13,8 @@ import {useSelector} from 'react-redux';
  */
 export function usePromise(promiseCreator, deps) {
   const [resolved, setResolved] = useState(null);
-  const [loading, setLoading]   = useState(false);
-  const [error, setError]       = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const process = async () => {
     setLoading(true);
@@ -35,30 +39,36 @@ export function usePromise(promiseCreator, deps) {
  * useInput
  * @param {*} initialForm object
  */
-export const useInput = (function(){
-  function reducer(state,action){
-    return { ...state, [action.name]:action.value }
+export const useInput = (function () {
+  function reducer(state, action) {
+    return { ...state, [action.name]: action.value }
   }
 
   return function useInput(initialForm) {
-    const [state,dispatch] = useReducer(reducer,initialForm);
-  
-    const onChange = e =>{
+    const [state, dispatch] = useReducer(reducer, initialForm);
+
+    const onChange = e => {
       dispatch(e.target);
     }
-    return [state,onChange];
+    return [state, onChange];
   }
-})() 
+})()
+
+//SECTION: Hign Order Component (HOC)
+/**
+ * 
+ * @param {*} url 
+ */
 
 
-export const useLanding =(Component)=>{
-  const baseReducer = useSelector(state=>state.base);
-  const {landing} = baseReducer;
-
-  if(landing){
-    console.log('Base landing...');
-    return <h4>Landing...</h4>
-  }else{
-    return Component
-  }
+export const withLoading = (WrappedComponent) => (props) =>{
+  return props.isLoading
+  ? (console.log('Base landing...'),<div>Loading ...</div>)
+  : <WrappedComponent { ...props } />
 }
+
+
+
+
+
+

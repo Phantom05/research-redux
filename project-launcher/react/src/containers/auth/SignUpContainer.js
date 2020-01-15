@@ -8,17 +8,15 @@ function SignUpContainer(props) {
   const {auth:authReducer} = useSelector(state=>state);
   const {isAutheticated} = authReducer.signIn;
 
+  //use Effect 있을땐 storage로
   useEffect(() => {
     if(isAutheticated){
       props.history.goBack()
     }
   }, [isAutheticated])
 
-
-  if(storage.get(keys.token)){
-    return null;
-  }
   return (
+    !storage.get(keys.token) &&
     <AuthTemplate
       children={<SignUpForm />}
     />

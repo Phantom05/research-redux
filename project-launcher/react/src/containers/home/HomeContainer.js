@@ -1,34 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import {useLanding} from 'lib/utils';
-import {storage,keys} from 'lib/library';
+import {withLoading } from 'lib/utils';
+import { PlainHeader } from 'components/common/header';
 
-function HomeContainer({main,auth}) {
-  const {auth:authReducer,base:baseReducer} = useSelector(state=>state);
-  const {signIn} = authReducer;
-  const {isAutheticated} = signIn
-  console.log(signIn,'signIn');
-  
+function HomeContainer() {
   return (
-    !baseReducer.landing &&
     <div>
-      Home
-      
-      <div>
-      {!isAutheticated && <Link to="/auth/signin">로그인</Link>}
-      </div>
-      <div>
-      {!isAutheticated && <Link to="/auth/signup">회원가입</Link>}
-      </div>
-      <div>
-        <Link to="/auth/signout">로그아웃</Link>
-      </div>
+      <h2>Home</h2>
+        <PlainHeader />
     </div>
   );
 }
 
-export default HomeContainer;
-
-// scss, stlyed-components
+export default HomeContainer
 
