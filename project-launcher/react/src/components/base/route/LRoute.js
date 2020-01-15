@@ -1,19 +1,24 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Route,Redirect} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import {FullScreenLoading} from 'components/base/loading';
 
-
-// <PrivateRoute path="/project" component={Project} to="/auth/signup"/>
+// <LRoute path="/auth" component={Auth} token/>
+// token이 있을때 보이면 안되는 페이지
 function LRoute({component:Component,...rest}) {
-  const {base} = useSelector(state=>state);
+  const {base,auth} = useSelector(state=>state);
   const {landing} = base;
+  const {isAutheticated} = auth.signIn;
 
   return (
     <Route {...rest} render={props=>{
+      const isSignOutPage = props.location.pathname !==`${props.match.path}/signout`;
       if(landing){
-        return <h3>Loading...L</h3>
+        return <FullScreenLoading />
+      }else if(rest.token && isAutheticated){
+        return isSignOutPage? <Redirect to="/"/>:<Component {...props}/>;
       }else {
-        return <Component {...props}/>
+        return <Component {...props}/>;
       }
     }} />
   );

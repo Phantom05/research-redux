@@ -40,12 +40,12 @@ function SignInContainer(props) {
       });
     }
     if(isAutheticated){
-      props.history.goBack()
+      // props.history.goBack()
     }
   }, [authCount,isAutheticated])
 
   return (
-    !storage.get(keys.token) &&
+    // !storage.get(keys.token) &&
     <AuthTemplate 
       footer={<PlainFooter />} >
 

@@ -5,7 +5,7 @@ import { PlainHeader } from 'components/common/header';
 function HomeContainer() {
   return (
     <div>
-      <h2>Home</h2>
+      <h2>Home Page</h2>
         <PlainHeader />
     </div>
   );

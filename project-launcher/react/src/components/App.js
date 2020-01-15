@@ -20,9 +20,9 @@ function App() {
       <Stlyed.GlobalStyles />
       <Core />
       <Switch>
-        <LRoute exact path="/" component={Home} />
-        <LRoute path="/home" component={Home} />
-        <LRoute path="/auth" component={Auth} />
+        <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute path="/home" component={Home} />
+        <LRoute path="/auth" component={Auth} token/>
         <LRoute path="/loading" component={FullScreenLoading} />
         <PrivateRoute path="/project" component={Project}/>
         <LRoute component={NotFound} />

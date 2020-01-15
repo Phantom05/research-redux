@@ -158,7 +158,7 @@ function SignInForm({onSubmit,error,pending}) {
 const useStyles = makeStyles(theme => ({
   root: {
     '& input:valid:focus + fieldset': {
-      borderColor: `${color.green}`,
+      borderColor: `${color.blue}`,
     },
   },
   withoutLabel: {
@@ -172,9 +172,9 @@ const useStyles = makeStyles(theme => ({
     width: `300px`,
     margin: 'auto',
     height:'40px',
-    background: `${color.green}`,
+    background: `${color.blue}`,
     '&:hover': {
-      background: `${color.green_hover}`
+      background: `${color.blue_hover}`
     }
   },
   input: {
@@ -195,8 +195,6 @@ const useStyles = makeStyles(theme => ({
 const Styled = {
   SignInForm: styled.div`
     width:400px;
-    /* border:1px solid red; */
-
     .form__group{
       ${floatClear}
     }
@@ -240,14 +238,14 @@ const Styled = {
     }
 
     .MuiInputLabel-root.Mui-focused{
-      color:${color.green}; 
-      border-color:${color.green}
+      color:${color.blue}; 
+      border-color:${color.blue}
     }
     .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
-      border-color:${color.green}
+      border-color:${color.blue}
     }
     .MuiCheckbox-colorPrimary.Mui-checked{
-      color:${color.green}
+      color:${color.blue}
     }
 
 

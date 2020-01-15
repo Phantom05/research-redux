@@ -1,8 +1,8 @@
-import {useEffect} from 'react';
+import React,{useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {storage} from 'lib/library';
 import {Actions} from 'store/actionCreators'
-import {withRouter} from 'react-router-dom';
+import {withRouter,Redirect} from 'react-router-dom';
 
 function SignOut(props) {
   const {pending, success,failure} = useSelector(state=>state.auth.signOut)
@@ -14,7 +14,8 @@ function SignOut(props) {
   }
   if(success){
     storage.clear();
-    props.history.goBack()
+    // props.history.goBack()
+    return <Redirect to="/"/>
   }
   if(failure){
 

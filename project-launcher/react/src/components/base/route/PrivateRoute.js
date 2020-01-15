@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route,Redirect} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-
+import {FullScreenLoading} from 'components/base/loading';
 
 // <PrivateRoute path="/project" component={Project} to="/auth/signup"/>
 function PrivateRoute({component:Component,...rest}) {
@@ -12,7 +12,7 @@ function PrivateRoute({component:Component,...rest}) {
   return (
     <Route {...rest} render={props=>{
       if(landing){
-        return <h3>Loading...</h3>
+        return <FullScreenLoading />
       }else if(!signIn.isAutheticated){
         return <Redirect to={rest.to? rest.to : '/auth/signin'}/>
       }else {

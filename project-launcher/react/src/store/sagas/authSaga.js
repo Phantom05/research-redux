@@ -1,7 +1,7 @@
 
 import {all, takeEvery,call} from 'redux-saga/effects';
 import * as actions from 'store/actions';
-import {storage,keys,cookie} from 'lib/library';
+import {storage,keys} from 'lib/library';
 import {Actions} from 'store/actionCreators';
 import * as api from 'lib/api';
 

@@ -10,6 +10,9 @@ function PlainHeader(props) {
   return (
     <div>
       <div>
+      <Link to="/">Home</Link>
+      </div>
+      <div>
         <Link to="/project">프로젝트 </Link>
       </div>
       <div>
