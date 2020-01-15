@@ -10,7 +10,9 @@ import {FullScreenLoading} from 'components/base/loading';
 import {
   Home,
   Auth,
-  Project
+  Case,
+  Works,
+  Mypage
 } from 'pages';
 
 
@@ -22,9 +24,10 @@ function App() {
       <Switch>
         <PrivateRoute exact path="/" component={Home} />
         <PrivateRoute path="/home" component={Home} />
+        <PrivateRoute path="/case" component={Case} />
+        <PrivateRoute path="/works" component={Works} />
+        <PrivateRoute path="/mypage" component={Mypage}/>
         <LRoute path="/auth" component={Auth} token/>
-        <LRoute path="/loading" component={FullScreenLoading} />
-        <PrivateRoute path="/project" component={Project}/>
         <LRoute component={NotFound} />
       </Switch>
     </div>

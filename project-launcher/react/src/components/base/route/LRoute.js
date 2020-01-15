@@ -14,7 +14,7 @@ function LRoute({component:Component,...rest}) {
     <Route {...rest} render={props=>{
       const isSignOutPage = props.location.pathname !==`${props.match.path}/signout`;
       if(landing){
-        return <FullScreenLoading />
+        return <FullScreenLoading visible={true}/>
       }else if(rest.token && isAutheticated){
         return isSignOutPage? <Redirect to="/"/>:<Component {...props}/>;
       }else {

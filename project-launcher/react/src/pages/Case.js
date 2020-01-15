@@ -1,16 +1,16 @@
 import React from 'react';
 import {DashboardNav} from 'components/common/nav';
 import {DashboardTemplate} from 'components/base/template';
+import {CaseContainer} from 'containers/case';
 
-function HomeContainer() {
+function Case(props) {
   return (
     <DashboardTemplate
       nav={<DashboardNav />}
     >
-    <h2>Home Page</h2>
+      <CaseContainer />
     </DashboardTemplate>
   );
 }
 
-export default HomeContainer
-
+export default Case;

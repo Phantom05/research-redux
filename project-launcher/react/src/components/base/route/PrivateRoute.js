@@ -12,7 +12,7 @@ function PrivateRoute({component:Component,...rest}) {
   return (
     <Route {...rest} render={props=>{
       if(landing){
-        return <FullScreenLoading />
+        return <FullScreenLoading visible={true}/>
       }else if(!signIn.isAutheticated){
         return <Redirect to={rest.to? rest.to : '/auth/signin'}/>
       }else {
