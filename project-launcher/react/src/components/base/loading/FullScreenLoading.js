@@ -25,9 +25,10 @@
 import React from 'react';
 
 function FullScreenLoading(props) {
+  if(!props.visible)  return null;
   return (
     <div>
-      
+      Loading...
     </div>
   );
 }

@@ -1,34 +1,46 @@
 import React, { Component } from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import throttle from 'lodash/throttle';
+import { withRouter } from 'react-router-dom';
 import { storage, keys } from 'lib/library'
 import { connect } from 'react-redux';
 import { Actions } from 'store/actionCreators';
-// import {disableDragSelect} from 'utils';
+import {FullScreenLoading} from 'components/base/loading'
 
 class Core extends Component {
+  
   initialize = async () => {
     const token = storage.get(keys.token);
     if (!token) {
       return Actions.base_exit_landing();
     }
-    if (token) {
-      Actions.base_enter_landing();
-      Actions.auth_token_request({ token });
-    }
+    Actions.auth_token_request({ token });
   }
+
+  setWidth = () => {
+    if (typeof window === 'undefined') return;
+    console.log('resive, setWidth');
+    // BaseActions.setWidth(window.outerWidth);
+  };
+
+  onResize = throttle(() => {
+    this.setWidth();
+  }, 250);
+
   componentDidMount() {
     const { initialize } = this;
     initialize();
+    window.addEventListener('resize', this.onResize);
   }
-
+  
   render() {
-    return(<></>)
+    console.log('core');
+    return(<FullScreenLoading visible={this.props.landing}/>)
   }
 }
 
 export default connect(
-  ({ auth }) => ({
-    isAutheticated: auth.isAutheticated,
+  ({ base }) => ({
+    landing: base.landing,
   })
 )(withRouter(Core));
 

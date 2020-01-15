@@ -196,6 +196,7 @@ const Styled = {
   SignInForm: styled.div`
     width:400px;
     /* border:1px solid red; */
+
     .form__group{
       ${floatClear}
     }
