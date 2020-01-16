@@ -11,13 +11,13 @@ function DashboardNavProfile(props) {
       </div>
       <div className="profile__info row">
         <div className="profile__info text_box">
-          김선호
+          황원준
         </div>
         <address className="profile__info text_box">
-          shkk@gmail.com
+          https://github.com/Maetel
         </address>
         <div className="profile__info text_box">
-          wifi 0 0 0
+          online
       </div>
       </div>
     </Styled.DashboardNavProfile>

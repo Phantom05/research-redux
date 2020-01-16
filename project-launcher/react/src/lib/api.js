@@ -52,7 +52,7 @@ export function postSignOut(){
  * @param {*} payload 
  */
 export function postToken(payload){
-  console.log('api post Token');
+  // console.log('api post Token');
   const axiosConf={
     url:endPoint.post_token,
     method:'post',

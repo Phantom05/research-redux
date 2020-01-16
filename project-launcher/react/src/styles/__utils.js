@@ -1,7 +1,8 @@
 import {css} from 'styled-components';
-import {_color} from 'styles/__common';
+import {_color,_deviceSize} from 'styles/__common';
 
 export const color = _color;
+export const device = _deviceSize;
 
 
 export const floatClear = css`

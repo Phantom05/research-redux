@@ -10,7 +10,6 @@ const _color ={
   purpleHover      : `#5A509A`,
   purpleHoverBg    : `rgba(224, 222, 236, 0.3)`,
   purpleWeak       : `#F5F7FF`,
-  purpleBgGradient : purpleBgGradient,
   purpleBg         : `#F8F9FF`,
   purpleDeep       : `#353147`,
   grayText         : `#999999`,
@@ -29,6 +28,14 @@ const _color ={
   black            : `#243533`,
   blue             : `#54ACDF`,
   blue_hover        : `#4198ca`,
+  purpleBgGradient : purpleBgGradient,
   scannerGradient  : scannerBgGradient,
 }
-export {_color}
+
+const _deviceSize={
+  pc:'1200px',
+  mobile:'400px',
+  pad:"800px"
+}
+
+export {_color,_deviceSize}

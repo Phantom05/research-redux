@@ -8,7 +8,6 @@ export const base_exit_landing  = createAction(BASE_EXIT_LANDING);
 export const base_enter_landing = createAction(BASE_ENTER_LANDING);
 
 
-
 export const AUTH_TOKEN       = makeAsyncActions('signin/AUTH_TOKEN');
 export const AUTH_TOKEN_SAGAS = makeAsyncCreateActions(AUTH_TOKEN)(API.postToken);
 

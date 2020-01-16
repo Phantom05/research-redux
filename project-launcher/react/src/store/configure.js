@@ -7,7 +7,8 @@ import {createLogger} from 'redux-logger';
 const configure = () =>{
   const logger = createLogger();
   const sagaMiddleware = createSagaMiddleware();
-  const middleware =[logger,sagaMiddleware];
+  // const middleware =[logger,sagaMiddleware];
+  const middleware =[sagaMiddleware];
   const composeEnhancers =
   typeof window === 'object' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
