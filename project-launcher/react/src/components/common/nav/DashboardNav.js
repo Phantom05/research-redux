@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import {DashboardNavProfile} from 'components/common/nav';
 
 function DashboardNav(props) {
+
+
   return (
     <Styled.DashboardNav>
       <DashboardNavProfile />
@@ -11,10 +13,7 @@ function DashboardNav(props) {
       <Link to="/case">Case</Link> <br/>
       <Link to="/work">Work</Link> <br/>
       <Link to="/mypage">My PAGE</Link> <br/>
-      
-      <div>
-        Nav
-      </div>
+      <Link to="/auth/signout">Logout</Link> <br/>
     </Styled.DashboardNav>
   );
 }

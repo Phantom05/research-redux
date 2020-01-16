@@ -21,7 +21,7 @@ let initialState = {
 
 export default handleActions({
   // NOTE: SIGN IN , TOKEN
-  [actions.AUTH_SIGNIN_PENDING]: (state, { payload: diff }) => {
+  [actions.AUTH_SIGNIN.PENDING]: (state, { payload: diff }) => {
     return produce(state, draft => {
       const {signIn} = draft;
       signIn.pending = true;
@@ -29,7 +29,7 @@ export default handleActions({
       signIn.token='';
     })
   },
-  [actions.AUTH_SIGNIN_SUCCESS]: (state, { payload: diff }) => {
+  [actions.AUTH_SIGNIN.SUCCESS]: (state, { payload: diff }) => {
     return produce(state, draft => {
       const {signIn} = draft;
       signIn.pending = false;
@@ -38,7 +38,7 @@ export default handleActions({
       signIn.profile = diff.profile;
     })
   },
-  [actions.AUTH_SIGNIN_FAILURE]: (state, { payload: diff }) => {
+  [actions.AUTH_SIGNIN.FAILURE]: (state, { payload: diff }) => {
     return produce(state, draft => {
       const {signIn} = draft;
       signIn.pending = false;
@@ -50,14 +50,14 @@ export default handleActions({
   
   
   // NOTE: SIGN OUT
-  [actions.AUTH_SIGNOUT_PENDING]: (state, { payload: diff }) => {
+  [actions.AUTH_SIGNOUT.PENDING]: (state, { payload: diff }) => {
     return produce(state, draft => {
       console.log('logout pending');
       const {signOut} = draft;
       signOut.pending = true;
     })
   },
-  [actions.AUTH_SIGNOUT_SUCCESS]: (state, { payload: diff }) => {
+  [actions.AUTH_SIGNOUT.SUCCESS]: (state, { payload: diff }) => {
     return produce(state, draft => {
       console.log('logout success');
       const {signOut,signIn} = draft;
@@ -72,7 +72,7 @@ export default handleActions({
       signIn.profile={};
     })
   },
-  [actions.AUTH_SIGNOUT_FAILURE]: (state, { payload: diff }) => {
+  [actions.AUTH_SIGNOUT.FAILURE]: (state, { payload: diff }) => {
     return produce(state, draft => {
       console.log('logout failure');
       const {signOut} = draft;
@@ -81,6 +81,7 @@ export default handleActions({
       signOut.success = false
     })
   },
+
 
 
 // NOTE: TOKEN

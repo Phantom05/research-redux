@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { storage, keys } from 'lib/library'
 import { connect } from 'react-redux';
 import { Actions } from 'store/actionCreators';
+import {AUTH_TOKEN_SAGAS} from 'store/actions';
 import {FullScreenLoading} from 'components/base/loading'
 
 class Core extends Component {
@@ -13,7 +14,8 @@ class Core extends Component {
     if (!token) {
       return Actions.base_exit_landing();
     }
-    Actions.auth_token_request({ token });
+    AUTH_TOKEN_SAGAS({token})
+    // Actions.auth_token_request({ token });
   }
 
   setWidth = () => {

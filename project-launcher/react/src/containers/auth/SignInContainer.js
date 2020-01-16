@@ -5,42 +5,58 @@ import {SignInForm} from 'components/common/form';
 import {PlainFooter} from 'components/common/footer';
 import {regEmail,regPassword} from 'lib/library';
 import {Toastify} from 'components/common/toastify';
-import {Actions} from 'store/actionCreators';
+import {AUTH_SIGNIN_SAGAS} from 'store/actions';
 import {withRouter} from 'react-router-dom';
+import {useImmer} from 'use-immer';
 import {storage,keys} from 'lib/library';
+
+// import {} from 'store/actionSagas';
 
 
 function SignInContainer(props) {
   const {auth:authReducer} = useSelector(state=>state);
   const {pending,isAutheticated,authCount} = authReducer.signIn;
-  const [value,setValue]  = useState({
+  const [vaild,setValid]  = useState({
     email:false,
     password:false,
   });
-  const handleSubmit=  ({email,password})=>{
-    if(!regEmail(email) || !regPassword(password)){
-      setValue({
-        email:true,
-        password:true
-      });
-    }else{
-      setValue({
-        email:false,
-        password:false
-      });
-      Actions.auth_signin_request({email,password});
+  const [value,setValue] = useImmer({
+    email:null,
+    password:null,
+    remember:null
+  });
+
+  const handleSubmit=  ({type,email,password,remember})=>{
+    if(type === 'user'){
+      if(!regEmail(email) || !regPassword(password)){
+        setValid({
+          email:true,
+          password:true
+        });
+      }else{
+        setValid({
+          email:false,
+          password:false
+        });
+        if(remember){
+          storage.set(keys.remember,email);
+        }else{
+          storage.remove(keys.remember);
+        }
+        AUTH_SIGNIN_SAGAS({email,password})
+      }
+    }else if (type === 'customer'){
+      console.log('비회원 로그인');
     }
+    
   };
 
   useEffect(() => {
     if(authCount >0 && !isAutheticated){
-      setValue({
+      setValid({
         email:true,
         password:true
       });
-    }
-    if(isAutheticated){
-      // props.history.goBack()
     }
   }, [authCount,isAutheticated])
 
@@ -51,12 +67,13 @@ function SignInContainer(props) {
 
       <SignInForm  
         onSubmit={handleSubmit} 
-        error={value} 
-        pending={pending} 
+        error={vaild} 
+        pending={pending}
+        
       />
       <Toastify
         type="error"
-        show={value.error|| value.password}
+        show={vaild.error|| vaild.password}
         text="아이디나 비밀번호를 확인해주세요."
       />
     </AuthTemplate>

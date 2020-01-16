@@ -12,11 +12,19 @@ for(const keyName in endPoint){
   endPoint[keyName] = api_address + value
 }
 
+/**
+ * 
+ * @param {*} axiosConf 
+ */
 function Acx(axiosConf){
   return axios(axiosConf)
   .catch(err=>({error:err}))
 }
 
+/**
+ * 
+ * @param {*} payload 
+ */
 export function postSignin(payload){
   console.log(`api : post signin`,payload);
   const axiosConf={
@@ -27,6 +35,9 @@ export function postSignin(payload){
   return Acx(axiosConf)
 }
 
+/**
+ * 
+ */
 export function postSignOut(){
   console.log(`api : signout`);
   const axiosConf={
@@ -36,11 +47,23 @@ export function postSignOut(){
   return Acx(axiosConf)
 }
 
+/**
+ * 
+ * @param {*} payload 
+ */
 export function postToken(payload){
+  console.log('api post Token');
   const axiosConf={
     url:endPoint.post_token,
     method:'post',
     data:payload
+  }
+  return Acx(axiosConf)
+}
+
+export function getTest(payload){
+  const axiosConf={
+    url:`https://jsonplaceholder.typicode.com/todos/1`
   }
   return Acx(axiosConf)
 }

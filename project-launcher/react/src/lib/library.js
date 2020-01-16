@@ -59,7 +59,8 @@ export function regLength(len,value,bool){
 
 const st = typeof localStorage === 'object' ? localStorage : {};
 export const keys = {
-  user: '__$$_dof__',
+  user: '__$$_dof_$$__',
+  remember:`__$$_dof_$$__remember`,
   token:'__$$_dof_$$__token'
 };
 

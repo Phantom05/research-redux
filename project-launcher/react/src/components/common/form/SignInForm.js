@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import { floatClear, color, font } from 'styles/__utils';
-import {ENV_MODE_DEV} from 'lib/setting';
-import {LoadingCircle} from 'components/base/loading';
+import { ENV_MODE_DEV } from 'lib/setting';
+import { LoadingCircle } from 'components/base/loading';
+import { useImmer } from 'use-immer';
+import {storage,keys} from 'lib/library';
 
-
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -22,23 +23,28 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
-
-
-function SignInForm({onSubmit,error,pending}) {
+function SignInForm({ onSubmit, error, pending,info }) {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useImmer({
     email: '',
     password: '',
     showPassword: false,
+    remember: false
   });
-  const {email:errorEmail,password:errorPassword} = error;
+  const { email: errorEmail, password: errorPassword } = error;
 
   const handleChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value });
+    const inputType = prop ==='remember'?'checked':'value';
+    const targetValue = event.target[inputType];
+    setValues(draft => {
+      draft[prop] = targetValue
+    });
   };
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setValues(draft => {
+      draft.showPassword = !draft.showPassword;
+    });
   };
 
   const handleMouseDownPassword = event => {
@@ -49,31 +55,39 @@ function SignInForm({onSubmit,error,pending}) {
     ? <Visibility className={classes.eyeIcon} />
     : <VisibilityOff className={classes.eyeIcon} />
 
-  const handleSubmit =()=> onSubmit(values);
-  const devInsertAccount = ()=>{
-    setValues({
-      ...values,
-      email:"hello@gmail.com",
-      password:"123j123J",
+  const handleSubmit = (e) => {
+    onSubmit({...values,type:e.currentTarget.name});
+  }
+  const devInsertAccount = () => {
+    setValues(draft => {
+      draft.email = "hello@gmail.com";
+      draft.password = "123j123J";
     })
   };
 
-  console.log(pending,'pending');
-
+  useEffect(()=>{
+    const getRemember = storage.get(keys.remember);
+    if(getRemember){
+      setValues(draft=>{
+        draft.email = getRemember;
+        draft.remember = true;
+      });
+    }
+  },[])
 
   return (
     <Styled.SignInForm>
       <h1 className="signin__title">DOF Launcher</h1>
       {ENV_MODE_DEV && <div>
-        <Button 
-            variant="contained" 
-            color="inherit" 
-            style={{marginBottom:20}}
-            onClick={devInsertAccount}>Dev Insert Id</Button>
+        <Button
+          variant="contained"
+          color="inherit"
+          style={{ marginBottom: 20 }}
+          onClick={devInsertAccount}>Dev Insert Id</Button>
       </div>}
       <form action="" className={classes.root}>
         <FormGroup aria-label="position" row>
-          <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <FormControl className={cx(classes.margin, classes.textField)} variant="outlined">
             <InputLabel htmlFor="email" className={classes.label}>Email Address</InputLabel>
             <OutlinedInput
               error={errorEmail}
@@ -89,7 +103,7 @@ function SignInForm({onSubmit,error,pending}) {
         </FormGroup>
 
         <FormGroup aria-label="position" row>
-          <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <FormControl className={cx(classes.margin, classes.textField)} variant="outlined">
             <InputLabel htmlFor="password" className={classes.label}>Password</InputLabel>
             <OutlinedInput
               error={errorPassword}
@@ -122,7 +136,9 @@ function SignInForm({onSubmit,error,pending}) {
             <Grid item xs={6}>
               <FormControlLabel
                 value="remember"
+                checked={values.remember}
                 control={<Checkbox color="primary" />}
+                onChange={handleChange('remember')}
                 label={<span className="remember_label">Remember me</span>}
                 labelPlacement="end"
               />
@@ -134,12 +150,24 @@ function SignInForm({onSubmit,error,pending}) {
         </FormGroup>
 
         <FormGroup aria-label="position" row>
-          <Button 
-            variant="contained" 
-            color="primary" 
-            className={classes.loginBtn}
+          <Button
+            variant="contained"
+            color="primary"
+            className={cx(classes.btn, 'login')}
+            name="user"
             onClick={handleSubmit}>
-             {pending ? <LoadingCircle  className="loading__bar" size={20}/>:'Log In'}
+            {pending ? <LoadingCircle className="loading__bar" size={20} /> : 'Log In'}
+          </Button>
+        </FormGroup>
+
+        <FormGroup aria-label="position" row>
+          <Button
+            variant="outlined"
+            color="primary"
+            name="customer"
+            className={cx(classes.btn, 'customer')}
+            onClick={handleSubmit}>
+            비회원 접속
           </Button>
         </FormGroup>
 
@@ -168,13 +196,24 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginBottom: 15,
   },
-  loginBtn: {
+  btn: {
+    display: 'inline-block',
     width: `300px`,
     margin: 'auto',
-    height:'40px',
-    background: `${color.blue}`,
+    height: '40px',
+    border: `1px solid ${color.blue}`,
     '&:hover': {
-      background: `${color.blue_hover}`
+      border: `1px solid ${color.blue}`,
+    },
+    '&.login': {
+      background: `${color.blue}`,
+      '&:hover': {
+        background: `${color.blue_hover}`
+      },
+    },
+    '&.customer': {
+      marginTop: 10,
+      color: `${color.blue}`,
     }
   },
   input: {
@@ -204,7 +243,7 @@ const Styled = {
       margin-top:20px;
     }
     .form__link_btn{
-      color:#2D9D8D;
+      color:${color.blue};
       font-size:16px;
       &:hover{
         text-decoration:underline;
@@ -235,6 +274,9 @@ const Styled = {
       position:relative;
       top:5px;
       margin-left:5px;
+    }
+    .btn__box{
+      text-align:center;
     }
 
     .MuiInputLabel-root.Mui-focused{

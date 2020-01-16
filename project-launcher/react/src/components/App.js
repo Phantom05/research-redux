@@ -6,7 +6,7 @@ import reset from "styled-reset";
 import {PrivateRoute,LRoute} from 'components/base/route';
 
 import Core from 'containers/base/Core';
-import {FullScreenLoading} from 'components/base/loading';
+// import {FullScreenLoading} from 'components/base/loading';
 import {
   Home,
   Auth,
