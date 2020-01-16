@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import {useImmer} from 'use-immer';
 import cx from 'classnames';
@@ -17,16 +17,15 @@ function DashboardTemplate({  nav, header, children }) {
   const headerRef = useRef();
   const childrenRef = useRef();
   
-  const [value,setValue] = useImmer({
-    loading:false
-  })
+
   const [cSize, setCSize] = useImmer({
     header   : { x: null, y: null },
     nav      : { x: null, y: null },
     children : { x: null, y: null },
   });
 
-  useEffect(() => {
+
+  useLayoutEffect(()=>{
     if(navRef.current){
       setCSize(draft=>{
         draft.header   = getSize(headerRef.current);
@@ -34,21 +33,16 @@ function DashboardTemplate({  nav, header, children }) {
         draft.children = getSize(childrenRef.current);
       })
     }
-    setValue(draft=>{
-      draft.loading = true
-    });
-    console.log('son use effect');
-  }, []);
-  console.log('render');
-  console.log(navRef);
+  },[])
+
   return (
     <Stlyed.DashboardTemplate {...cSize}>
       {header &&
-        <div className={cx('DashboardTemplate__header',{load:value.loading})} children={header} ref={headerRef} />}
+        <div className={cx('DashboardTemplate__header')} children={header} ref={headerRef} />}
       {nav &&
-        <div className={cx('DashboardTemplate__nav',{load:value.loading})} children={nav} ref={navRef} />}
+        <div className={cx('DashboardTemplate__nav')} children={nav} ref={navRef} />}
       {children && 
-        <div className={cx('DashboardTemplate__main',{load:value.loading})} children={children} ref={childrenRef} />
+        <div className={cx('DashboardTemplate__main')} children={children} ref={childrenRef} />
       }
     </Stlyed.DashboardTemplate>
   );
@@ -80,7 +74,7 @@ const Stlyed = {
       height:${props=>props.header.y ?`calc(100% - ${props.header.y}px)`:'100%' };
     }
     .DashboardTemplate__main{
-      opacity:0;
+      /* opacity:0; */
       &.load{
         opacity:1;
         

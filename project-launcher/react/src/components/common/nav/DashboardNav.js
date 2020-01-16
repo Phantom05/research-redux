@@ -24,7 +24,7 @@ const Styled ={
     width:220px;
     border:1px solid red;
     padding-top:50px;
-    background:white;
+    /* background:white; */
     @media screen and (max-width:${device.pc}){
       /* width:100vh; */
     }
