@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {font,color} from 'styles/__utils';
+import { font, color } from 'styles/__utils';
 import { makeStyles } from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
@@ -28,7 +28,7 @@ function CreateCase(props) {
 
   const [values, setValues] = useState({
     patient: '',
-    date:''
+    date: '',
   });
 
   const handleChange = prop => event => {
@@ -43,8 +43,8 @@ function CreateCase(props) {
 
   return (
     <Styled.CreateCase>
-      <Grid container>
-        <Grid item xs> 
+      <Grid container className="CreateCase__row">
+        <Grid item xs>
           <span className="CreateCase__title">Case ID </span>
         </Grid>
         <Grid item xs={6}> 20200120_clinic_Alice_01 </Grid>
@@ -63,20 +63,19 @@ function CreateCase(props) {
         </Grid>
       </Grid>
 
-      <Grid container>
-        <Grid item xs> 
+      <Grid container className="CreateCase__row">
+        <Grid item xs>
           <span className="CreateCase__title">Patient</span>
         </Grid>
         <Grid item xs={6}>
-
-        <OutlinedInput
+          <OutlinedInput
             value={values.patient}
             onChange={handleChange('patient')}
             labelWidth={0}
             className="CreateCase_input patient"
           />
-
         </Grid>
+        
         <Grid item xs={3} className="CreateCase__button_col">
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justify="space-around">
@@ -87,9 +86,6 @@ function CreateCase(props) {
                 id="date-picker-inline"
                 // label="Due Date"
                 value={selectedDate}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
                 inputVariant="outlined"
                 onChange={handleDateChange}
                 className="CreateCase_input date"
@@ -99,12 +95,12 @@ function CreateCase(props) {
         </Grid>
       </Grid>
 
-      <Grid container>
-        <Grid item xs> 
+      <Grid container className="CreateCase__row">
+        <Grid item xs>
           <span className="CreateCase__title">기공소</span>
         </Grid>
         <Grid item xs={6}>
-        새하얀하얀하얀 기공소
+          새하얀하얀하얀 기공소
         </Grid>
         <Grid item xs={3} className="CreateCase__button_col">
           <input
@@ -121,16 +117,15 @@ function CreateCase(props) {
         </Grid>
       </Grid>
 
-
     </Styled.CreateCase>
   );
 }
 
-const Styled={
-  CreateCase:styled.div`
+const Styled = {
+  CreateCase: styled.div`
     .CreateCase__title{
       display:inline-block;
-      ${font(18,color.black_font)};
+      ${font(18, color.black_font)};
       font-weight:600;
     }
     .CreateCase__button_col{
@@ -139,6 +134,9 @@ const Styled={
     .CreateCase__button{
       background:${color.blue};
       color:white;
+      &:hover{
+        background:${color.blue_hover};
+      }
     }
     .CreateCase_input{
       &.patient{
@@ -150,7 +148,12 @@ const Styled={
       }
       &.date input{
         padding:10px 15px;
+        ${font(14, color.grayFont)}
       }
+    }
+    .CreateCase__row{
+      height:50px;
+      border:1px solid red;
     }
   `
 }

@@ -4,7 +4,9 @@ import {CreateCase} from 'components/common/case';
 function CaseContainer(props) {
   return (
     <div>
-      <CreateCase />
+      <CreateCase 
+      
+      />
     </div>
   );
 }
