@@ -83,7 +83,7 @@ const Styled = {
           clear: both;
           left:0;
           top:0;
-          width:3px;
+          width:5px;
           height:100%;
           background:${color.blue_week};
         }

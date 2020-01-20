@@ -9,6 +9,7 @@ function Case(props) {
     <DashboardTemplate
       nav={<DashboardNav />}
       title="Create A New Case"
+      rightSpace={<span>Hello world</span>}
     >
       <CaseContainer />
     </DashboardTemplate>
