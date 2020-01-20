@@ -1,15 +1,14 @@
-import React,{useEffect} from 'react';
-import {DashboardNav} from 'components/common/nav';
+import React from 'react';
 import {DashboardTemplate} from 'components/base/template';
 import {CaseContainer} from 'containers/case';
-import {useImmer} from 'use-immer';
+import {NavContainer} from 'containers/nav';
 
 function Case(props) {
   return (
     <DashboardTemplate
-      nav={<DashboardNav />}
+      nav={<NavContainer type="dashboard" />}
       title="Create A New Case"
-      rightSpace={<span>Hello world</span>}
+      rightSpace={<NavContainer type="executor" />}
     >
       <CaseContainer />
     </DashboardTemplate>

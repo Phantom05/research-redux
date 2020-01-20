@@ -1,13 +1,14 @@
 import React from 'react';
-import {DashboardNav} from 'components/common/nav';
 import {DashboardTemplate} from 'components/base/template';
 import {MyPageContainer } from 'containers/mypage'
+import {NavContainer} from 'containers/nav';
 
 function Mypage(props) {
   return (
     <DashboardTemplate 
-      nav={<DashboardNav/>} 
+      nav={<NavContainer type="dashboard"/>} 
       title="My Page"
+      rightSpace={<NavContainer type="executor"/>}
     >
       <MyPageContainer />
     </DashboardTemplate>

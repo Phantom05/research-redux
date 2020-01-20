@@ -1,14 +1,16 @@
 import React from 'react';
-import {DashboardNav} from 'components/common/nav';
 import {DashboardTemplate} from 'components/base/template';
 import {WorkContainer} from 'containers/works';
+import {NavContainer} from 'containers/nav';
 
 function Works(props) {
   return (
     <DashboardTemplate 
-      nav={<DashboardNav/>} 
+      nav={<NavContainer type="dashboard" />}
       title="Works"
+      rightSpace={<NavContainer type="executor"/>}
     >
+      
       <WorkContainer />
     </DashboardTemplate>
   );

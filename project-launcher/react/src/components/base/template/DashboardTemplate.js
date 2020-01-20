@@ -49,7 +49,7 @@ function DashboardTemplate({className,  nav, header, children,title,rightSpace }
         </div>
       }
       {rightSpace && 
-              <div className={cx("DashboardTemplate__rightSpace")} children={rightSpace} ref={rightSpaceRef} />}
+          <div className={cx("DashboardTemplate__rightSpace")} children={rightSpace} ref={rightSpaceRef} />}
       
     </Styled.DashboardTemplate>
   );
@@ -76,7 +76,7 @@ const Styled = {
     }
     .DashboardTemplate__main{
       ${({header})=>header.y && `margin-top:${header.y}px; height:calc(100% - ${header.y}px)`}
-      ${({nav,rightSpace})=>nav.x && `margin-left:${nav.x}px; width:calc(100% - ${(rightSpace.x?rightSpace.x:0) + nav.x}px)`};
+      ${({nav,rightSpace})=>nav.x && `margin-left:${nav.x}px; width:calc(100% - ${(rightSpace.x?rightSpace.x:0) + nav.x +2}px)`};
       ${({rightSpace})=> `padding:${rightSpace.x?'30px 0 30px 30px':'30px'}`}
       &:after{
         display:block;
@@ -105,7 +105,8 @@ const Styled = {
       }
     }
     .DashboardTemplate__rightSpace{
-      display:inline-block;
+      /* display:inline-block; */
+      float:left;
     }
     .DashboardTemplate__children{
       border-radius:10px;
