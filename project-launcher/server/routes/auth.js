@@ -11,6 +11,7 @@ var log = console.log;
  * ROUTER: Login
  */
 router.post('/login', function(req, res, next) {
+  console.clear();
   console.log('login');
   console.log(req.body);
   const {email,password} = req.body;

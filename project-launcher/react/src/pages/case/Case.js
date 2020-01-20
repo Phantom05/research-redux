@@ -8,6 +8,7 @@ function Case(props) {
   return (
     <DashboardTemplate
       nav={<DashboardNav />}
+      title="Create A New Case"
     >
       <CaseContainer />
     </DashboardTemplate>

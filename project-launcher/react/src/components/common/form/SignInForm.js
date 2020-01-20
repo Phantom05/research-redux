@@ -78,6 +78,7 @@ function SignInForm({ onSubmit, error, pending,info }) {
   return (
     <Styled.SignInForm>
       <h1 className="signin__title">DOF Launcher</h1>
+      
       {ENV_MODE_DEV && <div>
         <Button
           variant="contained"
@@ -234,6 +235,7 @@ const useStyles = makeStyles(theme => ({
 const Styled = {
   SignInForm: styled.div`
     width:400px;
+
     .form__group{
       ${floatClear}
     }
@@ -289,9 +291,6 @@ const Styled = {
     .MuiCheckbox-colorPrimary.Mui-checked{
       color:${color.blue}
     }
-
-
-
 
 
   `

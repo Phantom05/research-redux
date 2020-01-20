@@ -9,6 +9,7 @@ let initialState = {
     isAutheticated: false,
     authCount:0,
     token:'',
+    grade:0,
     profile:{},
   },
   signOut:{
@@ -27,6 +28,7 @@ export default handleActions({
       signIn.pending = true;
       signIn.isAutheticated = false;
       signIn.token='';
+      signIn.grade = 0;
     })
   },
   [actions.AUTH_SIGNIN.SUCCESS]: (state, { payload: diff }) => {
@@ -36,6 +38,7 @@ export default handleActions({
       signIn.isAutheticated = true;
       signIn.token = diff.token;
       signIn.profile = diff.profile;
+      signIn.grade = 1;
     })
   },
   [actions.AUTH_SIGNIN.FAILURE]: (state, { payload: diff }) => {
@@ -45,6 +48,7 @@ export default handleActions({
       signIn.isAutheticated = false;
       signIn.token='';
       signIn.authCount+=1;
+      signIn.grade = 0;
     })
   },
   
@@ -55,6 +59,7 @@ export default handleActions({
       console.log('logout pending');
       const {signOut} = draft;
       signOut.pending = true;
+      
     })
   },
   [actions.AUTH_SIGNOUT.SUCCESS]: (state, { payload: diff }) => {
@@ -70,6 +75,7 @@ export default handleActions({
       signIn.token='';
       signIn.authCount=0;
       signIn.profile={};
+      signIn.grade = 0;
     })
   },
   [actions.AUTH_SIGNOUT.FAILURE]: (state, { payload: diff }) => {
@@ -78,7 +84,7 @@ export default handleActions({
       const {signOut} = draft;
       signOut.pending = false;
       signOut.failure = true;
-      signOut.success = false
+      signOut.success = false;
     })
   },
 

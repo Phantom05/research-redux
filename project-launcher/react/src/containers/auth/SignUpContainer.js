@@ -16,10 +16,7 @@ function SignUpContainer(props) {
   }, [isAutheticated])
 
   return (
-    !storage.get(keys.token) &&
-    <AuthTemplate
-      children={<SignUpForm />}
-    />
+    <SignUpForm />
   );
 }
 

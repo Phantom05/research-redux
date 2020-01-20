@@ -35,6 +35,7 @@ class Core extends Component {
   }
   
   render() {
+    console.log(this,'core');
     return(<FullScreenLoading visible={this.props.landing}/>)
   }
 }

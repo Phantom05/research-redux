@@ -36,10 +36,8 @@ export const font = (size=14,color='black') => {
   color: ${color};
   font-size: ${size}px;
   font-family:sans-serif;
-  & :hover{
-     color: $clr;
-  } 
-  @content;
+  & :hover{ color: $clr; } 
+  /* @content; */
   `;
 }
 

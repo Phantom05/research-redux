@@ -8,6 +8,7 @@ function PrivateRoute({component:Component,...rest}) {
   const {auth,base} = useSelector(state=>state);
   const {signIn} = auth;
   const {landing} = base;
+  const isRedirect = rest.redirect;
 
   return (
     <Route {...rest} render={props=>{
@@ -15,7 +16,9 @@ function PrivateRoute({component:Component,...rest}) {
         return <FullScreenLoading visible={true}/>
       }else if(!signIn.isAutheticated){
         return <Redirect to={rest.to? rest.to : '/auth/signin'}/>
-      }else {
+      }else if(rest.redirect){
+        return <Redirect to={isRedirect}/>
+      }else{
         return <Component {...props}/>
       }
     }} />
