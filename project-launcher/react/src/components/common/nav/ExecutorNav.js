@@ -2,12 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { color } from 'styles/__utils';
 import { icon_plus } from 'components/base/images';
+import {PlainDim} from 'components/common/dim';
+import { useImmer } from "use-immer";
 
 function ExecutorNav(props) {
+  const [value,setValue] = useImmer({
+    dim:false
+  });
+
+
   return (
     <Styled.ExecutorNav>
-      <div className="executor__menu_box">
-        <span className="menu__icon_con">
+      {/* <PlainDim  view={value.dim} /> */}
+      <div className="dim"></div>
+      <div className="executor__menu_box" >
+        <span className="menu__icon_con" >
           <div className="menu__icon_box">
             <img src={icon_plus} alt="icon_plus" className="menu__icon" />
           </div>
