@@ -1,6 +1,7 @@
 import {css} from 'styled-components';
 import {_color,_deviceSize} from 'styles/__common';
 
+
 export const color = _color;
 export const device = _deviceSize;
 
@@ -35,7 +36,7 @@ export const font = (size=14,color='black') => {
   return css`
   color: ${color};
   font-size: ${size}px;
-  font-family:sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   & :hover{ color: $clr; } 
   /* @content; */
   `;

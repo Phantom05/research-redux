@@ -11,7 +11,7 @@ function makeConnectView(state){
 
 function DashboardNavProfile({ title, email, connectState, image, alert }) {
   const alertIcon = alert && <span className="alert_icon">
-    <img src={icon_alert}/>
+    <img src={icon_alert} alt="alert icon"/>
   </span>;
   const profileImage = image ?image:icon_unlogged_person;
   const connectObj = {

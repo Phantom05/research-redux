@@ -23,18 +23,20 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
+
 function SignInForm({ onSubmit, error, pending,info }) {
   const classes = useStyles();
   const [values, setValues] = useImmer({
     email: '',
     password: '',
     showPassword: false,
-    remember: false
+    remember: true,
+    auto:false,
   });
   const { email: errorEmail, password: errorPassword } = error;
 
   const handleChange = prop => event => {
-    const inputType = prop ==='remember'?'checked':'value';
+    const inputType = (prop ==='remember' || prop ==='auto')?'checked':'value';
     const targetValue = event.target[inputType];
     setValues(draft => {
       draft[prop] = targetValue
@@ -65,6 +67,7 @@ function SignInForm({ onSubmit, error, pending,info }) {
     })
   };
 
+  // 마지막 로그인시 저장해둔 storage email값 가져오기 키이름은 remember
   useEffect(()=>{
     const getRemember = storage.get(keys.remember);
     if(getRemember){
@@ -73,12 +76,11 @@ function SignInForm({ onSubmit, error, pending,info }) {
         draft.remember = true;
       });
     }
-  },[])
+  },[]);
 
   return (
     <Styled.SignInForm>
       <h1 className="signin__title">DOF Launcher</h1>
-      
       {ENV_MODE_DEV && <div>
         <Button
           variant="contained"
@@ -135,17 +137,25 @@ function SignInForm({ onSubmit, error, pending,info }) {
         <FormGroup aria-label="position" row className="form__cash_box">
           <Grid container justify="space-between">
             <Grid item xs={6}>
-              <FormControlLabel
+            <FormControlLabel
+                value="auto"
+                checked={values.auto}
+                control={<Checkbox color="primary" />}
+                onChange={handleChange('auto')}
+                label={<span className="remember_label">Auto Login</span>}
+                labelPlacement="end"
+              />
+              {/* <FormControlLabel
                 value="remember"
                 checked={values.remember}
                 control={<Checkbox color="primary" />}
                 onChange={handleChange('remember')}
                 label={<span className="remember_label">Remember me</span>}
                 labelPlacement="end"
-              />
+              /> */}
             </Grid>
             <Grid item xs={6}>
-              <Link to="/" className="form__cash_tx">Forget password</Link>
+              <Link to="/auth/reset/password" className="form__cash_tx">Forget password</Link>
             </Grid>
           </Grid>
         </FormGroup>
@@ -195,7 +205,7 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     width: '100%',
-    marginBottom: 15,
+    marginBottom: 25,
   },
   btn: {
     display: 'inline-block',

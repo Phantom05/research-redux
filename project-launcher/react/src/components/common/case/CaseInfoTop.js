@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import { font, color } from 'styles/__utils';
 import { makeStyles } from '@material-ui/core/styles';
 
-import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import DateFnsUtils from '@date-io/date-fns';
+import {PlainTooltip} from 'components/common/tooltip';
+// import TextField from '@material-ui/core/TextField';
+// import Input from '@material-ui/core/Input';
+// import { Tooltip } from '@material-ui/core';
+
 
 import {
   MuiPickersUtilsProvider,
@@ -25,7 +28,9 @@ const useStyles = makeStyles(theme => ({
 function CaseInfoTop(props) {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(new Date());
-
+  const {caseId,partner} = props;
+  const partnerTooltipText = `My Page의 Partners에서 특정 기공소를 등록할 수 있습니다. 
+  등록된 기공소가 기본으로 선택되며, 추가 등록을 통해 여러 기공소와 협력할 수 있습니다.`
   const [values, setValues] = useState({
     patient: '',
     date: '',
@@ -40,21 +45,6 @@ function CaseInfoTop(props) {
     setValues({ ...values, date: selectedDate });
   };
   console.log(values);
-  
-
-  let temp;
-  const array = [10,5,4,7,9,6,8,2,1];
-  for(let i =0 ; i < array.length; i++){
-    for(let j = 0 ; j < array.length - (i+1); j++){
-      if(array[j] > array[j+1]){
-        temp = array[j];
-        array[j] = array[j+1];
-        array[j+1] = temp;
-      }
-    }
-  }
-  console.log(array);
-
 
   return (
     <Styled.CreateCase>
@@ -62,7 +52,9 @@ function CaseInfoTop(props) {
         <Grid item xs>
           <span className="CreateCase__title">Case ID </span>
         </Grid>
-        <Grid item xs={6}> 20200120_clinic_Alice_01 </Grid>
+        <Grid item xs={6}> 
+          <p className="CreateCase__text">{caseId}</p>
+        </Grid>
         <Grid item xs={3} className="CreateCase__button_col">
           <input
             accept="image/*"
@@ -80,7 +72,9 @@ function CaseInfoTop(props) {
 
       <Grid container className="CreateCase__row">
         <Grid item xs>
-          <span className="CreateCase__title">Patient</span>
+          <span className="CreateCase__title">
+            Patient
+            </span>
         </Grid>
         <Grid item xs={6}>
           <OutlinedInput
@@ -112,10 +106,17 @@ function CaseInfoTop(props) {
 
       <Grid container className="CreateCase__row">
         <Grid item xs>
-          <span className="CreateCase__title">기공소</span>
+          <span className="CreateCase__title">
+            <span className="title__text">Partner</span>
+            <PlainTooltip
+              type="help" 
+              title={partnerTooltipText} 
+              placement="right-start"
+            />
+          </span>
         </Grid>
         <Grid item xs={6}>
-          새하얀하얀하얀 기공소
+          <p className="CreateCase__text">{partner}</p>
         </Grid>
         <Grid item xs={3} className="CreateCase__button_col">
           <input
@@ -141,7 +142,10 @@ const Styled = {
     .CreateCase__title{
       display:inline-block;
       ${font(18, color.black_font)};
-      font-weight:600;
+      font-weight:500;
+    }
+    .title__text{
+      margin-right:5px;
     }
     .CreateCase__button_col{
       text-align:right;
@@ -168,7 +172,11 @@ const Styled = {
     }
     .CreateCase__row{
       height:50px;
-      border:1px solid red;
+      line-height:50px;
+    }
+    .CreateCase__text{
+      position:relative;
+      ${font(16,color.gray_font)};
     }
   `
 }

@@ -1,9 +1,7 @@
 import React,{useState} from 'react';
 import styled from 'styled-components';
-import {color,font} from 'styles/__utils';
+import {color} from 'styles/__utils';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Backdrop from '@material-ui/core/Backdrop';
 import cx from 'classnames';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import {useImmer} from 'use-immer';
@@ -28,9 +26,11 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
+    transition:0
   },
   tooltip:{
-    fontSize:12
+    fontSize:12,
+    padding:5
   }
 }));
 
@@ -44,13 +44,13 @@ const actions = [
 
 function ExecutorNav(props) {
   const classes = useStyles();
-  const [hidden, setHidden] = useState(false);
+  const [hidden] = useState(false);
   const [dialIconList, setDialIconList] = useImmer(actions);
   const {isOpen,handleToggle} = props;
   
-  const handleVisibility = () => {
-    setHidden(prevHidden => !prevHidden);
-  };
+  // const handleVisibility = () => {
+  //   setHidden(prevHidden => !prevHidden);
+  // };
 
   const onToggle = ()=>{
     handleToggle()
@@ -69,6 +69,7 @@ function ExecutorNav(props) {
     {/* <Button onClick={handleVisibility}>Toggle Speed Dial</Button> */}
     <SpeedDial
       // onClick={(e)=>onToggle(e,'dial')}
+      transitionDuration={0}
       ariaLabel="SpeedDial tooltip example"
       className={classes.speedDial}
       hidden={hidden}
@@ -103,8 +104,10 @@ const Styled ={
       height:40px;
     }
     
+    
     .MuiButtonBase-root.MuiFab-root.MuiSpeedDial-fab.MuiFab-primary{
       background:${color.blue};
+      
     }
     .MuiSvgIcon-root.MuiSpeedDialIcon-icon{
       font-size:40px;
@@ -116,6 +119,11 @@ const Styled ={
     }
     .speedDialAction__icon{
       transition:.3s;
+      /* background:black; */
+      /* color:white; */
+      &:hover{
+        /* background:${color.blue}; */
+      }
       &.active{
         background:${color.blue};
         color:white;

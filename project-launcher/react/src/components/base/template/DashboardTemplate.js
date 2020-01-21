@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useRef,  useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import {useImmer} from 'use-immer';
 import cx from 'classnames';
-import {device,color,font} from 'styles/__utils';
+import {color,font} from 'styles/__utils';
 
 function getSize(target) {
   if (target) {
@@ -12,7 +12,7 @@ function getSize(target) {
   return { x: null, y: null }
 }
 
-function DashboardTemplate({className,  nav, header, children,title,rightSpace }) {
+function DashboardTemplate({  nav, header, children,title,rightSpace }) {
   const navRef      = useRef();
   const headerRef   = useRef();
   const childrenRef = useRef();
@@ -58,7 +58,12 @@ function DashboardTemplate({className,  nav, header, children,title,rightSpace }
 const Styled = {
   DashboardTemplate: styled.div`
   ${({bg})=> bg && `background:${bg}`};
-  height:100vh;
+  min-height:100vh;
+  &:after{
+    display:block;
+    content:'';
+    clear: both;
+  }
 
   .DashboardTemplate__header{
       position:fixed;
@@ -72,7 +77,7 @@ const Styled = {
       position:fixed;
       left:0;
       top:${({header})=>header.y ? header.y:0 }px;
-      height:${({header})=>header.y ?`calc(100% - ${header.y}px)`:'100%' };
+      min-height:${({header})=>header.y ?`calc(100% - ${header.y}px)`:'100%' };
     }
     .DashboardTemplate__main{
       ${({header})=>header.y && `margin-top:${header.y}px; height:calc(100% - ${header.y}px)`}
@@ -83,7 +88,7 @@ const Styled = {
         content:"";
         clear: both;
       }
-      height:100vh;
+      min-height:100vh;
       float:left;
     }
     .DashboardTemplate__title{
@@ -100,7 +105,7 @@ const Styled = {
         left:0;
         top:0;
         width:5px;
-        height:100%;
+        min-height:100%;
         background:${color.blue_week};
       }
     }

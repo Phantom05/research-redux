@@ -7,7 +7,7 @@ import icon_mypage_person from 'static/icons/icon_mypage_person.svg';
 import icon_works_box from 'static/icons/icon_works_box.svg';
 import icon_plus from 'static/icons/icon_plus.svg';
 import icon_test_teeth_module from 'static/icons/icon_test_teeth_module.svg';
-
+import icon_alert_big from 'static/icons/icon_alert_big.svg';
 
 
 export {
@@ -18,6 +18,7 @@ export {
   icon_works_box,
   icon_plus,
   icon_test_teeth_module,
+  icon_alert_big,
 }
 
 

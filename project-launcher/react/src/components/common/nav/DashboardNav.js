@@ -1,17 +1,58 @@
-import React, { useRef } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React from 'react';
+import {  NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { DashboardNavProfile } from 'components/common/nav';
 import { device } from 'styles/__utils';
 import { color, font } from 'styles/__utils';
+import cx from 'classnames';
+import {useImmer} from 'use-immer';
 import {
   icon_case_teeth,
   icon_mypage_person,
-  icon_works_box} 
+  icon_works_box,
+  icon_alert_big} 
 from  'components/base/images';
 
-
+const menuList = [
+  {
+    id:0,
+    title:'Home',
+    icon:icon_case_teeth,
+    link:'/home',
+    hidden:true
+  },
+  {
+    id:1,
+    title:'Case',
+    icon:icon_case_teeth,
+    link:'/case',
+    hidden:false
+  },
+  {
+    id:2,
+    title:'Works',
+    icon:icon_works_box,
+    link:'/works',
+    hidden:false
+  },
+  {
+    id:3,
+    title:'Message',
+    icon:icon_alert_big,
+    link:'/alert/list',
+    hidden:false
+  },
+  {
+    id:4,
+    title:'My Page',
+    icon:icon_mypage_person,
+    link:'/mypage',
+    hidden:false
+  },
+];
 function DashboardNav(props) {
+  const [navList] = useImmer(menuList);
+
   return (
     <Styled.DashboardNav>
       <DashboardNavProfile
@@ -23,50 +64,56 @@ function DashboardNav(props) {
       />
 
       <div className="DashboardNav__link_con">
-        {/* <div className="DashboardNav__link box">
-          <NavLink to="/home" className="DashboardNav__link an">Home</NavLink>
-        </div> */}
-        <div className="DashboardNav__link box">
-          <NavLink to="/case" className="DashboardNav__link an">
+        {navList.map(item=>{
+          return <div className={cx('DashboardNav__link box',{hidden:item.hidden})} key={item.id}>
+          <NavLink to={item.link} className="DashboardNav__link an">
             <span className="DashboardNav_icon_box DashboardNav_item_box">
-              <img src={icon_case_teeth} alt="nav icon" className="DashboardNav_icon"/>
+              <img src={item.icon} alt="nav icon" className="DashboardNav_icon"/>
             </span>
-            <span className="DashboardNav__text DashboardNav_item_box">Case</span>
+          <span className="DashboardNav__text DashboardNav_item_box">{item.title}</span>
           </NavLink>
-        </div>
-        <div className="DashboardNav__link box">
-          <NavLink to="/works" className="DashboardNav__link an">
-            <span className="DashboardNav_icon_box DashboardNav_item_box">
-              <img src={icon_mypage_person} alt="nav icon" className="DashboardNav_icon"/>
-            </span>
-            <span className="DashboardNav__text DashboardNav_item_box">Work</span>
-          </NavLink>
-        </div>
-        <div className="DashboardNav__link box">
-          <NavLink to="/mypage" className="DashboardNav__link an">
-            <span className="DashboardNav_icon_box DashboardNav_item_box">
-              <img src={icon_works_box} alt="nav icon" className="DashboardNav_icon"/>
-            </span>
-            <span className="DashboardNav__text DashboardNav_item_box">My Page</span>
-          </NavLink>
-        </div>
-        <div className="DashboardNav__link box">
-          <NavLink to="/auth/signout" className="DashboardNav__link an" >Logout</NavLink>
-        </div>
+          </div>
+        })}
+
+
       </div>
+
+      <div className="DashboardNav__link box logout">
+        <NavLink to="/auth/signout" className="DashboardNav__link an" >Logout</NavLink>    
+      </div>
+      
     </Styled.DashboardNav>
   );
 }
 
 const Styled = {
   DashboardNav: styled.nav`
+    position:relative;
     width:220px;
-    height:100%;
+    min-height:100vh;
     padding-top:50px;
     background:white;
     .DashboardNav__link{
       display:block;
       padding:0 10px;
+      &.hidden{
+        display:none;
+      }
+      &.logout{
+        position:absolute;
+        bottom:10px;
+        left:50%;
+        transform:translateX(-50%);
+        width:100px;
+        border-radius:30px;
+        border:2px solid ${color.blue};
+        &  a{
+          padding:7px 15px;
+          ${font(14,color.black)};
+          font-weight:500;
+          
+        }
+      }
     }
     .DashboardNav__link_con{
       margin-top:40px;

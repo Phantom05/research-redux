@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 
 function PlainHeader(props) {
-  const { auth: authReducer, base: baseReducer } = useSelector(state => state);
+  const { auth: authReducer } = useSelector(state => state);
   const { signIn } = authReducer;
   const { isAutheticated } = signIn;
 
