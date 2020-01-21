@@ -7,6 +7,9 @@ export const BASE_ENTER_LANDING = 'base/BASE_ENTER_LANDING';
 export const base_exit_landing  = createAction(BASE_EXIT_LANDING);
 export const base_enter_landing = createAction(BASE_ENTER_LANDING);
 
+export const COMMON_EXECUTOR_NAV = 'common/COMMON_EXECUTOR_NAV';
+export const common_executor_nav = createAction(COMMON_EXECUTOR_NAV);
+
 
 export const AUTH_TOKEN       = makeAsyncActions('signin/AUTH_TOKEN');
 export const AUTH_TOKEN_SAGAS = makeAsyncCreateActions(AUTH_TOKEN)(API.postToken);
@@ -16,3 +19,5 @@ export const AUTH_SIGNIN_SAGAS = makeAsyncCreateActions(AUTH_SIGNIN)(API.postSig
 
 export const AUTH_SIGNOUT       = makeAsyncActions('signout/AUTH_SIGNOUT');
 export const AUTH_SIGNOUT_SAGAS = makeAsyncCreateActions(AUTH_SIGNOUT)(API.postSignOut);
+
+

@@ -7,7 +7,7 @@ function Case(props) {
   return (
     <DashboardTemplate
       nav={<NavContainer type="dashboard" />}
-      title="Create A New Case"
+      title="Case"
       rightSpace={<NavContainer type="executor" />}
     >
       <CaseContainer />

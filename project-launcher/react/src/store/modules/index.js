@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import auth from './auth';
 import base from './base';
+import common from './common';
 // import home from './home';
 // import user from './user';
 // import stage from './stage';
@@ -16,10 +17,11 @@ import base from './base';
 
 export default combineReducers({
   base,
+  common,
+  auth,
   // ws,
   // listing,
   // setting,
-  auth,
   // home,
   // window,
   // user,

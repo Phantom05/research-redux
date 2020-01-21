@@ -1,15 +1,12 @@
-// import React from 'react';
-// import styled from 'styled-components';
-// import { color } from 'styles/__utils';
-// import { icon_plus } from 'components/base/images';
-// import {PlainDim} from 'components/common/dim';
-// import { useImmer } from "use-immer";
-
-import React from 'react';
+import React,{useState} from 'react';
+import styled from 'styled-components';
+import {color,font} from 'styles/__utils';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Backdrop from '@material-ui/core/Backdrop';
+import cx from 'classnames';
 import SpeedDial from '@material-ui/lab/SpeedDial';
+import {useImmer} from 'use-immer';
 
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
@@ -22,7 +19,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width:200,
+    width:100,
     height: 380,
     transform: 'translateZ(0px)',
     flexGrow: 1,
@@ -32,55 +29,109 @@ const useStyles = makeStyles(theme => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
+  tooltip:{
+    fontSize:12
+  }
 }));
 
 const actions = [
-  { icon: <FileCopyIcon />, name: 'SNAP Scan' },
-  { icon: <SaveIcon />, name: 'Smile Design' },
-  { icon: <PrintIcon />, name: 'Scan App' },
-  { icon: <ShareIcon />, name: 'IOS' },
-  { icon: <FavoriteIcon />, name: 'Design Platform' },
+  { icon: <FileCopyIcon />, name: 'SNAP Scan' ,isActive:false},
+  { icon: <SaveIcon />, name: 'Smile Design' ,isActive:false},
+  { icon: <PrintIcon />, name: 'Scan App' ,isActive:false},
+  { icon: <ShareIcon />, name: 'IOS' ,isActive:false},
+  { icon: <FavoriteIcon />, name: 'Design Platform' ,isActive:false},
 ];
 
-function ExecutorNav() {
+function ExecutorNav(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [hidden, setHidden] = React.useState(false);
-
+  const [hidden, setHidden] = useState(false);
+  const [dialIconList, setDialIconList] = useImmer(actions);
+  const {isOpen,handleToggle} = props;
+  
   const handleVisibility = () => {
     setHidden(prevHidden => !prevHidden);
   };
 
-  const handleToggle = () => {
-    setOpen(!open);
+  const onToggle = ()=>{
+    handleToggle()
+  }
+
+  const handleClickDialItem = (value) => {
+    setDialIconList(draft=>{
+      draft.forEach(item=> item.isActive = false)
+      draft.find(item=>item.name === value).isActive = true;
+    });
   };
 
   return (
+    <Styled.ExecutorNav>
     <div className={classes.root}>
     {/* <Button onClick={handleVisibility}>Toggle Speed Dial</Button> */}
     <SpeedDial
+      // onClick={(e)=>onToggle(e,'dial')}
       ariaLabel="SpeedDial tooltip example"
       className={classes.speedDial}
       hidden={hidden}
-      icon={<SpeedDialIcon />}
-      onClick={handleToggle}
-      open={open}
+      icon={<SpeedDialIcon className={cx('speedDialIcon')}/>}
+      FabProps = {{onClick:onToggle }}
+      open={isOpen}
       direction="down"
+      className="SpeedDial"
     >
-      {actions.map(action => (
+    {dialIconList.map(action => (
         <SpeedDialAction
           key={action.name}
           icon={action.icon}
-          tooltipTitle={action.name}
-          onClick={handleToggle}
+          className={cx('speedDialAction__icon',{active:action.isActive})}
+          tooltipTitle={<span className={classes.tooltip}>{action.name}</span>}
+          onClick={(e)=>handleClickDialItem(action.name)}
         />
-      ))}
+      ))} 
     </SpeedDial>
+    
   </div>
+  </Styled.ExecutorNav>
   );
 }
 
+const Styled ={
+  ExecutorNav:styled.div`
+    .SpeedDial{
+      margin-top:20px;
+    }
+    .MuiSpeedDialIcon-root{
+      height:40px;
+    }
+    
+    .MuiButtonBase-root.MuiFab-root.MuiSpeedDial-fab.MuiFab-primary{
+      background:${color.blue};
+    }
+    .MuiSvgIcon-root.MuiSpeedDialIcon-icon{
+      font-size:40px;
+    }
+    .MuiFab-sizeSmall{
+      width:50px;
+      height:50px;
+      margin:6px;
+    }
+    .speedDialAction__icon{
+      transition:.3s;
+      &.active{
+        background:${color.blue};
+        color:white;
+      }
+    }
+  `
+}
 
+
+
+// import React from 'react';
+// import styled from 'styled-components';
+// import { color } from 'styles/__utils';
+// import { icon_plus } from 'components/base/images';
+// import {PlainDim} from 'components/common/dim';
+// import { useImmer } from "use-immer";
 
 
 // function ExecutorNav(props) {
