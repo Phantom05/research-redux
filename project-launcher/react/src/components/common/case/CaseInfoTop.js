@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 function CaseInfoTop(props) {
   const classes = useStyles();
-  const {caseId, partner, onChange, date, patient} = props;
+  const {caseId, partner, onChange, date, patient,onClick} = props;
   const partnerTooltipText = `My Page의 Partners에서 특정 기공소를 등록할 수 있습니다. 
   등록된 기공소가 기본으로 선택되며, 추가 등록을 통해 여러 기공소와 협력할 수 있습니다.`;
 
@@ -76,7 +76,11 @@ function CaseInfoTop(props) {
             hidden
           />
           <label htmlFor="contained-button-file" >
-            <Button variant="contained" className="CreateCase__button" component="span">Load</Button>
+            <Button 
+              onClick={()=>onClick('load')}
+              variant="contained" 
+              className="CreateCase__button" 
+              component="span">Load</Button>
           </label>
         </Grid>
       </Grid>

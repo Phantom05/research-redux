@@ -29,6 +29,7 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
+    "react-spring": "^8.0.27",
     "react-toastify": "^5.5.0",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
@@ -41,7 +42,7 @@
   "homepage": ".",
   "scripts": {
     "start": "cross-env NODE_PATH=src react-scripts start",
-    "build": "cross-env NODE_PATH=src react-scripts build",
+    "build": "cross-env NODE_PATH=src react-scripts --max_old_space_size=4096 build",
     "test": "cross-env NODE_PATH=src react-scripts test",
     "eject": "cross-env NODE_PATH=src react-scripts eject"
   },

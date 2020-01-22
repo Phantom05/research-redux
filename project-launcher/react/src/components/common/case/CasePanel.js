@@ -9,11 +9,12 @@ import styled from 'styled-components';
 import cx from 'classnames';
 import { useImmer } from 'use-immer';
 import { TeethModule } from 'components/common/module';
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import CreateIcon from '@material-ui/icons/Create';
 import {color,font} from 'styles/__utils';
 import Button from '@material-ui/core/Button';
+
+
+import {CaseMemo} from 'components/common/case';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,17 +26,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const editorConfiguration = {
-  toolbar: [],
-  width:'100%'
-};
 
 function CasePanel(props) {
   const { type } = props;
   const classes = useStyles();
   const [panel, setPanel] = useImmer({
     indication: {
-      isOpen: true,
+      isOpen: false,
       hidden: false,
       isEdit:false,
     },
@@ -72,6 +69,7 @@ function CasePanel(props) {
 
   return (
     <Styled.CasePanel className={classes.root}>
+
       <hr className="boundery__line"/>
       <ExpansionPanel
         className={cx('panel', { hidden: panel.indication.hidden })}
@@ -91,7 +89,6 @@ function CasePanel(props) {
             />
           </Typography>
         </ExpansionPanelSummary>
-
         <TeethModule />
       </ExpansionPanel>
       <hr className="boundery__line"/>
@@ -103,7 +100,6 @@ function CasePanel(props) {
         <ExpansionPanelSummary
           aria-controls="panel2a-content"
           id="panel2a-header"
-          
           onClick={(e)=>handleClick(e,'sender')}
         >
           <Typography className={classes.heading}>
@@ -114,24 +110,7 @@ function CasePanel(props) {
         <ExpansionPanelDetails>
           {!panel.sender.isEdit 
           ? `${indicationTooltipText}` 
-          : <CKEditor
-              editor={ClassicEditor}
-              config={editorConfiguration}
-              data={`${indicationTooltipText}`}
-              onInit={editor => {
-                console.log('Editor is ready to use!', editor);
-              }}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                console.log({ event, editor, data });
-              }}
-              onBlur={(event, editor) => {
-                console.log('Blur.', editor);
-              }}
-              onFocus={(event, editor) => {
-                console.log('Focus.', editor);
-              }}
-            />
+          : <CaseMemo content={indicationTooltipText}/>
           }
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -149,10 +128,12 @@ function CasePanel(props) {
             <span className="title__text">Recevier's  Memo</span> </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
+
+        {!panel.receiver.isEdit 
+          ? `${indicationTooltipText}` 
+          : <CaseMemo content={indicationTooltipText}/>
+          }
+
         </ExpansionPanelDetails>
       </ExpansionPanel>
 
@@ -181,14 +162,12 @@ const Styled = {
         display:none;
       }
     }
-    .ck.ck-editor{
-      width:100%;
-    }
+
     .MuiPaper-elevation1{
       box-shadow:none
     }
     .boundery__line{
-      border:1px solid ${color.grat_border6};
+      border:.5px solid ${color.grat_border6};
     }
     .title__text{
       ${font(18,color.black)};

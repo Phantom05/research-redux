@@ -19,7 +19,7 @@ function PlainDim(props) {
 const Stlyed={
   PlainDim:styled.div`
       position:fixed;
-      z-index:500000;
+      z-index:501;
       left:0;
       top:0;
       width:100%;

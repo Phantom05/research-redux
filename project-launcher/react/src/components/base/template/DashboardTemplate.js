@@ -70,10 +70,10 @@ const Styled = {
       left:0;
       top:0;
       width:100%;
-      z-index:50000
+      z-index:500
     }
     .DashboardTemplate__nav{
-      z-index:50000;
+      z-index:500;
       position:fixed;
       left:0;
       top:${({header})=>header.y ? header.y:0 }px;
