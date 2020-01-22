@@ -56,14 +56,22 @@ export function regLength(len,value,bool){
     return regExp.test(value)
 }
 
-
+/**
+ * 
+ */
 const st = typeof localStorage === 'object' ? localStorage : {};
+/**
+ * 
+ */
 export const keys = {
   user: '__$$_dof_$$__',
   remember:`__$$_dof_$$__remember`,
   token:'__$$_dof_$$__token'
 };
 
+/**
+ * 
+ */
 export const storage= {
   set(key, value) {
     st[key] = JSON.stringify(value);
@@ -88,6 +96,9 @@ export const storage= {
   },
 };
 
+/**
+ * 
+ */
 class Cookie {
   set(name, value, exp = 1) {
     // set(변수이름, 변수값, 기간(일수));
@@ -130,6 +141,10 @@ class Cookie {
 
 export const cookie = new Cookie()
 
+/**
+ * 
+ * @param {*} target 
+ */
 export function disableDragSelect(target){
   try{
     if(target){
@@ -142,6 +157,9 @@ export function disableDragSelect(target){
   }
 }
 
+/**
+ * 
+ */
 export const getScrollTop = () => {
   if (!document.body) return 0;
   const scrollTop = document.documentElement
@@ -150,6 +168,9 @@ export const getScrollTop = () => {
   return scrollTop;
 };
 
+/**
+ * 
+ */
 export const getScrollBottom = () => {
   if (!document.body) return 0;
   const { scrollHeight } = document.body;
@@ -158,6 +179,9 @@ export const getScrollBottom = () => {
   return scrollHeight - innerHeight - scrollTop;
 };
 
+/**
+ * 
+ */
 export const preventStickBottom = () => {
   const scrollBottom = getScrollBottom();
   if (scrollBottom !== 0) return;
@@ -169,9 +193,28 @@ export const preventStickBottom = () => {
   }
 };
 
+/**
+ * 
+ * @param {*} start 
+ * @param {*} end 
+ */
 export function numRangeMap(start,end){
   return function(num){
     return (num >= start && num <= end)
   }
 }
 
+
+/**
+ * isFocusCurrentTarget
+ * @param {*} param0 e, eventObject
+ */
+export function isFocusCurrentTarget({ relatedTarget, currentTarget }){
+  if (relatedTarget === null) return false;
+  let node = relatedTarget.parentNode;
+  while (node !== null) {
+    if (node === currentTarget) return true;
+    node = node.parentNode;
+  }
+  return false;
+}

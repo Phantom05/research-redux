@@ -44,7 +44,7 @@ const Stlyed ={
       color:inherit;
   }
   *{
-      box-sizing:border-box;
+      box-sizing:border-box !important;
   }
   body{
       font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

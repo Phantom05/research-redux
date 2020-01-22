@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled from 'styled-components';
+import {isFocusCurrentTarget} from 'lib/library';
 import { font, color } from 'styles/__utils';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { useImmer } from 'use-immer';
+import moment  from 'moment';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -21,47 +23,56 @@ import {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // flexGrow: 1,
   },
+  notchedOutline:{
+    '&$cssFocused $notchedOutline': {
+      borderColor: `red !important`,
+    }
+  },
+  cssOutlinedInput:{
+
+  },
+  focused:{
+    borderColor:'black !important' 
+  }
 }));
 
 function CaseInfoTop(props) {
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const {caseId,partner} = props;
+  const {caseId, partner, onChange, date, patient} = props;
   const partnerTooltipText = `My Page의 Partners에서 특정 기공소를 등록할 수 있습니다. 
-  등록된 기공소가 기본으로 선택되며, 추가 등록을 통해 여러 기공소와 협력할 수 있습니다.`
-  const [values, setValues] = useState({
-    patient: '',
-    date: '',
-  });
+  등록된 기공소가 기본으로 선택되며, 추가 등록을 통해 여러 기공소와 협력할 수 있습니다.`;
 
-  const handleChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChange = name => event => {
+    onChange(name,event.target.value)
   };
 
   const handleDateChange = date => {
-    setSelectedDate(date);
-    setValues({ ...values, date: selectedDate });
+    const moDate = moment(date);
+    onChange('date',moDate)
   };
-  console.log(values);
 
+  const handleBlur =  (e) => {
+    if (!isFocusCurrentTarget(e)) {
+      onChange('caseId',patient);
+    }
+  }
   return (
     <Styled.CreateCase>
       <Grid container className="CreateCase__row">
-        <Grid item xs>
+        <Grid item xs={2}>
           <span className="CreateCase__title">Case ID </span>
         </Grid>
         <Grid item xs={6}> 
           <p className="CreateCase__text">{caseId}</p>
         </Grid>
-        <Grid item xs={3} className="CreateCase__button_col">
+        <Grid item xs className="CreateCase__button_col">
           <input
             accept="image/*"
             className={classes.input}
             id="contained-button-file"
             multiple
-            type="file"
+            // type="file"
             hidden
           />
           <label htmlFor="contained-button-file" >
@@ -71,41 +82,56 @@ function CaseInfoTop(props) {
       </Grid>
 
       <Grid container className="CreateCase__row">
-        <Grid item xs>
-          <span className="CreateCase__title">
-            Patient
-            </span>
-        </Grid>
         <Grid item xs={6}>
-          <OutlinedInput
-            value={values.patient}
-            onChange={handleChange('patient')}
-            labelWidth={0}
-            className="CreateCase_input patient"
-          />
-        </Grid>
-
-        <Grid item xs={3} className="CreateCase__button_col">
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container justify="space-around">
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="yyyy-MM-dd"
-                id="date-picker-inline"
-                // label="Due Date"
-                value={selectedDate}
-                inputVariant="outlined"
-                onChange={handleDateChange}
-                className="CreateCase_input date"
+          <Grid container>
+            <Grid item xs={4}>
+              <span className="CreateCase__title">
+                Patient
+                </span>
+            </Grid>
+            <Grid item xs={8}>
+              <OutlinedInput
+                value={patient}
+                onChange={handleChange('patient')}
+                onBlur={handleBlur}
+                labelWidth={0}
+                className="CreateCase_input patient"
               />
             </Grid>
+          </Grid>
+        </Grid>
+
+        <Grid item xs={6} className="CreateCase__button_col">
+        <Grid container>
+            <Grid item xs={4}>
+              <span className="CreateCase__title date">
+                Due Date
+                </span>
+            </Grid>
+            <Grid item xs={8}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Grid container justify="space-around">
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="yyyy-MM-dd"
+                  id="date-picker-inline"
+                  value={date}
+                  inputVariant="outlined"
+                  onChange={handleDateChange}
+                  className="CreateCase_input date"
+                />
+              </Grid>
           </MuiPickersUtilsProvider>
+            </Grid>
+          </Grid>
+
+
         </Grid>
       </Grid>
 
       <Grid container className="CreateCase__row">
-        <Grid item xs>
+        <Grid item xs={2}>
           <span className="CreateCase__title">
             <span className="title__text">Partner</span>
             <PlainTooltip
@@ -118,7 +144,7 @@ function CaseInfoTop(props) {
         <Grid item xs={6}>
           <p className="CreateCase__text">{partner}</p>
         </Grid>
-        <Grid item xs={3} className="CreateCase__button_col">
+        <Grid item xs className="CreateCase__button_col">
           <input
             accept="image/*"
             className={classes.input}
@@ -143,6 +169,9 @@ const Styled = {
       display:inline-block;
       ${font(18, color.black_font)};
       font-weight:500;
+      &.date{
+        margin-right:10px;
+      }
     }
     .title__text{
       margin-right:5px;
@@ -158,21 +187,38 @@ const Styled = {
       }
     }
     .CreateCase_input{
+      display:inline-block;
+      /* height:40px; */
+
       &.patient{
-        width:90%;
+        width:100%;
       }
       &.patient input{
         padding:10px 15px;
         width:100%;
+        height:40px;
+        ${font(14,color.black)}
+      }
+      .MuiOutlinedInput-adornedEnd{
+        padding-right:0;
       }
       &.date input{
+        height:40px;
         padding:10px 15px;
-        ${font(14, color.grayFont)}
+        ${font(14, color.gray_font)};
+        
       }
     }
     .CreateCase__row{
-      height:50px;
-      line-height:50px;
+      height:60px;
+      line-height:60px;
+    }
+
+    .Mui-focused .MuiOutlinedInput-notchedOutline{
+      border-color:${color.blue} !important;
+    }
+    .CreateCase_input.date.Mui-focused, .CreateCase_input.patient.Mui-focused  fieldset{
+      border:2px solid ${color.blue}
     }
     .CreateCase__text{
       position:relative;

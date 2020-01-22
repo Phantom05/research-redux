@@ -100,14 +100,11 @@ export const useInput = (function () {
 })();
 
 
-
 //SECTION: Hign Order Component (HOC)
 /**
  * 
  * @param {*} url 
  */
-
-
 export const withLoading = (WrappedComponent) => (props) =>{
   return props.isLoading
   ? (console.log('Base landing...'),<div>Loading ...</div>)
