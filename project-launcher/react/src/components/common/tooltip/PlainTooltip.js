@@ -4,17 +4,19 @@ import HelpIcon from '@material-ui/icons/Help';
 import styled from 'styled-components';
 import {color} from 'styles/__utils';
 
+
 function PlainTooltip(props) {
   const {type,children} = props;
   const typeIcon ={
     'help':HelpIcon,
   }
   let Icon = typeIcon[type];
+  console.log(props,'props');
   return (
     <Styled.PlainTooltip >
       <Tooltip 
         {...props} 
-        className={type} 
+        className={type?type:''} 
         title={<Styled.TootipStyle>{props.title}</Styled.TootipStyle>}
       >
         {Icon ?<Icon /> :<>{children}</>} 

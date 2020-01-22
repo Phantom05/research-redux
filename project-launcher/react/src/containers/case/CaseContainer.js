@@ -17,6 +17,7 @@ function CaseContainer(props) {
   const handleChange=(name,value)=>{
     setValue(draft=>{
       const moDate = moment(new Date()).format(`YYYYMMDD`);
+      console.log(value,'value');
       draft[name] = value;
       if(name === 'caseId' || name === 'patient' ){
         draft.caseId=  `${moDate}-${partner}-${value}`;
@@ -28,6 +29,13 @@ function CaseContainer(props) {
     setValue(draft=>{
       draft.modal = true
     })
+  }
+  const handleModalClick = (value) =>{
+    if(value === 'dim'){
+      setValue(draft=>{
+        draft.modal = false
+      })
+    }
   }
   const caseList = [
     {
@@ -67,6 +75,7 @@ function CaseContainer(props) {
       <PlainModal 
         type="caseLoad"
         isOpen={value.modal}
+        onClick={handleModalClick}
         content={<CaseLoadList list={caseList}/>}
       />
       <CaseInfoTop 

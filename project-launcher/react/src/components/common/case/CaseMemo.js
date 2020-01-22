@@ -44,6 +44,9 @@ const Styled = {
     .ck.ck-editor{
       width:100%;
     }
+    .ck.ck-editor__top.ck-reset_all{
+      display:none;
+    }
   `
 }
 

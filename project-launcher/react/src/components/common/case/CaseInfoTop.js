@@ -1,32 +1,21 @@
-import React, { useState,useEffect } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import styled, {createGlobalStyle} from 'styled-components';
 import {isFocusCurrentTarget} from 'lib/library';
 import { font, color } from 'styles/__utils';
-import { makeStyles } from '@material-ui/core/styles';
-import { useImmer } from 'use-immer';
+import { makeStyles} from '@material-ui/core/styles';
 import moment  from 'moment';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import DateFnsUtils from '@date-io/date-fns';
 import {PlainTooltip} from 'components/common/tooltip';
-// import TextField from '@material-ui/core/TextField';
-// import Input from '@material-ui/core/Input';
-// import { Tooltip } from '@material-ui/core';
-
-
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-
+import {DatePicker} from 'components/common/input';
 
 const useStyles = makeStyles(theme => ({
   root: {
   },
   notchedOutline:{
     '&$cssFocused $notchedOutline': {
-      borderColor: `red !important`,
+      // borderColor: `red !important`,
     }
   },
   cssOutlinedInput:{
@@ -34,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   focused:{
     borderColor:'black !important' 
-  }
+  },
 }));
 
 function CaseInfoTop(props) {
@@ -113,23 +102,13 @@ function CaseInfoTop(props) {
                 </span>
             </Grid>
             <Grid item xs={8}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid container justify="space-around">
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="yyyy-MM-dd"
-                  id="date-picker-inline"
-                  value={date}
-                  inputVariant="outlined"
-                  onChange={handleDateChange}
-                  className="CreateCase_input date"
-                />
-              </Grid>
-          </MuiPickersUtilsProvider>
+              <DatePicker 
+                value={date}
+                className="CreateCase_input date"
+                onChange={handleDateChange}
+              />
             </Grid>
           </Grid>
-
 
         </Grid>
       </Grid>
@@ -162,13 +141,14 @@ function CaseInfoTop(props) {
           </label>
         </Grid>
       </Grid>
-
+    <Styled.GlobalStyles />
     </Styled.CreateCase>
   );
 }
 
 const Styled = {
   CreateCase: styled.div`
+
     .CreateCase__title{
       display:inline-block;
       ${font(18, color.black_font)};
@@ -228,7 +208,12 @@ const Styled = {
       position:relative;
       ${font(16,color.gray_font)};
     }
-  `
+  `,
+    GlobalStyles:createGlobalStyle`
+      .MuiPickersDay-daySelected{
+        background-color:${color.blue} !important;
+      };
+    `
 }
 
 

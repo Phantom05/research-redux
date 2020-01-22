@@ -12,8 +12,7 @@ import { TeethModule } from 'components/common/module';
 import CreateIcon from '@material-ui/icons/Create';
 import {color,font} from 'styles/__utils';
 import Button from '@material-ui/core/Button';
-
-
+import Tooltip from '@material-ui/core/Tooltip';
 import {CaseMemo} from 'components/common/case';
 
 const useStyles = makeStyles(theme => ({
@@ -139,10 +138,27 @@ function CasePanel(props) {
 
       <hr className="boundery__line"/>
       <div className="upload__button_box">
-        <Button 
-          variant="contained" 
-          className="CreateCase__button CreateCase__button-white" 
-          component="span">Upload Cloud</Button>
+
+        <Tooltip
+          // arrow
+          title={<Styled.CaseTooltip>생성된 케이스 데이터를 클라우드에 업로드합니다.</Styled.CaseTooltip>} placement="top-start"
+          PopperProps={{
+            popperOptions: {
+              // modifiers: {
+              //   offset: {
+              //     // enabled: true,
+              //     // offset: '0, 0',
+              //   },
+              // },
+            },
+          }}
+        >
+          <Button 
+            variant="contained" 
+            className="CreateCase__button CreateCase__button-white" 
+            component="span">Upload Cloud</Button>
+        </Tooltip>
+        
         <Button 
           variant="contained" 
           className="CreateCase__button CreateCase__button-blue float-right" 
@@ -162,7 +178,6 @@ const Styled = {
         display:none;
       }
     }
-
     .MuiPaper-elevation1{
       box-shadow:none
     }
@@ -192,7 +207,7 @@ const Styled = {
         }
       }
       &-white{
-        border:2px solid ${color.blue};
+        border:1px solid ${color.blue};
         background:white;
         color:${color.blue};
         &:hover{
@@ -215,9 +230,10 @@ const Styled = {
     .MuiExpansionPanel-root:before{
       height:0;
     }
-    .ck.ck-editor__top.ck-reset_all{
-      display:none;
-
-    }
+  `,
+  CaseTooltip:styled.span`
+     display:inline-block;
+    font-size:12px;
+    padding:5px;
   `
 }

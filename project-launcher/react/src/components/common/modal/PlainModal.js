@@ -48,7 +48,7 @@ const PlainStyles = makeStyles(theme => ({
  * @param {*} props 
  */
 function PlainModal(props) {
-  const {isOpen,content,type} = props;
+  const {isOpen,content,type,onClick} = props;
   let classes = PlainStyles();
   const stylesObj = {
     'caseLoad':loadStyles,
@@ -60,17 +60,17 @@ function PlainModal(props) {
   }
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
-  useEffect(()=>{
-    setOpen(isOpen);
-  },[isOpen])
+  // useEffect(()=>{
+  //   setOpen(isOpen);
+  // },[isOpen])
 
   return (
     <Styled.PlainModal>
@@ -78,16 +78,15 @@ function PlainModal(props) {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={open}
-        onClose={handleClose}
+        open={isOpen} // 원래 open
+        onClose={()=>onClick('dim')}
         closeAfterTransition
-        // style={{width:700}}
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
         }}
       >
-        <Fade in={open}>
+        <Fade in={isOpen}>
           <div className={cx(classes.paper)}>
             {content}
           </div>
