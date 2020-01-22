@@ -4,7 +4,6 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { PlainTooltip } from 'components/common/tooltip';
 import styled from 'styled-components';
 import cx from 'classnames';
@@ -12,8 +11,9 @@ import { useImmer } from 'use-immer';
 import { TeethModule } from 'components/common/module';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-
+import CreateIcon from '@material-ui/icons/Create';
+import {color,font} from 'styles/__utils';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +26,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const editorConfiguration = {
-  toolbar: []
+  toolbar: [],
+  width:'100%'
 };
 
 function CasePanel(props) {
@@ -52,7 +53,6 @@ function CasePanel(props) {
 
   const handleClick = (e,name) => {
     e.stopPropagation();
-    console.log('handleClick');
     setPanel(draft => {
       {
         draft[name].isOpen = !draft[name].isOpen
@@ -68,11 +68,11 @@ function CasePanel(props) {
     }
   }, []);
 
-  const indicationTooltipText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut est cupiditate sed sequi eos totam voluptas sint, atque ratione, ipsum dicta temporibus ullam consequuntur. Pariatur impedit autem illo dolore quo?`;
+  const indicationTooltipText = `Lorem im illo dolore quo?`;
 
   return (
     <Styled.CasePanel className={classes.root}>
-
+      <hr className="boundery__line"/>
       <ExpansionPanel
         className={cx('panel', { hidden: panel.indication.hidden })}
         expanded={panel.indication.isOpen}
@@ -94,6 +94,7 @@ function CasePanel(props) {
 
         <TeethModule />
       </ExpansionPanel>
+      <hr className="boundery__line"/>
 
       <ExpansionPanel
         className={cx('panel', { hidden: panel.sender.hidden })}
@@ -106,33 +107,32 @@ function CasePanel(props) {
           onClick={(e)=>handleClick(e,'sender')}
         >
           <Typography className={classes.heading}>
-            <span className="title__text">Sender's Memo</span>
+            <span className="title__text">Sender's Memo</span> <CreateIcon/>
           </Typography>
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails>
-          {
-            !panel.sender.isEdit ? `${indicationTooltipText}` : <CKEditor
-            editor={ClassicEditor}
-            config={editorConfiguration}
-            data={`${indicationTooltipText}`}
-            onInit={editor => {
-              // You can store the "editor" and use when it is needed.
-              console.log('Editor is ready to use!', editor);
-            }}
-            onChange={(event, editor) => {
-              const data = editor.getData();
-              console.log({ event, editor, data });
-            }}
-            onBlur={(event, editor) => {
-              console.log('Blur.', editor);
-            }}
-            onFocus={(event, editor) => {
-              console.log('Focus.', editor);
-            }}
-          />
+          {!panel.sender.isEdit 
+          ? `${indicationTooltipText}` 
+          : <CKEditor
+              editor={ClassicEditor}
+              config={editorConfiguration}
+              data={`${indicationTooltipText}`}
+              onInit={editor => {
+                console.log('Editor is ready to use!', editor);
+              }}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                console.log({ event, editor, data });
+              }}
+              onBlur={(event, editor) => {
+                console.log('Blur.', editor);
+              }}
+              onFocus={(event, editor) => {
+                console.log('Focus.', editor);
+              }}
+            />
           }
-
         </ExpansionPanelDetails>
       </ExpansionPanel>
 
@@ -145,7 +145,8 @@ function CasePanel(props) {
           id="panel3a-header"
           onClick={(e)=>handleClick(e,'receiver')}
         >
-          <Typography className={classes.heading}>Recevier's  Memo</Typography>
+          <Typography className={classes.heading}>
+            <span className="title__text">Recevier's  Memo</span> </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -155,17 +156,23 @@ function CasePanel(props) {
         </ExpansionPanelDetails>
       </ExpansionPanel>
 
+      <hr className="boundery__line"/>
+      <div className="upload__button_box">
+        <Button 
+          variant="contained" 
+          className="CreateCase__button CreateCase__button-white" 
+          component="span">Upload Cloud</Button>
+        <Button 
+          variant="contained" 
+          className="CreateCase__button CreateCase__button-blue float-right" 
+          component="span">Create</Button>
+      </div>
+        
     </Styled.CasePanel>
   );
 }
 
-
-
-
-
-
-
-export default CasePanel
+export default CasePanel;
 
 const Styled = {
   CasePanel: styled.div`
@@ -174,6 +181,64 @@ const Styled = {
         display:none;
       }
     }
-  
+    .ck.ck-editor{
+      width:100%;
+    }
+    .MuiPaper-elevation1{
+      box-shadow:none
+    }
+    .boundery__line{
+      border:1px solid ${color.grat_border6};
+    }
+    .title__text{
+      ${font(18,color.black)};
+    }
+    .MuiExpansionPanelSummary-root{
+      padding:0;
+    }
+    .MuiExpansionPanelDetails-root{
+      padding:5px;
+    }
+    .CreateCase__button{
+      box-shadow:none;
+      border-radius:3px;
+      font-weight:600;
+      &-blue{
+        border:2px solid ${color.blue};
+        background:${color.blue};
+        color:white;
+        &:hover{
+          background:${color.blue_hover};
+          box-shadow:none;
+        }
+      }
+      &-white{
+        border:2px solid ${color.blue};
+        background:white;
+        color:${color.blue};
+        &:hover{
+          background:white;
+          box-shadow:none;
+        }
+      }
+    }
+    .upload__button_box{
+      margin-top:28px;
+      &:after{
+        display:block;
+        content:"";
+        clear: both;
+      }
+      .float-right{
+        float:right;
+      }
+    }
+    .MuiExpansionPanel-root:before{
+      height:0;
+    }
+    .ck.ck-editor__top.ck-reset_all{
+      display:none;
+
+    }
   `
 }

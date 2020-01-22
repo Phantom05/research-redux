@@ -21,6 +21,7 @@ const _color ={
   gray_border3       : `#e5e5e5`,
   gray_border4       : `#ccc`,
   gray_border5       : `#C2C7D8`,
+  grat_border6       : `#E2E7EA`,
   gray_font          : `#777777`,
   gray_dashboard     : `#FAFAFA`,
   gray_bg2           : `#dddce680`,
