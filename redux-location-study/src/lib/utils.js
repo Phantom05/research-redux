@@ -1,15 +1,11 @@
 
 import React, { 
+  // useState,
   useEffect,
   useRef,
   useReducer } from 'react';
 import {dispatch} from 'store/actionCreators';
-import _ from 'lodash';
-// import { connect } from 'react-redux';
-// import { useSelector } from 'react-redux';
-// import axios from 'axios';
-// import {storage,keys} from 'lib/library';
-
+// import _ from 'lodash';
 
 // SECTION: Redux Saga, Actions
 
@@ -20,8 +16,8 @@ import _ from 'lodash';
 export function makeAsyncActions(actionName) {
   const prefix = actionName;
   const prefixObj = {
-    INDEX : 'INDEX',
-    INIT : `INIT`,
+    INDEX   : 'INDEX',
+    INIT    : `INIT`,
     REQUEST : `REQUEST`,
     PENDING : `PENDING`,
     SUCCESS : `SUCCESS`,
@@ -117,23 +113,37 @@ export const useInput = (function () {
  * @param {*} fn 
  * @param {*} inputs 
  */
+// export function useDidUpdateEffect(fn, inputs) {
+//   const didMountRef = useRef(false);
+//   useEffect(() => {
+//     if(didMountRef.current){
+//       fn();
+//     }
+//     else{
+//       didMountRef.current = true;
+//     }
+//   }, inputs);
+// }
+
 export function useDidUpdateEffect(fn, inputs) {
-  const didMountRef = useRef(false);
+  const firstUpdate = useRef(true);
   useEffect(() => {
-    if (didMountRef.current){
-      fn();
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
     }
-    else{
-      didMountRef.current = true;
-    }
+    fn();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, inputs);
 }
+
+
 
 /**
  * 
  * @param {*} f 
  */
-export const useDidMount = f => useEffect(() => f && f(), []);
+export const useDidMount = f => useEffect(() => f && f(), [f]);
 
 //SECTION: Hign Order Component (HOC)
 /**
@@ -144,28 +154,4 @@ export const withLoading = (WrappedComponent) => (props) =>{
   return props.isLoading
   ? (console.log('Base landing...'),<div>Loading ...</div>)
   : <WrappedComponent { ...props } />
-}
-
-
-
-
-export const withUseEffect =(fn,arr) =>{
-  // arr.forEach((item)=>{
-  //   useEffect(()=>{
-  //   },[item]);
-  // });
-}
-
-
-
-
-
-
-//SECTION: Reducer 
-/**
- * 
- * @param {*} reducerInitalize 
- */
-export function initReducer(typeAction){
-  dispatch(typeAction)
 }

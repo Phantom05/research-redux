@@ -315,7 +315,7 @@ export function setFormData(data){
 export function extractFileName(name){
   const index = name.lastIndexOf(".");
   let fileName  = name;
-  if(index != -1){
+  if(index !== -1){
     fileName = name.substring(0, index )
   }
   return fileName;
