@@ -64,17 +64,30 @@ export function makeAsyncCreateActions(actions){
  * @param {*} type 
  * @param {*} promiseCreator 
  */
-export const createPromiseSaga = (type, promiseCreator) => {
+export const createPromiseSaga = ({
+  type, 
+  tag,
+  pending = ()=>{},
+  success = ()=>{},
+  failure = ()=>{}
+} ) => {
   return function* saga(action) {
-    AlertFn(promiseCreator);
+    AlertFn(tag);
+    if(!type) {
+      console.warn(`createPromiseSaga Need type`);
+      return null;
+    };
     const payload = action.payload;
+    pending(action);
     type.pending();
     const {data,error} =yield call(type.request,payload);
     console.log(` %cResponse Data :\n`,"color:red;padding:5px;font-weight:bold",data);
     data.payload = payload;
     if(data && !error){
+      success(data);
       type.success(data);
     }else{
+      failure(data);
       type.failure(data);
     }
   };

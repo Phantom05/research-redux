@@ -9,7 +9,12 @@ import {
  * handleTest
  * @param {*} param0 
  */
-const handleTest= createPromiseSaga(TEST_SAGAS,'handleTest');
+const handleTest= createPromiseSaga({
+  type:TEST_SAGAS,
+  tag:'handleTest',
+  success:(val)=>{console.log('success!!!',val)},
+  failure:()=>{console.log('failure!!!')},
+});
 
 export default function* baseSaga(){
   yield all([
