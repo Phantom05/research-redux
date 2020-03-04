@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet'
 import Core from 'containers/base/Core';

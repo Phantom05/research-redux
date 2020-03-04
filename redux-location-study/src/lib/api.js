@@ -21,7 +21,17 @@ export const Test={
   getTest:(payload)=>{
     console.log(`api : post getTest`);
     const axiosConf={
-      url:`/articles?${limit(10, payload)}`,
+      url:`/articles?${limit(5, payload)}`,
+      method:'get',
+      data:payload
+    }
+    return Acx(axiosConf);
+  },
+  getTestDetail:(payload)=>{
+    console.log(`api : post getTestDetail`);
+    const {slug} = payload;
+    const axiosConf={
+      url:`/articles/${slug}`,
       method:'get',
       data:payload
     }

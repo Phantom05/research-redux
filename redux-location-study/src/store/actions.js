@@ -14,4 +14,7 @@ export const base_enter_landing = createAction(BASE_ENTER_LANDING);
 export const TEST       = makeAsyncActions('base/TEST');
 export const TEST_SAGAS = makeAsyncCreateActions(TEST)(API.Test.getTest);
 
+export const TEST_DETAIL       = makeAsyncActions('base/TEST_DETAIL');
+export const TEST_DETAIL_SAGAS = makeAsyncCreateActions(TEST_DETAIL)(API.Test.getTestDetail);
+
 
