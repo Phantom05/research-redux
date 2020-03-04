@@ -2,6 +2,7 @@
 import {handleActions} from 'redux-actions';
 import * as actions from 'store/actions';
 import produce from 'immer';
+import {IPSFset} from 'lib/utils';
 
 
 export const initialState={
@@ -31,33 +32,28 @@ export default handleActions({
   // NOTE:
   [actions.TEST.INIT]:(state,{payload:diff})=>{
     return produce(state,draft=>{
-      console.log('>>>TEST_SAGAS INIT');
+      // console.log('>>>TEST_SAGAS INIT');
       draft.sagaTest = initialState.sagaTest;
     })
   },
   [actions.TEST.PENDING]:(state,{payload:diff})=>{
     return produce(state,draft=>{
-      console.log('>>>TEST_SAGAS pending');
-      draft.sagaTest.pending = true;
-      draft.sagaTest.success = false;
-      draft.sagaTest.failure = false;
+      // console.log('>>>TEST_SAGAS pending');
+      IPSFset(draft.sagaTest,'pending');
     })
   },
   [actions.TEST.SUCCESS]:(state,{payload:diff})=>{
     return produce(state,draft=>{
-      console.log('>>>TEST_SAGAS success');
+      // console.log('>>>TEST_SAGAS success');
+      console.log(diff);
       draft.sagaTest.list = diff.articles;
-      draft.sagaTest.pending = false;
-      draft.sagaTest.success = true;
-      draft.sagaTest.failure = false;
+      IPSFset(draft.sagaTest,'success');
     })
   },
   [actions.TEST.FAILURE]:(state,{payload:diff})=>{
     return produce(state,draft=>{
-      console.log('>>>TEST_SAGAS failure');
-      draft.sagaTest.pending = false;
-      draft.sagaTest.success = false;
-      draft.sagaTest.failure = true;
+      // console.log('>>>TEST_SAGAS failure');
+      IPSFset(draft.sagaTest,'failure');
     })
   },
   

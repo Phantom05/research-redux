@@ -26,7 +26,9 @@ function Home() {
         draft.list = baseReducer.sagaTest.list;
       });
     }
-  },[baseReducer.sagaTest.list,isSagaTestSuccess,setValues])
+  },[baseReducer.sagaTest.list,isSagaTestSuccess,setValues]);
+
+
 
   return (
     <Styled.Home>

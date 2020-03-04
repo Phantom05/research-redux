@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from 'store/sagas';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import {createLogger} from 'redux-logger';
 
 const persistConfig = {
   key: 'root',
@@ -12,6 +13,7 @@ const persistConfig = {
 const enhancedReducer = persistReducer(persistConfig, modules);
 const configure = () =>{
   const sagaMiddleware = createSagaMiddleware();
+  // const logger = createLogger();
   const middleware =[ sagaMiddleware];
   const REDUX_DEVTOOLS = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ;
   const composeEnhancers =

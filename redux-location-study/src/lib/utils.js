@@ -4,6 +4,8 @@ import React, {
   useEffect,
   useRef,
   useReducer } from 'react';
+import {call} from 'redux-saga/effects';
+import { AlertFn } from 'lib/library';
 import {dispatch} from 'store/actionCreators';
 // import _ from 'lodash';
 
@@ -56,6 +58,27 @@ export function makeAsyncCreateActions(actions){
     return ActionsFunction
   }
 }
+
+/**
+ * 
+ * @param {*} type 
+ * @param {*} promiseCreator 
+ */
+export const createPromiseSaga = (type, promiseCreator) => {
+  return function* saga(action) {
+    AlertFn(promiseCreator);
+    const payload = action.payload;
+    type.pending();
+    const {data,error} =yield call(type.request,payload);
+    console.log(` %cResponse Data :\n`,"color:red;padding:5px;font-weight:bold",data);
+    data.payload = payload;
+    if(data && !error){
+      type.success(data);
+    }else{
+      type.failure(data);
+    }
+  };
+};
 
 // SECTION: use
 /**
@@ -154,4 +177,13 @@ export const withLoading = (WrappedComponent) => (props) =>{
   return props.isLoading
   ? (console.log('Base landing...'),<div>Loading ...</div>)
   : <WrappedComponent { ...props } />
+}
+
+
+
+export function IPSFset(draft,type){
+  draft.pending = false;
+  draft.success = false;
+  draft.failure = false;
+  draft[type]   = true;
 }
