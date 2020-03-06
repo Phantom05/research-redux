@@ -14,9 +14,7 @@ function App() {
       <Helmet>
         <title>React Test</title>
       </Helmet>
-      <Core />
       <Switch>
-
         <Route exact path="/" component={Home} />
       </Switch>
     </>

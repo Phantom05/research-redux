@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Actions } from 'store/actionCreators';
+// import { Actions } from 'store/actionCreators';
 import {useSelector} from 'react-redux';
 import throttle from 'lodash/throttle';
 
 function Core(){
-  const {base:baseReducer} = useSelector(state=>state);
-  const landing = baseReducer.landing;
+  // const {base:baseReducer} = useSelector(state=>state);
+  // const landing = baseReducer.landing;
 
   const initialize = async () => {
     const token = false;
     if (!token) {
-      return Actions.base_exit_landing();
+      // return Actions.base_exit_landing();
     }
   }
   const setWidth = () => {
@@ -35,7 +35,7 @@ function Core(){
 
   return(
     <>
-    {landing && 'Loading...'}
+    {/* {landing && 'Loading...'} */}
     </>
   )
 }

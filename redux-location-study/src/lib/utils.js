@@ -6,7 +6,7 @@ import React, {
   useReducer } from 'react';
 import {call} from 'redux-saga/effects';
 import { AlertFn } from 'lib/library';
-import {dispatch} from 'store/actionCreators';
+// import {dispatch} from 'store/actionCreators';
 // import _ from 'lodash';
 
 // SECTION: Redux Saga, Actions
@@ -15,49 +15,49 @@ import {dispatch} from 'store/actionCreators';
  * Actions Name
  * @param {*} actionName string
  */
-export function makeAsyncActions(actionName) {
-  const prefix = actionName;
-  const prefixObj = {
-    INDEX   : 'INDEX',
-    INIT    : `INIT`,
-    REQUEST : `REQUEST`,
-    PENDING : `PENDING`,
-    SUCCESS : `SUCCESS`,
-    FAILURE : `FAILURE`,
-  }
-  for(const item in prefixObj){
-    prefixObj[item] = prefix + `_${item}`;
-  }
-  prefixObj.init = (payload)=>makeActionCreator(prefixObj.INIT,payload);
-  return prefixObj;
-}
+// export function makeAsyncActions(actionName) {
+//   const prefix = actionName;
+//   const prefixObj = {
+//     INDEX   : 'INDEX',
+//     INIT    : `INIT`,
+//     REQUEST : `REQUEST`,
+//     PENDING : `PENDING`,
+//     SUCCESS : `SUCCESS`,
+//     FAILURE : `FAILURE`,
+//   }
+//   for(const item in prefixObj){
+//     prefixObj[item] = prefix + `_${item}`;
+//   }
+//   prefixObj.init = (payload)=>makeActionCreator(prefixObj.INIT,payload);
+//   return prefixObj;
+// }
 
 /**
  * makeActionCreator
  * @param {*} actionType 
  * @param {*} payload 
  */
-export function makeActionCreator(actionType,payload) {
-  return dispatch({ type: actionType, payload:payload })
-}
+// export function makeActionCreator(actionType,payload) {
+//   return dispatch({ type: actionType, payload:payload })
+// }
 
 /**
  * makeAsyncActions
  * @param {*} actions Object
  */
-export function makeAsyncCreateActions(actions){
-  const ActionsFunction = (payload)=>makeActionCreator(actions.INDEX,payload);
-  return (api)=>{
-    if(typeof api !== 'function') new Error('api must be Function');
-    ActionsFunction.index = actions.INDEX;
-    ActionsFunction.request = (data)=>  api(data);
-    ActionsFunction.init = (payload)=>makeActionCreator(actions.INIT,payload);
-    ActionsFunction.pending = (payload)=>makeActionCreator(actions.PENDING,payload);
-    ActionsFunction.success = (payload)=>makeActionCreator(actions.SUCCESS,payload);
-    ActionsFunction.failure = (payload)=>makeActionCreator(actions.FAILURE,payload);
-    return ActionsFunction
-  }
-}
+// export function makeAsyncCreateActions(actions){
+//   const ActionsFunction = (payload)=>makeActionCreator(actions.INDEX,payload);
+//   return (api)=>{
+//     if(typeof api !== 'function') new Error('api must be Function');
+//     ActionsFunction.index = actions.INDEX;
+//     ActionsFunction.request = (data)=>  api(data);
+//     ActionsFunction.init = (payload)=>makeActionCreator(actions.INIT,payload);
+//     ActionsFunction.pending = (payload)=>makeActionCreator(actions.PENDING,payload);
+//     ActionsFunction.success = (payload)=>makeActionCreator(actions.SUCCESS,payload);
+//     ActionsFunction.failure = (payload)=>makeActionCreator(actions.FAILURE,payload);
+//     return ActionsFunction
+//   }
+// }
 
 /**
  * 

@@ -1,37 +1,18 @@
 import { createSelector } from 'reselect'
 
-const shopItemsSelector = state => state.shop.items;
-const taxPercentSelector = state => state.shop.taxPercent;
-const testLoopSelector = state => state.shop.i;
-
-export const subtotalSelector = createSelector(
-  shopItemsSelector,
-  items => items.reduce((acc, item) => acc + item.value, 0)
-)
-
-const taxSelector = createSelector(
-  subtotalSelector,
-  taxPercentSelector,
-  (subtotal, taxPercent) => subtotal * (taxPercent / 100)
-)
-
-export const totalSelector = createSelector(
-  subtotalSelector,
-  taxSelector,
-  (subtotal, tax) => ({ total: subtotal + tax })
-)
+const LoopSelecor = state => state.list;
 
 export const loopSelecor = createSelector(
-  testLoopSelector,
+  LoopSelecor,
   item=>{
-    let res = 0;
-    for(let i = 0 ; i < item ; i++){
-      res += 1;
+    let newArr =[];
+    if(item[0]){
+      for(let i = 5; i--;){
+        newArr.push(
+          i + item[0].title
+        )
+      }
     }
-    return res;
+    return newArr;
   }
 )
-
-// console.log(subtotalSelector(exampleState)) // 2.15
-// console.log(taxSelector(exampleState))      // 0.172
-// console.log(totalSelector(exampleState)) 

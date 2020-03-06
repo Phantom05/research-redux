@@ -5,8 +5,11 @@ import styled from 'styled-components';
 import {useImmer} from 'use-immer';
 import _ from 'lodash';
 import {TestList} from 'components/common/listing';
-import {TEST_SAGAS} from 'store/actions';
 import { subtotalSelector,loopSelecor } from 'lib/selectors'
+import {
+  // TEST_SAGAS,
+} from 'store/actions';
+import {Actions} from 'store/actionCreators';
 
 
 // import {useDidUpdateEffect} from 'lib/utils';
@@ -17,57 +20,58 @@ const intialState={
     items: [
       { name: 'apple', value: 1.20 },
       { name: 'orange', value: 0.95 },
-    ]
+    ],
+    i:100000
   },
-  i:10000
 }
 
 function Home() {
   const [values,setValues] = useImmer(intialState);
   const {base:baseReducer} = useSelector(state=>state);
-  const rSagaTest = baseReducer.sagaTest;
-  const handleClick = _.debounce(() =>{
-    TEST_SAGAS( Math.ceil(Math.random()*5) );
-  },150);
+  // const rSagaTest = baseReducer.sagaTest;
 
-  // NOTE: list upload
-  const isSagaTestSuccess = rSagaTest.success;
-  useEffect(()=>{
-    if(isSagaTestSuccess){
-      setValues(draft=>{
-        draft.list = rSagaTest.list;
-      });
+  // const handleClick = _.debounce(() =>{
+  //   TEST_SAGAS( Math.ceil(Math.random()*5) );
+  // },150);
+
+
+  // // NOTE: list upload
+  // const isSagaTestSuccess = rSagaTest.success;
+  // useEffect(()=>{
+  //   if(isSagaTestSuccess){
+  //     setValues(draft=>{
+  //       draft.list = rSagaTest.list;
+  //     });
+    
+  //   }
+  // },[rSagaTest.list,isSagaTestSuccess,setValues]);
+
+  // console.log(baseReducer.sagaTest);
+  // // console.log(loopSelecor(values));
+
+  // console.log(
+  //   baseReducer.sagaTest.test
+  // );
+
+  const handleClick = config=>{
+    console.log(baseReducer.landing);
+    if(baseReducer.landing){
+      Actions.base_exit_landing()
+    }else{
+      Actions.base_enter_landing()
     }
-  },[rSagaTest.list,isSagaTestSuccess,setValues]);
-
-
-  console.log(baseReducer.sagaTest);
-
-  console.time()
-  console.log(
-    loopSelecor(values)
-  );
-  console.timeEnd()
-
-  console.time();
-  let res;
-  for(let i = 0 ; i < values.shop.i ; i++){
-    res += 1;
   }
-  console.log(res);
-  console.timeEnd();
-
-
+  console.log(baseReducer);
   return (
     <Styled.Home>
       <button 
         onClick={handleClick}
         className="btn"
       >LIST RANDOM</button>
-
       <div>
         <TestList list={values.list}/>
       </div>
+      
     </Styled.Home>
   );
 }
