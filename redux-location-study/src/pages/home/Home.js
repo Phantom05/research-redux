@@ -6,45 +6,67 @@ import {useImmer} from 'use-immer';
 import _ from 'lodash';
 import {TestList} from 'components/common/listing';
 import {TEST_SAGAS} from 'store/actions';
+import { subtotalSelector,loopSelecor } from 'lib/selectors'
+
 
 // import {useDidUpdateEffect} from 'lib/utils';
-
 const intialState={
   list:[],
+  shop: {
+    taxPercent: 8,
+    items: [
+      { name: 'apple', value: 1.20 },
+      { name: 'orange', value: 0.95 },
+    ]
+  },
+  i:10000
 }
 
 function Home() {
   const [values,setValues] = useImmer(intialState);
   const {base:baseReducer} = useSelector(state=>state);
-
+  const rSagaTest = baseReducer.sagaTest;
   const handleClick = _.debounce(() =>{
     TEST_SAGAS( Math.ceil(Math.random()*5) );
   },150);
 
   // NOTE: list upload
-  const isSagaTestSuccess = baseReducer.sagaTest.success;
+  const isSagaTestSuccess = rSagaTest.success;
   useEffect(()=>{
     if(isSagaTestSuccess){
       setValues(draft=>{
-        draft.list = baseReducer.sagaTest.list;
+        draft.list = rSagaTest.list;
       });
     }
-  },[baseReducer.sagaTest.list,isSagaTestSuccess,setValues]);
+  },[rSagaTest.list,isSagaTestSuccess,setValues]);
 
 
+  console.log(baseReducer.sagaTest);
 
-  console.log('home');
+  console.time()
+  console.log(
+    loopSelecor(values)
+  );
+  console.timeEnd()
+
+  console.time();
+  let res;
+  for(let i = 0 ; i < values.shop.i ; i++){
+    res += 1;
+  }
+  console.log(res);
+  console.timeEnd();
+
+
   return (
     <Styled.Home>
       <button 
         onClick={handleClick}
-        className="test__btn"
+        className="btn"
       >LIST RANDOM</button>
 
       <div>
-        <TestList 
-          list={values.list}
-        />
+        <TestList list={values.list}/>
       </div>
     </Styled.Home>
   );
@@ -52,8 +74,8 @@ function Home() {
 
 const Styled = {
   Home:styled.div`
-  & > {
-    .test__btn{
+  & {
+    .btn{
       display:inline-block;
       border:0;
       padding:10px 15px;

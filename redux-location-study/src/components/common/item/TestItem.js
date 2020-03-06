@@ -4,17 +4,18 @@ import styled from 'styled-components';
 function TestItem(props) {
   const idx =props.idx;
   const info =props.info;
-  const detail = props.detail;
-  
-  const isMine = info.author.username === detail.author.username;
-  // console.log(props);
+  // const detail = props.detail;
+  // const isMine = info.author.username === detail.author.username;
   return (
     <Styled.TestItem>
-      <p><button onClick={()=>props.onClick({info,idx})}>Detail</button> {info.title}</p>
+      <p> 
+      {/* <button onClick={()=>props.onClick({info,idx})}>Detail</button> */}
+        {info.title}
+      </p>
       <div className="item__body">
-        {isMine &&
+        {/* {isMine &&
           <div>{detail.slug}</div>
-        }
+        } */}
       </div>
     </Styled.TestItem>
   );

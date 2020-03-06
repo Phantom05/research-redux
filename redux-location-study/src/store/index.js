@@ -1,2 +1,2 @@
 import configure from './configure';
-export default configure();
+export const { store, persistor } = configure;

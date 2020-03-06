@@ -13,8 +13,6 @@ import {
 const handleTest= createPromiseSaga({
   type:TEST_SAGAS,
   tag:'handleTest',
-  // success:(val)=>{console.log('success!!!',val)},
-  // failure:()=>{console.log('failure!!!')},
 });
 
 const handleTestDetail= createPromiseSaga({

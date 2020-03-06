@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
-import App from 'components/App';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import configureStore from 'store';
-const { store, persistor } = configureStore;
+import App from 'components/App';
+import  { store, persistor }  from 'store';
 
 
 class Root extends Component {
   render() {
     return (
-      <Router>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Router>
             <App />
-          </PersistGate>
-        </Provider>
-      </Router>
+          </Router>
+        </PersistGate>
+      </Provider>
     );
   }
 }

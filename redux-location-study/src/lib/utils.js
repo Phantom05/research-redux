@@ -198,5 +198,7 @@ export function IPSFset(draft,type){
   draft.pending = false;
   draft.success = false;
   draft.failure = false;
-  draft[type]   = true;
+  if(draft[type] !== 'init'){
+    draft[type]   = true;
+  }
 }
