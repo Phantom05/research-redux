@@ -21,15 +21,11 @@ const logger = createLogger();
 const middleware =[ logger,sagaMiddleware];
 
 let store = createStore(
-  // enhanceReducer(modules),
   modules,
   compose(
-    // enhanceStore,
     applyMiddleware(...middleware),
-    // offMiddleware,
     autoRehydrate,
     offline(offlineConfig),
-    // localIds({reducer: modules}),
   )
 );
 
