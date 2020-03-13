@@ -7,7 +7,7 @@ const persistConfig = {
   key: 'root',
   storage: storage,
   version:0
-}
+}  
 
 const persistedReducer = persistReducer(persistConfig, reducers)
 
