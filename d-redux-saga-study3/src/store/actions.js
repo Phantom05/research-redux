@@ -7,7 +7,7 @@ export const HOME_GET_RESULT = 'HOME_GET_RESULT';
 export const home_get_result = createAction(HOME_GET_RESULT);
   
   
-
+   
 // saga
 export const SAGA_GET_RESULT  = 'SAGA_GET_RESULT';
 export const SAGA_WS_CONNECT  = 'SAGA_WS_CONNECT';
