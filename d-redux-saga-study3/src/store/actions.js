@@ -1,6 +1,6 @@
 import {createAction} from 'redux-actions';
 
-
+  
 // home
 export const HOME_GET_RESULT = 'HOME_GET_RESULT';
 
