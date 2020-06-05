@@ -38,13 +38,16 @@ function CasePanel(props) {
     sender: {
       isOpen: true,
       hidden: false,
-      isEdit: true,
+      isEdit: false,
     },
     receiver: {
       isOpen: true,
       hidden: false,
       isEdit: false,
     },
+    heading:{
+      position:'relative'
+    }
   });
 
   const handleClick = (e,name) => {
@@ -59,10 +62,17 @@ function CasePanel(props) {
   useEffect(() => {
     if (type === 'create') {
       setPanel(draft => {
-        draft.receiver.hidden = true;
+        // draft.receiver.hidden = true;
       })
     }
   }, []);
+
+
+  const handleClickEdit = (name)=>{
+    setPanel(draft => {
+      draft[name].isEdit = true;
+    })
+  }
 
   const indicationTooltipText = `Lorem im illo dolore quo?`;
 
@@ -86,6 +96,15 @@ function CasePanel(props) {
               title={indicationTooltipText}
               placement="right-start"
             />
+            <span 
+              className="edit__icon right font"
+              onClick={()=>handleClickEdit('sender')}
+            > 
+            <Button 
+              variant="contained" 
+              className="CreateCase__button CreateCase__button-blue float-right" 
+              component="span">SET</Button>
+            </span>
           </Typography>
         </ExpansionPanelSummary>
         <TeethModule />
@@ -99,10 +118,14 @@ function CasePanel(props) {
         <ExpansionPanelSummary
           aria-controls="panel2a-content"
           id="panel2a-header"
-          onClick={(e)=>handleClick(e,'sender')}
+          // onClick={(e)=>handleClick(e,'sender')}
         >
           <Typography className={classes.heading}>
-            <span className="title__text">Sender's Memo</span> <CreateIcon/>
+            <span className="title__text">Sender's Memo</span> 
+            <span 
+              className="edit__icon right"
+              onClick={()=>handleClickEdit('sender')}
+            > <CreateIcon fontSize="small"/></span>
           </Typography>
         </ExpansionPanelSummary>
 
@@ -121,10 +144,15 @@ function CasePanel(props) {
         <ExpansionPanelSummary
           aria-controls="panel3a-content"
           id="panel3a-header"
-          onClick={(e)=>handleClick(e,'receiver')}
+          // onClick={(e)=>handleClick(e,'receiver')}
         >
           <Typography className={classes.heading}>
-            <span className="title__text">Recevier's  Memo</span> </Typography>
+            <span className="title__text">Recevier's  Memo</span> 
+            <span 
+              className="edit__icon right" 
+              onClick={()=>handleClickEdit('receiver')}
+            > <CreateIcon fontSize="small"/></span>  
+          </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
 
@@ -138,7 +166,6 @@ function CasePanel(props) {
 
       <hr className="boundery__line"/>
       <div className="upload__button_box">
-
         <Tooltip
           // arrow
           title={<Styled.CaseTooltip>생성된 케이스 데이터를 클라우드에 업로드합니다.</Styled.CaseTooltip>} placement="top-start"
@@ -227,8 +254,33 @@ const Styled = {
         float:right;
       }
     }
+    .MuiExpansionPanelSummary-root.Mui-expanded{
+      cursor: default !important;
+    }
+    .MuiExpansionPanelSummary-content{
+      position:relative;
+      cursor: default;
+    }
     .MuiExpansionPanel-root:before{
       height:0;
+    }
+    .edit__icon{
+      display:inline-block;
+      background:${color.blue};
+      border-radius:2px;
+      color:white;
+      padding:2px 5px;
+      cursor: pointer;
+      &.right{
+        position:absolute;
+        right:0;
+        top:50%;
+        transform:translateY(-50%);
+      }
+      &.font{
+        ${font(16,'white')};
+        padding:0;
+      }
     }
   `,
   CaseTooltip:styled.span`
