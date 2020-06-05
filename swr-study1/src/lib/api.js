@@ -1,26 +1,11 @@
 import { useRequest } from "./utils";
 import axiosCancel from "axios-cancel";
-
 import axios from "axios";
-
-export const http = axios.create({
-  baseURL: "http://localhost:9999",
-  // timeout: 1000,
-  // headers: {'X-Custom-Header': 'foobar'}
-});
-
-// axiosCancel(http, {
-//   debug: false, // process.env.NODE_ENV === 'development'
-// });
+export const http = axios.create({ baseURL: "http://localhost:9999" });
 
 export const API = {
-  world: {
-    async hello(params) {
-      const { data } = await http.get(params).then((item) => item);
-      console.log(data, "data");
-      return data;
-    },
+  project: {
+    list: ({ params, body }) => http.get("/hello", { params }),
+    detail: ({ params, body }) => http.post("/hello", { ...body }),
   },
 };
-
-// export const http = () => {};
